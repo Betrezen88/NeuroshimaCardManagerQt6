@@ -1,0 +1,1 @@
+# NeuroshimaCardManagerQt6
