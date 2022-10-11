@@ -11,7 +11,10 @@ qt_add_executable(appQmlUI
 qt_add_qml_module(appQmlUI
     URI QmlUI
     VERSION 1.0
-    QML_FILES main.qml
+    QML_FILES
+        main.qml
+        Views/Welcome.qml
+        Delegates/RecentFileDelegate.qml
 )
 
 set_target_properties(appQmlUI PROPERTIES
