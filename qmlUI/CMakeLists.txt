@@ -14,7 +14,6 @@ qt_add_qml_module(appQmlUI
     QML_FILES
         main.qml
         Views/Welcome.qml
-        Delegates/RecentFileDelegate.qml
 )
 
 set_target_properties(appQmlUI PROPERTIES

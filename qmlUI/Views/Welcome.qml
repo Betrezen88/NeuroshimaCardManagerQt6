@@ -2,23 +2,22 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "../Delegates"
-
 Item {
     id: _root
-
 
     Label {
         id: _label
         height: 40
         text: qsTr("Witaj !")
+        color: "black"
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        font.pixelSize: 14
+        anchors.topMargin: 20
+        font.pixelSize: 20
+        font.bold: true
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.bold: true
     }
 
     RowLayout {
@@ -27,55 +26,82 @@ Item {
         anchors.top: _label.bottom
         anchors.bottom: parent.bottom
         anchors.topMargin: 20
-        anchors.leftMargin: 0
+        anchors.leftMargin: 5
+        anchors.rightMargin: 5
         spacing: 10
 
-        Column {
-            width: 200
-            height: 400
+        ColumnLayout {
             spacing: 5
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rightMargin: 5
+            Layout.preferredWidth: (parent.width / 2) - parent.spacing / 2
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.fillHeight: true
 
             Button {
-                width: 200
-                height: 40
                 text: qsTr("Stwórz nową postać")
-            }
-        }
+                Layout.preferredWidth: parent.width < 200 ? 200 : parent.width > 500 ? 500 : parent.width
+                Layout.preferredHeight: 40
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        Column {
-            width: 200
-            height: 400
+                onClicked: {
+                    // TODO: open creation view.
+                    console.log( "Open creation view." )
+                }
+            }
+        } // ColumnLayout
+
+        ColumnLayout {
             spacing: 5
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.leftMargin: 5
+            Layout.preferredWidth: (parent.width / 2) - parent.spacing / 2
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.fillHeight: true
 
             Button {
-                width: 200
-                height: 40
                 text: qsTr("Wczytaj kartę postaci")
+                Layout.preferredWidth: parent.width < 200 ? 200 : parent.width > 500 ? 500 : parent.width
+                Layout.preferredHeight: 40
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+
+                onClicked: {
+                    // TODO: open load dialog.
+                    console.log( "Open load dialog." )
+                }
             }
 
             Label {
-                width: parent.width
-                height: 30
                 text: qsTr("Ostatnio otwierane")
+                color: "black"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
+                Layout.preferredHeight: 30
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             }
 
             Repeater {
                 id: _recentFiles
-                model: 1
-                delegate: RecentFileDelegate {
-                    width: parent.width
-                }
-            }
-        }
-    }
+
+                model: 3
+
+                delegate: Button {
+                    text: "Filename.json"
+                    hoverEnabled: true
+                    Layout.preferredWidth: parent.width < 200 ? 200 : parent.width > 500 ? 500 : parent.width
+                    Layout.preferredHeight: 40
+                    Layout.alignment: Qt.AlignHCenter
+
+                    onClicked: {
+                        // TODO: Load selected card.
+                        console.log( "Loading selected card " + text )
+                    }
+
+                    ToolTip {
+                        parent: parent
+                        visible: parent.hovered
+                        text: "/home/miwy/Workspace/Qt/build-NeuroshimaCardManagerQt6-Desktop_Qt_6_4_0_GCC_64bit-Debug/qmlUI/appQmlUI"
+                    }
+                } // Button delegate
+            } // Repeater
+        } // ColumnLayout
+    } // RowLayout
 }
 
 /*##^##

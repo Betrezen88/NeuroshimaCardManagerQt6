@@ -6,6 +6,8 @@ import "Views"
 Window {
     width: 640
     height: 480
+    minimumWidth: 600
+    minimumHeight: 400
     visible: true
     title: qsTr("Hello World")
 
