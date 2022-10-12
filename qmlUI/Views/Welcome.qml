@@ -2,18 +2,17 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-Item {
+Page {
     id: _root
 
-    Label {
+    signal showCreationView()
+
+    header: Label {
         id: _label
-        height: 40
+        height: 50
+        padding: 10
         text: qsTr("Witaj !")
         color: "black"
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.topMargin: 20
         font.pixelSize: 20
         font.bold: true
         horizontalAlignment: Text.AlignHCenter
@@ -21,13 +20,7 @@ Item {
     }
 
     RowLayout {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: _label.bottom
-        anchors.bottom: parent.bottom
-        anchors.topMargin: 20
-        anchors.leftMargin: 5
-        anchors.rightMargin: 5
+        anchors.fill: parent
         spacing: 10
 
         ColumnLayout {
@@ -42,10 +35,7 @@ Item {
                 Layout.preferredHeight: 40
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-                onClicked: {
-                    // TODO: open creation view.
-                    console.log( "Open creation view." )
-                }
+                onClicked: _root.showCreationView()
             }
         } // ColumnLayout
 
@@ -102,7 +92,7 @@ Item {
             } // Repeater
         } // ColumnLayout
     } // RowLayout
-}
+} // Page
 
 /*##^##
 Designer {
