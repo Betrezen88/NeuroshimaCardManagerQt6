@@ -15,6 +15,14 @@ Window {
         id: _stackView
         anchors.fill: parent
 
-        initialItem: Welcome {}
+        initialItem: Welcome {
+            id: _welcomeView
+            onShowCreationView: _stackView.push( _creationView )
+        }
+
+        Creation {
+            id: _creationView
+            onCancelCreation: _stackView.pop()
+        }
     }
-}
+} // Window
