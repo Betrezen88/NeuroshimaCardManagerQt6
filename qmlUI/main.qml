@@ -17,12 +17,26 @@ Window {
 
         initialItem: Welcome {
             id: _welcomeView
-            onShowCreationView: _stackView.push( _creationView )
+            onShowCreationView: {
+                _creationView.visible = true
+                _stackView.push( _creationView )
+            }
+            onShowCardsView: {
+                _cardsView.visible = true
+                _stackView.push( _cardsView )
+            }
         }
 
         Creation {
             id: _creationView
+            visible: false
             onCancelCreation: _stackView.pop()
+        }
+
+        Cards {
+            id: _cardsView
+            visible: false
+            onCloseCardsView: _stackView.pop();
         }
     }
 } // Window

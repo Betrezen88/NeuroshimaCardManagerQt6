@@ -13,6 +13,7 @@ qt_add_qml_module(appQmlUI
     VERSION 1.0
     QML_FILES
         main.qml
+        Views/Cards.qml
         Views/Creation.qml
         Views/Welcome.qml
 )

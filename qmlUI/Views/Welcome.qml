@@ -6,6 +6,7 @@ Page {
     id: _root
 
     signal showCreationView()
+    signal showCardsView()
 
     header: Label {
         id: _label
@@ -54,6 +55,7 @@ Page {
                 onClicked: {
                     // TODO: open load dialog.
                     console.log( "Open load dialog." )
+                    _root.showCardsView()
                 }
             }
 
