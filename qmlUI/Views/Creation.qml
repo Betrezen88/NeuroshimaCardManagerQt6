@@ -8,6 +8,7 @@ Page {
     signal cancelCreation()
 
     ScrollView {
+        clip: true
         anchors.fill: parent
 
         Column {
