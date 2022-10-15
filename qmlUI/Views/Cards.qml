@@ -45,26 +45,9 @@ Page {
         }
     }
 
-    Rectangle {
-        color: "black"
+    Card {
+        id: _cardView
         anchors.fill: parent
-
-        ScrollView {
-            clip: true
-            anchors.fill: parent
-
-            Column {
-                anchors.fill: parent
-                Rectangle {
-                    width: 1000; height: 1000
-                    color: "green"
-                    Label {
-                        text: "Placeholder"
-                        anchors.centerIn: parent
-                    }
-                }
-            }
-        }
     }
 
 } // Page
