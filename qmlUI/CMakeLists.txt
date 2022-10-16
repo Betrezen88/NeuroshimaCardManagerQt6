@@ -17,6 +17,8 @@ qt_add_qml_module(appQmlUI
         Views/Cards.qml
         Views/Creation.qml
         Views/Welcome.qml
+
+        Placeholders/PagePlaceholder.qml
 )
 
 set_target_properties(appQmlUI PROPERTIES
