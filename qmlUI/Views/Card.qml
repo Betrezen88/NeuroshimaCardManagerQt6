@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 
+import "../Pages/Card"
+
 Item {
     id: _root
 
@@ -55,9 +57,7 @@ Item {
             id: _leftPage
             SplitView.minimumWidth: 200
 
-            initialItem: Rectangle {
-                color: "green"
-            }
+            initialItem: Statistics {}
         }
 
         StackView {
@@ -65,9 +65,7 @@ Item {
             visible: false
             SplitView.minimumWidth: 200
 
-            initialItem: Rectangle {
-                color: "blue"
-            }
+            initialItem: Statistics {}
         }
     } // SplitView
 } // Item
