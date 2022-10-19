@@ -19,6 +19,7 @@ qt_add_qml_module(appQmlUI
         Views/Creation.qml
         Views/Welcome.qml
         Elements/Card/Statistics/Portrait.qml
+        Elements/Card/Statistics/PersonalField.qml
 
         Placeholders/PagePlaceholder.qml
 )
