@@ -18,6 +18,9 @@ qt_add_qml_module(appQmlUI
         Views/Cards.qml
         Views/Creation.qml
         Views/Welcome.qml
+
+        Delegates/Card/Statistics/Modifiers/ModifierCategory.qml
+
         Elements/Card/Statistics/Attribute.qml
         Elements/Card/Statistics/AttributeLabel.qml
         Elements/Card/Statistics/Portrait.qml
