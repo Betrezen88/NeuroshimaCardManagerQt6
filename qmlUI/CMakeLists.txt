@@ -23,6 +23,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Statistics/PersonalField.qml
         Elements/Card/Statistics/Personal.qml
         Elements/Card/Statistics/Tricks.qml
+        Elements/Card/Statistics/Skillpack.qml
         Elements/Card/Statistics/Skill.qml
 
         Placeholders/PagePlaceholder.qml
