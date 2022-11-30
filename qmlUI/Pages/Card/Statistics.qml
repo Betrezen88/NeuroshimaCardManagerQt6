@@ -133,15 +133,14 @@ Page {
                     }
                 }
 
-                Rectangle {
+                OtherSkills {
                     id: _otherSkills
-                    color: "green"
-                    width: parent.colWidth; height: 300
-                    radius: 5
-
-                    Text {
-                        text: "Placeholder"
-                        anchors.centerIn: parent
+                    width: parent.colWidth; height: _charisma.height + _perception.height - _cleaverness.height
+                    skillsModel: ListModel {
+                        ListElement { name: "Pilotowanie"; attribute: "Sp"; value: 1 }
+                        ListElement { name: "Zeglowanie"; attribute: "Sp"; value: 1 }
+                        ListElement { name: "Dluga nazwa bardzo specjalistycznego skilla"; attribute: "Zr"; value: 1 }
+                        ListElement { name: "Gra na gitarze"; attribute: "Zr"; value: 1 }
                     }
                 }
             }
