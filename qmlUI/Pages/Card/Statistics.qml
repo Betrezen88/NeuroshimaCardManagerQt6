@@ -16,6 +16,7 @@ Page {
 
             Column {
                 property int colWidth: 300
+                spacing: 3
 
                 Personal {
                     id: _personal
@@ -58,7 +59,7 @@ Page {
                 }
 
                 Label {
-                    text: "Rany"
+                    text: "Modyfikatory"
                     width: parent.colWidth; height: 40
                     font.bold: true
                     font.pointSize: 14
@@ -69,16 +70,9 @@ Page {
                     }
                 }
 
-                Rectangle {
-                    id: _damage
-                    color: "green"
-                    width: parent.colWidth; height: 200
-                    radius: 5
-
-                    Text {
-                        text: "Placeholder"
-                        anchors.centerIn: parent
-                    }
+                Modifiers {
+                    id: _modifiers
+                    width: parent.colWidth; height: 160
                 }
             }
 
@@ -100,7 +94,7 @@ Page {
                 }
 
                 Label {
-                    text: "Modyfikatory"
+                    text: "Rany"
                     width: parent.colWidth; height: 40
                     font.bold: true
                     font.pointSize: 14
@@ -111,8 +105,8 @@ Page {
                     }
                 }
 
-                Modifiers {
-                    id: _modifiers
+                Wounds {
+                    id: _wounds
                     width: parent.colWidth; height: 200
                 }
             }
@@ -125,6 +119,18 @@ Page {
                     aName: "Spryt"
                     skillpacks: 5
                     width: parent.colWidth
+                }
+
+                Label {
+                    text: "Inne Umiejetnosci"
+                    width: parent.colWidth; height: 40
+                    font.bold: true
+                    font.pointSize: 14
+                    horizontalAlignment: Qt.AlignHCenter
+                    verticalAlignment: Qt.AlignVCenter
+                    background: Rectangle {
+                        color: "#000"
+                    }
                 }
 
                 Rectangle {
