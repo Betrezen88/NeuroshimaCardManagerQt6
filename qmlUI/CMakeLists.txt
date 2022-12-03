@@ -19,6 +19,7 @@ qt_add_qml_module(appQmlUI
         Views/Creation.qml
         Views/Welcome.qml
 
+        Delegates/Card/Statistics/AttributeLabel/AttributeValueLabel.qml
         Delegates/Card/Statistics/Modifiers/ModifierCategory.qml
         Delegates/Card/Statistics/OtherSkill/OtherSkill.qml
         Delegates/Card/Statistics/Wounds/Wound.qml

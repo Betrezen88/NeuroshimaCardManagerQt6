@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 
+import "../../../Delegates/Card/Statistics/AttributeLabel"
+
 Rectangle {
     id: _root
 
@@ -30,14 +32,19 @@ Rectangle {
 
             Repeater {
                 id: _levels
-                model: 7
+                model: ListModel {
+                    ListElement { name: "Lat."; value: "2" }
+                    ListElement { name: "Prze."; value: "0" }
+                    ListElement { name: "Prob."; value: "-2" }
+                    ListElement { name: "Trud."; value: "-5" }
+                    ListElement { name: "B.Tr."; value: "-8" }
+                    ListElement { name: "Ch.Tr."; value: "-11" }
+                    ListElement { name: "Fuks"; value: "-14" }
+                }
 
-                delegate: Rectangle {
-                    width: 40; height: 40
-                    color: "#fff"
-                    radius: 10
-                    border.width: 2
-                    border.color: "#000"
+                delegate: AttributeValueLabel {
+                    name: model.name
+                    value: model.value
                 }
             }
         } // Row
