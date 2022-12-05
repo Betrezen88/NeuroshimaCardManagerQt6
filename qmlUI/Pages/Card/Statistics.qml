@@ -143,6 +143,23 @@ Page {
                         ListElement { name: "Gra na gitarze"; attribute: "Zr"; value: 1 }
                     }
                 }
+
+                Label {
+                    text: "Doswiadczenie"
+                    width: parent.colWidth; height: 40
+                    font.bold: true
+                    font.pointSize: 14
+                    horizontalAlignment: Qt.AlignHCenter
+                    verticalAlignment: Qt.AlignVCenter
+                    background: Rectangle {
+                        color: "#000"
+                    }
+                }
+
+                Experience {
+                    id: _experience
+                    width: parent.colWidth
+                }
             }
         } // Grid
 

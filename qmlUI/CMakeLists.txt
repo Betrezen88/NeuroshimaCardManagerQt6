@@ -26,6 +26,7 @@ qt_add_qml_module(appQmlUI
 
         Elements/Card/Statistics/Attribute.qml
         Elements/Card/Statistics/AttributeLabel.qml
+        Elements/Card/Statistics/Experience.qml
         Elements/Card/Statistics/Modifiers.qml
         Elements/Card/Statistics/OtherSkills.qml
         Elements/Card/Statistics/Portrait.qml
