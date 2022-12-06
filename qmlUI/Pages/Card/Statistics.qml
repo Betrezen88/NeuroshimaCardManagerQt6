@@ -160,6 +160,10 @@ Page {
                     id: _experience
                     width: parent.colWidth
                 }
+
+                DifficultyLevels {
+                    width: parent.colWidth; height: 57
+                }
             }
         } // Grid
 
