@@ -13,7 +13,10 @@ qt_add_qml_module(appQmlUI
     VERSION 1.0
     QML_FILES
         main.qml
+
         Pages/Card/Statistics.qml
+        Pages/Card/Equipment.qml
+
         Views/Card.qml
         Views/Cards.qml
         Views/Creation.qml
