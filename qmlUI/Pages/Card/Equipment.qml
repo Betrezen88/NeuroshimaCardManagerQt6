@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 
-import "../../Placeholders"
+import "../../Elements/Card/Equipment"
+
 Page {
     id: _root
 
@@ -12,7 +13,9 @@ Page {
             spacing: 5
 
             Column {
+                spacing: 5
                 width: 600
+
                 Label {
                     text: "Pancerz"
                     height: 40; width: parent.width
@@ -23,6 +26,11 @@ Page {
                     background: Rectangle {
                         color: "#000"
                     }
+                }
+
+                Armor {
+                    id: _armor
+                    width: parent.width
                 }
 
                 Label {
