@@ -31,6 +31,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Equipment/Armor.qml
         Elements/Card/Equipment/StatsText.qml
         Elements/Card/Equipment/StatsSpinBox.qml
+        Elements/Card/Equipment/StatsSpecials.qml
 
         Elements/Card/Statistics/Attribute.qml
         Elements/Card/Statistics/AttributeLabel.qml
