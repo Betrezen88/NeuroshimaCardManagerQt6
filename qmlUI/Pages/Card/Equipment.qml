@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 import "../../Elements/Card/Equipment"
+import "../../Delegates/Card/Equipment"
 
 Page {
     id: _root
@@ -45,6 +46,29 @@ Page {
                     }
                 }
 
+                ListView {
+                    width: parent.width; height: 800
+                    spacing: 3
+                    clip: true
+
+                    model: ListModel {
+                        ListElement {
+                            name: "Beretta";
+                            type: "ranged";
+                        }
+                        ListElement {
+                            name: "Kij";
+                            type: "melee";
+                        }
+                    }
+
+                    delegate: Weapon {
+                        width: ListView.view.width
+                        name: model.name
+                        type: model.type
+//                        stats: model.stats
+                    }
+                }
             } // Column
 
             Column {
