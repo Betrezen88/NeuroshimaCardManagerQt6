@@ -29,6 +29,7 @@ qt_add_qml_module(appQmlUI
         Delegates/Card/Statistics/Wounds/Wound.qml
 
         Elements/Card/Equipment/Armor.qml
+        Elements/Card/Equipment/StatsWeaponRanged.qml
         Elements/Card/Equipment/StatsWeaponMelee.qml
         Elements/Card/Equipment/StatsText.qml
         Elements/Card/Equipment/StatsSpinBox.qml
