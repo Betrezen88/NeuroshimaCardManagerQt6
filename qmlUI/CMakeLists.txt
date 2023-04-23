@@ -29,6 +29,7 @@ qt_add_qml_module(appQmlUI
         Delegates/Card/Statistics/Wounds/Wound.qml
 
         Elements/Card/Equipment/Armor.qml
+        Elements/Card/Equipment/StatsText.qml
 
         Elements/Card/Statistics/Attribute.qml
         Elements/Card/Statistics/AttributeLabel.qml
