@@ -22,6 +22,7 @@ qt_add_qml_module(appQmlUI
         Views/Creation.qml
         Views/Welcome.qml
 
+        Delegates/Card/Equipment/BackpackItem.qml
         Delegates/Card/Equipment/ArmorPart.qml
         Delegates/Card/Equipment/Weapon.qml
         Delegates/Card/Statistics/AttributeLabel/AttributeValueLabel.qml
