@@ -122,6 +122,12 @@ Page {
                         color: "#000"
                     }
                 }
+
+                Resources {
+                    id: _resources
+                    width: parent.width
+                    height: 50
+                }
             } // Column
         }
     }
