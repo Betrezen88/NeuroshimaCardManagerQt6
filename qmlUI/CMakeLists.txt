@@ -26,6 +26,7 @@ qt_add_qml_module(appQmlUI
         Delegates/Card/Equipment/ArmorPart.qml
         Delegates/Card/Equipment/Resource.qml
         Delegates/Card/Equipment/Weapon.qml
+        Delegates/Card/Notes/FormQuestion.qml
         Delegates/Card/Statistics/AttributeLabel/AttributeValueLabel.qml
         Delegates/Card/Statistics/Modifiers/ModifierCategory.qml
         Delegates/Card/Statistics/OtherSkill/OtherSkill.qml
