@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 import "../../Delegates/Card/Notes"
+import "../../Elements/Card/Common"
 
 Page {
     id: _root
@@ -16,82 +17,33 @@ Page {
                 spacing: 5
 
                 Column {
-                    Label {
+                    HeaderLabel {
                         text: "Biografia"
                         height: 40; width: 600 - (5 / 2)
-                        font.bold: true
-                        font.pointSize: 14
-                        horizontalAlignment: Qt.AlignHCenter
-                        verticalAlignment: Qt.AlignVCenter
-                        background: Rectangle {
-                            color: "#000"
-                        }
                     }
 
-                    ScrollView {
-                        width: 600 - (5 / 2)
-                        height: 400
-
-                        TextArea {
-                            id: _bibliography
-                            width: parent.width
-                            wrapMode: Text.WordWrap
-                            font.pointSize: 12
-                            color: "#000"
-
-                            background: Rectangle {
-                                color: "#fff"
-                                border.width: 2
-                                border.color: "#000"
-                            }
-                        }
+                    ScrollTextArea {
+                        id: _bibliography
+                        width: 600 - (5 / 2); height: 400
                     }
                 } // Column
 
                 Column {
-                    Label {
+                    HeaderLabel {
                         text: "Notatki"
                         height: 40; width: 600 - (5 / 2)
-                        font.bold: true
-                        font.pointSize: 14
-                        horizontalAlignment: Qt.AlignHCenter
-                        verticalAlignment: Qt.AlignVCenter
-                        background: Rectangle {
-                            color: "#000"
-                        }
                     }
 
-                    ScrollView {
-                        width: 600 - (5 / 2)
-                        height: 400
-
-                        TextArea {
-                            id: _notes
-                            width: parent.width
-                            wrapMode: Text.WordWrap
-                            font.pointSize: 12
-                            color: "#000"
-
-                            background: Rectangle {
-                                color: "#fff"
-                                border.width: 2
-                                border.color: "#000"
-                            }
-                        }
+                    ScrollTextArea {
+                        id: _notes
+                        width: 600 - (5 / 2); height: 400
                     }
                 }
             } // Row
 
-            Label {
+            HeaderLabel {
                 text: "Formularz"
                 height: 40; width: 1200
-                font.bold: true
-                font.pointSize: 14
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                background: Rectangle {
-                    color: "#000"
-                }
             }
 
             Repeater {

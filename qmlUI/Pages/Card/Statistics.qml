@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 
-import "../../Placeholders"
 import "../../Elements/Card/Statistics"
+import "../../Elements/Card/Common"
 
 Page {
     id: _root
@@ -27,21 +27,14 @@ Page {
                     id: _tricks
                     width: parent.colWidth
                 }
-            }
+            } // Column
 
             Column {
                 property int colWidth: 300
 
-                Label {
-                    text: "Wspolczynniki i umiejetnosci"
+                HeaderLabel {
+                    text: "Współczynniki i umiejętności"
                     width: parent.colWidth; height: 40
-                    font.bold: true
-                    font.pointSize: 14
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    background: Rectangle {
-                        color: "#000"
-                    }
                 }
 
                 Attribute {
@@ -53,7 +46,7 @@ Page {
 
                 Attribute {
                     id: _dexterity
-                    aName: "Zrecznosc"
+                    aName: "Zręczność"
                     skillpacks: 5
                     width: parent.colWidth
                 }
@@ -74,7 +67,7 @@ Page {
                     id: _modifiers
                     width: parent.colWidth; height: 160
                 }
-            }
+            } // Column
 
             Column {
                 property int colWidth: 300
@@ -93,23 +86,16 @@ Page {
                     width: parent.colWidth
                 }
 
-                Label {
+                HeaderLabel {
                     text: "Rany"
                     width: parent.colWidth; height: 40
-                    font.bold: true
-                    font.pointSize: 14
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    background: Rectangle {
-                        color: "#000"
-                    }
                 }
 
                 Wounds {
                     id: _wounds
                     width: parent.colWidth; height: 200
                 }
-            }
+            } // Column
 
             Column {
                 property int colWidth: 300
@@ -121,16 +107,9 @@ Page {
                     width: parent.colWidth
                 }
 
-                Label {
-                    text: "Inne Umiejetnosci"
+                HeaderLabel {
+                    text: "Inne Umiejętności"
                     width: parent.colWidth; height: 40
-                    font.bold: true
-                    font.pointSize: 14
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    background: Rectangle {
-                        color: "#000"
-                    }
                 }
 
                 OtherSkills {
@@ -144,16 +123,9 @@ Page {
                     }
                 }
 
-                Label {
-                    text: "Doswiadczenie"
+                HeaderLabel {
+                    text: "Doświadczenie"
                     width: parent.colWidth; height: 40
-                    font.bold: true
-                    font.pointSize: 14
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    background: Rectangle {
-                        color: "#000"
-                    }
                 }
 
                 Experience {
@@ -164,7 +136,7 @@ Page {
                 DifficultyLevels {
                     width: parent.colWidth; height: 57
                 }
-            }
+            } // Column
         } // Grid
 
     } // ScrollView

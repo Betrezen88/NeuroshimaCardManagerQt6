@@ -13,22 +13,15 @@ Column {
         width: _root.width; height: 250
     }
 
-    Label {
-        text: "Postac"
+    HeaderLabel {
+        text: "Postać"
         width: _root.width; height: 40
-        font.bold: true
-        font.pointSize: 14
-        horizontalAlignment: Qt.AlignHCenter
-        verticalAlignment: Qt.AlignVCenter
-        background: Rectangle {
-            color: "#000"
-        }
     }
 
     DataField {
         id: _fullname
         width: _root.width
-        name: "Imie"
+        name: "Imię"
         value: "Nick 'Happy' Sax"
     }
 
@@ -77,7 +70,7 @@ Column {
     DataField {
         id: _fame
         width: _root.width
-        name: "Slawa"
+        name: "Sława"
         value: "0"
     }
 
