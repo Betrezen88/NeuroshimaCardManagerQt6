@@ -28,7 +28,6 @@ qt_add_qml_module(appQmlUI
         Delegates/Card/Equipment/Resource.qml
         Delegates/Card/Equipment/Weapon.qml
         Delegates/Card/Notes/FormQuestion.qml
-        Delegates/Card/Statistics/AttributeLabel/AttributeValueLabel.qml
         Delegates/Card/Statistics/Modifiers/ModifierCategory.qml
         Delegates/Card/Statistics/OtherSkill/OtherSkill.qml
         Delegates/Card/Statistics/Wounds/Wound.qml
@@ -36,6 +35,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Common/DataField.qml
         Elements/Card/Common/HeaderLabel.qml
         Elements/Card/Common/Portrait.qml
+        Elements/Card/Common/ValueLabel.qml
         Elements/Card/Equipment/Armor.qml
         Elements/Card/Equipment/Resources.qml
         Elements/Card/Equipment/StatsWeaponRanged.qml
