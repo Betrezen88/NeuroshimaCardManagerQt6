@@ -40,6 +40,8 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Common/ValueLabel.qml
 
         Elements/Card/Beast/AttributeRow.qml
+        Elements/Card/Beast/StatsField.qml
+
         Elements/Card/Equipment/Armor.qml
         Elements/Card/Equipment/Resources.qml
         Elements/Card/Equipment/StatsWeaponRanged.qml
