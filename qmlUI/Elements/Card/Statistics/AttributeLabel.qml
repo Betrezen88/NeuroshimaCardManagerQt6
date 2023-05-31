@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "../../../Delegates/Card/Statistics/AttributeLabel"
+import "../Common/"
 
 Rectangle {
     id: _root
@@ -42,7 +42,7 @@ Rectangle {
                     ListElement { name: "Fuks"; value: "-14" }
                 }
 
-                delegate: AttributeValueLabel {
+                delegate: ValueLabel {
                     name: model.name
                     value: model.value
                 }
