@@ -6,7 +6,6 @@ Rectangle {
     id: _root
 
     color: "#fff"
-    radius: 10
     border.color: "#000"
     border.width: 2
 
