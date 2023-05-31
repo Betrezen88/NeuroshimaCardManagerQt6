@@ -33,6 +33,7 @@ qt_add_qml_module(appQmlUI
         Delegates/Card/Statistics/OtherSkill/OtherSkill.qml
         Delegates/Card/Statistics/Wounds/Wound.qml
 
+        Elements/Card/Common/DataField.qml
         Elements/Card/Common/HeaderLabel.qml
         Elements/Card/Common/Portrait.qml
         Elements/Card/Equipment/Armor.qml
@@ -49,7 +50,6 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Statistics/Experience.qml
         Elements/Card/Statistics/Modifiers.qml
         Elements/Card/Statistics/OtherSkills.qml
-        Elements/Card/Statistics/PersonalField.qml
         Elements/Card/Statistics/Personal.qml
         Elements/Card/Statistics/Tricks.qml
         Elements/Card/Statistics/Skillpack.qml

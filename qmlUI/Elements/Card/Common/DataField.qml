@@ -9,7 +9,6 @@ Rectangle {
 
     color: "#fff"
     height: _text.implicitHeight < 40 ? 40 : _text.implicitHeight
-    radius: 10
     border.color: "#000"
     border.width: 2
 
