@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 
+import "../Common"
+
 Column {
     id: _root
 
@@ -23,56 +25,56 @@ Column {
         }
     }
 
-    PersonalField {
+    DataField {
         id: _fullname
         width: _root.width
         name: "Imie"
         value: "Nick 'Happy' Sax"
     }
 
-    PersonalField {
+    DataField {
         id: _origin
         width: _root.width
         name: "Pochodzenie"
         value: "Las Vegas"
     }
 
-    PersonalField {
+    DataField {
         id: _profesion
         width: _root.width
         name: "Profesja"
         value: "Wojownik Autostrady"
     }
 
-    PersonalField {
+    DataField {
         id: _specialization
         width: _root.width
         name: "Specjalizacja"
         value: "Technik"
     }
 
-    PersonalField {
+    DataField {
         id: _disease
         width: _root.width
         name: "Choroba"
         value: "Goraczka Sobotniej Nocy"
     }
 
-    PersonalField {
+    DataField {
         id: _originFeature
         width: _root.width
         name: "Cecha z pochodzenia"
         value: "Zalety klasycznego wyksztalcenia"
     }
 
-    PersonalField {
+    DataField {
         id: _profesionFeature
         width: _root.width
         name: "Cecha z profesji"
         value: "Szybka bryka"
     }
 
-    PersonalField {
+    DataField {
         id: _fame
         width: _root.width
         name: "Slawa"
