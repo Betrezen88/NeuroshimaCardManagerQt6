@@ -33,6 +33,7 @@ qt_add_qml_module(appQmlUI
         Delegates/Card/Statistics/OtherSkill/OtherSkill.qml
         Delegates/Card/Statistics/Wounds/Wound.qml
 
+        Elements/Card/Common/HeaderLabel.qml
         Elements/Card/Equipment/Armor.qml
         Elements/Card/Equipment/Resources.qml
         Elements/Card/Equipment/StatsWeaponRanged.qml
