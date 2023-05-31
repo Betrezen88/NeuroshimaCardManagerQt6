@@ -34,6 +34,7 @@ qt_add_qml_module(appQmlUI
 
         Elements/Card/Common/DataField.qml
         Elements/Card/Common/HeaderLabel.qml
+        Elements/Card/Common/List.qml
         Elements/Card/Common/Portrait.qml
         Elements/Card/Common/ScrollTextArea.qml
         Elements/Card/Common/ValueLabel.qml
