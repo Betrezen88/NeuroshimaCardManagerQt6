@@ -1,6 +1,6 @@
 import QtQuick
 
-import "../../../Delegates/Card/Statistics/AttributeLabel"
+import "../../Card/Common"
 
 Rectangle {
     id: _root
@@ -26,7 +26,7 @@ Rectangle {
                 ListElement { name: "Fuks"; value: "-14" }
             }
 
-            delegate: AttributeValueLabel {
+            delegate: ValueLabel {
                 name: model.name
                 value: model.value
             }
