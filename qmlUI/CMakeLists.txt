@@ -25,6 +25,7 @@ qt_add_qml_module(appQmlUI
 
         Delegates/Card/Beast/Command.qml
         Delegates/Card/Beast/Condition.qml
+        Delegates/Card/Beast/Maneuver.qml
         Delegates/Card/Equipment/BackpackItem.qml
         Delegates/Card/Equipment/ArmorPart.qml
         Delegates/Card/Equipment/Resource.qml
