@@ -3,6 +3,7 @@ import QtQuick 2.15
 Rectangle {
     property alias model: _list.model
     property alias delegate: _list.delegate
+    property alias spacing: _list.spacing
 
     id: _root
 
@@ -13,6 +14,5 @@ Rectangle {
         id: _list
         anchors.fill: parent
         clip: true
-        spacing: 2
     }
 }
