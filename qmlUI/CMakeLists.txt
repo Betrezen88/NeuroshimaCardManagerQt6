@@ -47,6 +47,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Common/ValueLabel.qml
 
         Elements/Card/Beast/AttributeRow.qml
+        Elements/Card/Beast/Damage.qml
         Elements/Card/Beast/Data.qml
         Elements/Card/Beast/Stats.qml
         Elements/Card/Beast/StatsField.qml
