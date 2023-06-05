@@ -71,6 +71,35 @@ Column {
         width: _root.width
         name: "Choroba"
         value: "Goraczka Sobotniej Nocy"
+        tooltipItem: DiseaseTooltip {
+            width: 350
+            height: 300
+            title: _disease.value
+            description: "Zajebista nazwa, ale gdy na nią chorujesz, nie jest wcale tak wesoło. Gorączka sobotniej nocy, to choroba, którą przywlekli ludzie z okolic Waszyngtonu, gdzie na poczatku wojny zdetonowano chyba połowę ziemskiego potencjału militarnego: broń nuklearną, biologiczną, chemiczną. Wszystko, co tylko nadawało się do masowej eksterminacji. Cele były jasne - prezydent i reszta polityków. Retrowirus, którego tam użyto, pochodził się z labolatoriów rosyjskich, tak przynajmniej tłumaczyli to później jajogłowi. Nazwa wzieła sie od filmu, w którym John Travolta tańczy jak paralityk podczas ataku padaczki. Dlaczego? A zajrzyj do opisu objawów, to będziesz wiedział."
+            cure: "Valapren. Tylko i wyłączni. Lekarstwo, które produkowane było przez kilka lat w jednej fabryce, gdzieś na północnym wschodzie. Nikt nie wie gdzie - ludzie, którzy handlują lekami nie ujawniają tak łatwo swoich źródeł. Na szczęście zrobili tego straszne ilości, ale w tej chwili niestety, jest na wyczerpaniu - źródełko wysycha, a po za tym w okolicy pojawili się mutanci. Valapren jest coraz trudniej dostępny, jeśli pytasz wędrownego handlarza lekami, czy ma parę pigułek - masz 20% szans, że tak. I jest bardzo drogi. Opakowanie to słoiczek z 20 pastylkami."
+            penalties: ListModel {
+                ListElement {
+                    name: "Pierwsze symptomy"
+                    description: "Mało przyjemne. Pocisz się i masz niekontrolowane skurcze mięśni. Niektórych rzeczy nie zrobisz, choćbyś się zesrał, co w Twoim stanie jest dość proste, w końcu zwieracze też są mięśniami, nie?"
+                    penalties: "Budowa -3, Zręczność -3, Kontakty z ludźmi +60%"
+                }
+                ListElement {
+                    name: "Stan ostry"
+                    description: "Nie możesz wykonywać żadnych precyzyjnych czynności - strzelać, otwierać zamków, prowadzić samochodu. Biegać także nie możesz. Rób często Przeciętny test Budowy, jeśli go nie przejdziesz - mdlejesz na kilka chwil."
+                    penalties: "Budowa -6, Zręczność -6, Kontakty z ludźmi +90%"
+                }
+                ListElement {
+                    name: "Stan krytyczny"
+                    description: "Nie możesz przejść więcej niż dziesięć kroków. No dobra - jedenaście przejdziesz. Dwanaście też. Chodziło mi tylko o to, że chodzisz z trudem i nawala Ci błędnik. Niekontrolowane skurcze mięśni powodują, że zaczynasz tańczyć. Dosłownie - podrygujesz, jak małpa na drucie. Taniec jest niekontrolowany i po każdym ataku (Przeciętny test Budowy) padasz nieprzytomny i leżysz tak przez dłuższy czas."
+                    penalties: "Budowa -10, Zręczność -10, Kontakty z ludźmi +120%"
+                }
+                ListElement {
+                    name: "Stan terminalny"
+                    description: "Wygląda to, jakby na każdy Twój mięsień można wykonać rzut k20, by okreslić w którą stronę się udaje. Umierasz."
+                    penalties: ""
+                }
+            }
+        }
     }
 
     DataField {
