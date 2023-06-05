@@ -41,6 +41,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Common/List.qml
         Elements/Card/Common/Portrait.qml
         Elements/Card/Common/ScrollTextArea.qml
+        Elements/Card/Common/TooltipContent.qml
         Elements/Card/Common/ValueLabel.qml
 
         Elements/Card/Beast/AttributeRow.qml
