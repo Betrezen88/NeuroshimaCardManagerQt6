@@ -1,9 +1,11 @@
 import QtQuick
+import QtQuick.Controls
 
 Rectangle {
     property string name
     property string value
-    property string description
+    property Item tooltipItem: null
+    property int tooltipWidth
 
     id: _root
 
@@ -21,4 +23,32 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
         padding: 5
     }
+
+    Popup {
+        id: _tooltip
+        width: _root.tooltipWidth
+        padding: 5
+        x: parent.width
+        y: -(height/2)
+
+        contentItem: _root.tooltipItem
+
+        background: Rectangle {
+            border.width: 2
+            border.color: "#000"
+        }
+    } // Popup
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            if (tooltipItem == null)
+                return
+
+            if (_tooltip.opened)
+                _tooltip.close()
+            else
+                _tooltip.open()
+        }
+    } // MouseArea
 }
