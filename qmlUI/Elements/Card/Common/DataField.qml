@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Controls
 
+import "../../../Common"
+
 Rectangle {
     property string name
     property string value
     property Item tooltipItem: null
-    property int tooltipWidth
 
     id: _root
 
@@ -24,25 +25,19 @@ Rectangle {
         padding: 5
     }
 
-    Popup {
+    TooltipPopup {
         id: _tooltip
-        width: _root.tooltipItem != null ? _root.tooltipItem.width : 0
-        padding: 5
+
         x: parent.width
         y: -(height/2)
 
         contentItem: _root.tooltipItem
-
-        background: Rectangle {
-            border.width: 2
-            border.color: "#000"
-        }
-    } // Popup
+    } // TooltipPopup
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            if (tooltipItem == null)
+            if (_root.tooltipItem == null)
                 return
 
             if (_tooltip.opened)
