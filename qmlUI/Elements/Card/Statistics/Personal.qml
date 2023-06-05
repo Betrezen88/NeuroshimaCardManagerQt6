@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 import "../Common"
+import "../../../Common"
 
 Column {
     id: _root
@@ -133,24 +134,65 @@ Column {
         value: "0"
     }
 
-    Rectangle {
-        id: _reputation
-        color: "#fff"
+    Button {
         width: _root.width; height: 40
-        radius: 10
-        border.width: 2
-        border.color: "#000"
 
-        Text {
+        contentItem: Text {
             text: "Reputacja"
+            color: "#000"
             font.pointSize: 12
             font.bold: true
-            anchors.centerIn: parent
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
         }
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: console.log("Show reputation popup")
+        background: Rectangle {
+            border.width: 2
+            border.color: "#000"
         }
-    }
+
+        TooltipPopup {
+            id: _repTooltip
+
+            x: parent.width
+            y: -(height/2)
+
+            contentItem: ReputationTooltip {
+                width: 300; height: 300
+                title: "Reputacja"
+                places: ListModel {
+                    ListElement { name: "Kalifornia"; value: 0 }
+                    ListElement { name: "Nevada"; value: 0 }
+                    ListElement { name: "Vegas"; value: 0 }
+                    ListElement { name: "Południowa Hegemonia"; value: 0 }
+                    ListElement { name: "Salt Lake City"; value: 0 }
+                    ListElement { name: "Wyoming"; value: 0 }
+                    ListElement { name: "Kolorado"; value: 0 }
+                    ListElement { name: "Nebraska"; value: 0 }
+                    ListElement { name: "Kansas i Oklahoma"; value: 0 }
+                    ListElement { name: "Teksas"; value: 0 }
+                    ListElement { name: "Minnesota"; value: 0 }
+                    ListElement { name: "Iowa"; value: 0 }
+                    ListElement { name: "Missouri"; value: 0 }
+                    ListElement { name: "Missisipi"; value: 0 }
+                    ListElement { name: "Wisconsin"; value: 0 }
+                    ListElement { name: "Illinois"; value: 0 }
+                    ListElement { name: "Federacja Apallachów"; value: 0 }
+                    ListElement { name: "Georgia"; value: 0 }
+                    ListElement { name: "Miami"; value: 0 }
+                    ListElement { name: "Detroit"; value: 0 }
+                    ListElement { name: "Nowy Jork"; value: 0 }
+                    ListElement { name: "Karolina"; value: 0 }
+                }
+            }
+        }
+
+        onClicked: {
+            if (_repTooltip.opened)
+                _repTooltip.close()
+            else
+                _repTooltip.open()
+        }
+    } // Button
+
 } // Column
