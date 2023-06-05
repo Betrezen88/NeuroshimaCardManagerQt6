@@ -26,7 +26,7 @@ Rectangle {
 
     Popup {
         id: _tooltip
-        width: _root.tooltipWidth
+        width: _root.tooltipItem != null ? _root.tooltipItem.width : 0
         padding: 5
         x: parent.width
         y: -(height/2)
