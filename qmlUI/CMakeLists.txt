@@ -67,6 +67,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Statistics/Modifiers.qml
         Elements/Card/Statistics/OtherSkills.qml
         Elements/Card/Statistics/Personal.qml
+        Elements/Card/Statistics/ReputationTooltip.qml
         Elements/Card/Statistics/Tricks.qml
         Elements/Card/Statistics/TrickTooltip.qml
         Elements/Card/Statistics/Skillpack.qml
