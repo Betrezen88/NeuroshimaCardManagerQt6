@@ -18,11 +18,33 @@ Item {
             width: _sidePanel.width
             anchors { top: parent.top; bottom: _buttons.top; left: parent.left }
 
-            model: 6
+            model: ListModel {
+                ListElement { name: "S"; page: "qrc:/QmlUI/Pages/Card/Statistics.qml" }
+                ListElement { name: "E"; page: "qrc:/QmlUI/Pages/Card/Equipment.qml" }
+                ListElement { name: "N"; page: "qrc:/QmlUI/Pages/Card/Notes.qml" }
+                ListElement { name: "F"; page: "" }
+                ListElement { name: "B"; page: "qrc:/QmlUI/Views/Pets.qml" }
+                ListElement { name: "P"; page: "" }
+            }
 
             delegate: Button {
                 width: _sidePanel.width; height: 50
-                text: index
+                text: model.name
+                onClicked: {
+                    // TODO: Need to rework this
+                    if (_leftPage.count > 0) {
+                        _leftPage.removeItem( _leftPage.currentItem )
+                    }
+
+                    var item = Qt.createComponent(model.page)
+                    if (item.status === Component.Ready) {
+                        _leftPage.addItem(item.createObject(_leftPage, {}))
+                        console.log("Component added")
+                    }
+                    else if (item.status === Component.Error) {
+                        console.log("Error: ", item.errorString())
+                    }
+                }
             }
         }
 
