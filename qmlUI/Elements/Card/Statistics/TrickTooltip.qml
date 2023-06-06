@@ -6,8 +6,13 @@ Item {
     property string requirements
     property string description
     property string action
+    property int maxHeight
 
     id: _root
+
+    height: (_title.height + _scrollContent.height > maxHeight)
+                ? maxHeight
+                : _title.height + _scrollContent.height
 
     Column {
         id: _column
@@ -26,6 +31,7 @@ Item {
             width: _root.width; height: _root.height - _title.height
 
             Column {
+                id: _scrollContent
                 spacing: 5
 
                 Text {
