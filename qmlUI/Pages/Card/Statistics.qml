@@ -3,6 +3,7 @@ import QtQuick.Controls
 
 import "../../Elements/Card/Statistics"
 import "../../Elements/Card/Common"
+import "../../Delegates/Card/Statistics"
 
 Page {
     id: _root
@@ -23,9 +24,20 @@ Page {
                     width: parent.colWidth
                 }
 
-                Tricks {
-                    id: _tricks
+                HeaderLabel {
+                    text: "Sztuczki"
                     width: parent.colWidth
+                }
+
+                List {
+                    id: _triicks
+                    width: parent.colWidth; height: 830
+                    model: 5
+
+                    delegate: Trick {
+                        width: ListView.view.width; height: 40
+                        name: "Sztuczka"
+                    }
                 }
             } // Column
 
