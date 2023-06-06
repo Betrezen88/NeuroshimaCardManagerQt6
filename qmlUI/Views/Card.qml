@@ -53,19 +53,27 @@ Item {
         anchors { top: parent.top; bottom: parent.bottom; left: _sidePanel.right; right: parent.right }
 
         // TODO: Move it to seperate component ?
-        StackView {
+        SwipeView {
             id: _leftPage
             SplitView.minimumWidth: 200
 
-            initialItem: Statistics {}
+            Component.onCompleted: {
+                // TODO: Temporary solution
+                var item = Qt.createComponent("qrc:/QmlUI/Pages/Card/Statistics.qml")
+                if (item.status === Component.Ready) {
+                    _leftPage.addItem(item.createObject(_leftPage, {}))
+                    console.log("Component added")
+                }
+                else if (item.status === Component.Error) {
+                    console.log("Error: ", item.errorString())
+                }
+            }
         }
 
-        StackView {
+        SwipeView {
             id: _rightPage
             visible: false
             SplitView.minimumWidth: 200
-
-            initialItem: Statistics {}
         }
     } // SplitView
 } // Item
