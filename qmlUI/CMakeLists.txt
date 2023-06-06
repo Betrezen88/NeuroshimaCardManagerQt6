@@ -22,6 +22,7 @@ qt_add_qml_module(appQmlUI
         Views/Card.qml
         Views/Cards.qml
         Views/Creation.qml
+        Views/Pets.qml
         Views/Welcome.qml
 
         Common/TooltipPopup.qml
