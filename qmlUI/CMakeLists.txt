@@ -14,6 +14,7 @@ qt_add_qml_module(appQmlUI
     QML_FILES
         main.qml
 
+        Pages/Card/Beast.qml
         Pages/Card/Statistics.qml
         Pages/Card/Equipment.qml
         Pages/Card/Notes.qml
