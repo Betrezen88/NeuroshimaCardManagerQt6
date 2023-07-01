@@ -4,4 +4,5 @@ qt_add_qml_module(Data
     URI core.data
     VERSION 1.0
     SOURCES
+        Common/Types.h
 )
