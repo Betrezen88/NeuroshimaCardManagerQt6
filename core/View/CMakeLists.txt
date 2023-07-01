@@ -16,6 +16,8 @@ qt_add_qml_module(View
         Card/Statistics/Place.cpp
         Card/Statistics/Profession.h
         Card/Statistics/Profession.cpp
+        Card/Statistics/Reputation.h
+        Card/Statistics/Reputation.cpp
         Card/Statistics/Skill.h
         Card/Statistics/Skill.cpp
         Card/Statistics/Skillpack.h
