@@ -34,13 +34,13 @@ Page {
                 }
 
                 List {
-                    id: _triicks
+                    id: _tricks
                     width: parent.colWidth; height: 830
-                    model: 5
+                    model: sData != null ? sData.tricks : 0
 
                     delegate: Trick {
+                        trick: modelData
                         width: ListView.view.width; height: 40
-                        name: "Sztuczka"
                     }
                 }
             } // Column
