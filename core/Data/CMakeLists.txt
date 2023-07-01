@@ -5,6 +5,7 @@ qt_add_qml_module(Data
     VERSION 1.0
     SOURCES
         Common/Types.h
+        Statistics/FeatureData.h
         Statistics/OtherSkillData.h
         Statistics/SkillData.h
 )
