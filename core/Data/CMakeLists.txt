@@ -9,6 +9,7 @@ qt_add_qml_module(Data
         Statistics/DiseaseData.h
         Statistics/FeatureData.h
         Statistics/ExperienceData.h
+        Statistics/ModifierData.h
         Statistics/OriginData.h
         Statistics/OtherSkillData.h
         Statistics/PlaceData.h
