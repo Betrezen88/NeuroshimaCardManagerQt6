@@ -105,6 +105,21 @@ Item {
     } // SplitView
 
 
+    function loadPage(side, type) {
+        if ( side.count > 0 ) {
+            side.removeItem( side.currentItem )
+        }
+
+        var item = Qt.createComponent( pagePath(type) )
+        if (item.status === Component.Ready) {
+            side.addItem(item.createObject(side, { sData: pageData(type) }))
+            _root.pageChanged( _root.pageTitle(type) )
+        }
+        else if (item.status === Component.Error) {
+            console.log("Error: ", item.errorString())
+        }
+    }
+
     function pagePath(type) {
         switch(type) {
         case Types.Page.Statistics:
