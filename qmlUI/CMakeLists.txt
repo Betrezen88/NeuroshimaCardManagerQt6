@@ -91,6 +91,7 @@ set_target_properties(appQmlUI PROPERTIES
 target_link_libraries(appQmlUI
     PRIVATE
         Qt6::Quick
+        View
         Data
 
 install(TARGETS appQmlUI
