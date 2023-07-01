@@ -5,6 +5,8 @@ find_package(Qt6 6.4 COMPONENTS Core)
 add_library(Utils
     CardReader.h
     CardReader.cpp
+    CardWriter.h
+    CardWriter.cpp
 )
 
 target_link_libraries(Utils
