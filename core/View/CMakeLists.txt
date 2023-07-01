@@ -4,6 +4,8 @@ qt_add_qml_module(View
     URI core.view
     VERSION 1.0
     SOURCES
+        Card/Statistics/Experience.h
+        Card/Statistics/Experience.cpp
         Card/Statistics/Feature.h
         Card/Statistics/Feature.cpp
         Card/Statistics/Origin.h
