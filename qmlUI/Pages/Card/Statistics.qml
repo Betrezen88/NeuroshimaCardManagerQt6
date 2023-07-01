@@ -1,11 +1,15 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.view
+
 import "../../Elements/Card/Statistics"
 import "../../Elements/Card/Common"
 import "../../Delegates/Card/Statistics"
 
 Page {
+    property Statistics sData
+
     id: _root
 
     ScrollView {
