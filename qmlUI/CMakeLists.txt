@@ -72,8 +72,8 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Statistics/Personal.qml
         Elements/Card/Statistics/ReputationTooltip.qml
         Elements/Card/Statistics/TrickTooltip.qml
-        Elements/Card/Statistics/Skillpack.qml
-        Elements/Card/Statistics/Skill.qml
+        Elements/Card/Statistics/NSSkillpack.qml
+        Elements/Card/Statistics/NSSkill.qml
         Elements/Card/Statistics/Wounds.qml
 
         Placeholders/PagePlaceholder.qml

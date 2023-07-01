@@ -1,7 +1,11 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.view
+
 Rectangle {
+    property Skillpack skillpack: null
+
     id: _root
 
     height: _content.implicitHeight + 5
@@ -19,7 +23,7 @@ Rectangle {
 
             Label {
                 id: _name
-                text: "Skillpack"
+                text: skillpack != null ? skillpack.name : "Skillpack"
                 topPadding: 5; bottomPadding: 5
                 leftPadding: 15; rightPadding: 5
                 color: "#000"
@@ -29,7 +33,7 @@ Rectangle {
 
             Label {
                 id: _specializations
-                text: "(R)"
+                text: skillpack != null ? skillpack.specializationsShort() : "()"
                 padding: 5
                 color: "#000"
                 font.bold: true
@@ -38,9 +42,10 @@ Rectangle {
         } // Row
 
         Repeater {
-            model: 3
+            model: skillpack != null ? skillpack.skills : 0
 
-            delegate: Skill {
+            delegate: NSSkill {
+                skill: modelData
                 width: parent.width
             }
         }
