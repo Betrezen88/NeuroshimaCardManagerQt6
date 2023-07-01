@@ -13,4 +13,5 @@ qt_add_qml_module(Data
         Statistics/ProfessionData.h
         Statistics/SkillData.h
         Statistics/SkillpackData.h
+        Statistics/SpecializationData.h
 )
