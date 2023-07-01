@@ -32,4 +32,10 @@ qt_add_qml_module(View
         Card/Statistics/Trick.cpp
         Card/Statistics/Wound.h
         Card/Statistics/Wound.cpp
+
+        Card/Common/Modifier.h
+        Card/Common/Modifier.cpp
+    DEPENDENCIES
+        Data
+)
 )
