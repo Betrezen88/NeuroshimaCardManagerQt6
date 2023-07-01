@@ -4,6 +4,8 @@ qt_add_qml_module(Managers
     URI core.managers
     VERSION 1.0
     SOURCES
+        MainManager.h
+        MainManager.cpp
         CardManager.h
         CardManager.cpp
 )
