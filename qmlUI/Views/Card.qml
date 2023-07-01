@@ -1,9 +1,14 @@
 import QtQuick
 import QtQuick.Controls
 
+import data.types
+import core.view
+
 import "../Pages/Card"
 
 Item {
+    property Card card: null
+
     id: _root
 
     Item {
