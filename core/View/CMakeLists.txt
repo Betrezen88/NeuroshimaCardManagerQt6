@@ -12,6 +12,8 @@ qt_add_qml_module(View
         Card/Statistics/Otherskill.cpp
         Card/Statistics/Place.h
         Card/Statistics/Place.cpp
+        Card/Statistics/Profession.h
+        Card/Statistics/Profession.cpp
         Card/Statistics/Skill.h
         Card/Statistics/Skill.cpp
         Card/Statistics/Specialization.h
