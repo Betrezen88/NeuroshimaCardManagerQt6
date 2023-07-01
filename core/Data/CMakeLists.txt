@@ -6,6 +6,7 @@ qt_add_qml_module(Data
     SOURCES
         Common/Types.h
         Statistics/FeatureData.h
+        Statistics/OriginData.h
         Statistics/OtherSkillData.h
         Statistics/SkillData.h
 )
