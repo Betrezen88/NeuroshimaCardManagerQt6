@@ -36,6 +36,7 @@ Window {
         Cards {
             id: _cardsView
             visible: false
+            cardManager: manager.cardManager
             onCloseCardsView: _stackView.pop();
         }
     }
