@@ -14,6 +14,9 @@ Q_ENUM_NS(Requirement)
 enum class Modifier { Attribute, Test };
 Q_ENUM_NS(Modifier)
 
+enum class Wound { Scratch, Light, Heavy, Critical };
+Q_ENUM_NS(Wound)
+
 } // Types
 
 #endif // TYPES_H

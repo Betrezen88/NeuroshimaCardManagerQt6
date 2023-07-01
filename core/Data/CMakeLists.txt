@@ -19,4 +19,5 @@ qt_add_qml_module(Data
         Statistics/SpecializationData.h
         Statistics/SymptomData.h
         Statistics/TrickData.h
+        Statistics/WoundData.h
 )
