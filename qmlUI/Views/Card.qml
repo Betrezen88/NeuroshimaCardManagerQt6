@@ -11,6 +11,8 @@ Item {
 
     id: _root
 
+    signal pageChanged(name: string)
+
     Item {
         id: _sidePanel
         width: 50
@@ -24,33 +26,24 @@ Item {
             anchors { top: parent.top; bottom: _buttons.top; left: parent.left }
 
             model: ListModel {
-                ListElement { name: "S"; page: "qrc:/QmlUI/Pages/Card/Statistics.qml" }
-                ListElement { name: "E"; page: "qrc:/QmlUI/Pages/Card/Equipment.qml" }
-                ListElement { name: "N"; page: "qrc:/QmlUI/Pages/Card/Notes.qml" }
-                ListElement { name: "F"; page: "" }
-                ListElement { name: "B"; page: "qrc:/QmlUI/Views/Pets.qml" }
-                ListElement { name: "P"; page: "" }
+                ListElement { name: "S"; type: Types.Page.Statistics }
+                ListElement { name: "E"; type: Types.Page.Equipment }
+                ListElement { name: "N"; type: Types.Page.Notes }
+                ListElement { name: "F"; type: Types.Page.Friend }
+                ListElement { name: "B"; type: Types.Page.Beast }
+                ListElement { name: "P"; type: Types.Page.Vehicle }
             }
 
             delegate: Button {
                 width: _sidePanel.width; height: 50
                 text: model.name
+                visible: card == null
+                         ? false
+                         : card.hasPage(model.type)
                 onClicked: {
-                    // TODO: Need to rework this
-                    if (_leftPage.count > 0) {
-                        _leftPage.removeItem( _leftPage.currentItem )
-                    }
-
-                    var item = Qt.createComponent(model.page)
-                    if (item.status === Component.Ready) {
-                        _leftPage.addItem(item.createObject(_leftPage, {}))
-                        console.log("Component added")
-                    }
-                    else if (item.status === Component.Error) {
-                        console.log("Error: ", item.errorString())
-                    }
+                    _root.loadPage( _leftPage, model.type )
                 }
-            }
+            } // Button
         }
 
         Column {
@@ -83,18 +76,6 @@ Item {
         SwipeView {
             id: _leftPage
             SplitView.minimumWidth: 200
-
-            Component.onCompleted: {
-                // TODO: Temporary solution
-                var item = Qt.createComponent("qrc:/QmlUI/Pages/Card/Statistics.qml")
-                if (item.status === Component.Ready) {
-                    _leftPage.addItem(item.createObject(_leftPage, {}))
-                    console.log("Component added")
-                }
-                else if (item.status === Component.Error) {
-                    console.log("Error: ", item.errorString())
-                }
-            }
         }
 
         SwipeView {
@@ -104,6 +85,13 @@ Item {
         }
     } // SplitView
 
+    onCardChanged: {
+        if ( card == null ) {
+            return
+        }
+
+        loadPage( _leftPage, Types.Page.Statistics )
+    }
 
     function loadPage(side, type) {
         if ( side.count > 0 ) {
