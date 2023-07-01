@@ -1,7 +1,11 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.managers
+
 Page {
+    property CardManager cardManager: null
+
     id: _root
 
     signal closeCardsView()
