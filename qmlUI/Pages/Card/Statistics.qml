@@ -26,6 +26,7 @@ Page {
                 Personal {
                     id: _personal
                     width: parent.colWidth
+                    pData: sData
                 }
 
                 HeaderLabel {
