@@ -55,15 +55,13 @@ Page {
 
                 Attribute {
                     id: _body
-                    aName: "Budowa"
-                    skillpacks: 2
+                    attribute: sData.attribute("Budowa")
                     width: parent.colWidth
                 }
 
                 Attribute {
                     id: _dexterity
-                    aName: "Zręczność"
-                    skillpacks: 5
+                    attribute: sData.attribute("Zręczność")
                     width: parent.colWidth
                 }
 
@@ -90,15 +88,13 @@ Page {
 
                 Attribute {
                     id: _charisma
-                    aName: "Charakter"
-                    skillpacks: 3
+                    attribute: sData.attribute("Charakter")
                     width: parent.colWidth
                 }
 
                 Attribute {
                     id: _perception
-                    aName: "Percepcja"
-                    skillpacks: 4
+                    attribute: sData.attribute("Percepcja")
                     width: parent.colWidth
                 }
 
@@ -118,8 +114,7 @@ Page {
 
                 Attribute {
                     id: _cleaverness
-                    aName: "Spryt"
-                    skillpacks: 5
+                    attribute: sData.attribute("Spryt")
                     width: parent.colWidth
                 }
 

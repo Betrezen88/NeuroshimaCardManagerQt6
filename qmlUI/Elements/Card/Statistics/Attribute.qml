@@ -1,11 +1,11 @@
 import QtQuick
-import QtQuick.Controls
+
+import core.view
 
 Rectangle {
-    id: _root
+    property Attribute attribute: null
 
-    property string aName: "Attribute Name"
-    property int skillpacks: 1
+    id: _root
 
     height: _content.implicitHeight + 5
     color: "lightgray"
@@ -19,17 +19,20 @@ Rectangle {
 
         AttributeLabel {
             id: _label
-            name: aName
+            name: attribute != null ? attribute.name : "Attribute name"
+            value: attribute != null ? attribute.value : 0
             width: parent.width
         }
 
         Repeater {
-            model: skillpacks
+            model: attribute != null ? attribute.skillpacks : 0
 
-            delegate: Skillpack {
+            delegate: NSSkillpack {
+                skillpack: modelData
                 width: _content.width - 10
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
-    }
-}
+    } // Column
+
+} // Rectangle
