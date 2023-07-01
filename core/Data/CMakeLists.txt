@@ -4,6 +4,8 @@ qt_add_qml_module(Data
     URI core.data
     VERSION 1.0
     SOURCES
+        CardData.h
+
         Common/Types.h
         Pages/StatisticsData.h
 
