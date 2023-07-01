@@ -1,23 +1,24 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.view
+
 Item {
-    property alias skillName: _skillName.text
-    property alias skillAttribute: _attribute.text
-    property alias skillValue: _value.text
+    property OtherSkill otherSkill: null
 
     id: _root
     height: _skillName.implicitHeight < 40 ? 40 : _skillName.implicitHeight
 
     CheckBox {
         id: _used
+        checked: otherSkill != null ? otherSkill.used : false
         width: 40; height: 40
         anchors.left: parent.left
     }
 
     Text {
         id: _skillName
-        text: model.name
+        text: otherSkill != null ? otherSkill.name : "Unknown"
         font.pointSize: 10
         anchors.left: _used.right
         height: parent.height; width: _root.width - _used.width - _attribute.width - _attribute.leftPadding
@@ -31,7 +32,7 @@ Item {
 
         Text {
             id: _attribute
-            text: model.attribute
+            text: otherSkill != null ? otherSkill.attributeShort() : "Un"
             font.pointSize: 10
             height: 40
             leftPadding: 5; rightPadding: 5
@@ -47,7 +48,7 @@ Item {
 
             Text {
                 id: _value
-                text: model.value
+                text: otherSkill != null ? otherSkill.value : 0
                 font.pointSize: 10
                 anchors.centerIn: parent
             }
