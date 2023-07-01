@@ -1,11 +1,13 @@
 import QtQuick
 import QtQuick.Controls
 
+import "../../../Delegates/Card/Statistics"
+
 Item {
     property alias title: _title.text
-    property string description: _description.text
-    property string cure: _cure.text
-    property ListModel penalties
+    property string description
+    property string cure
+    property alias symptoms: _symptoms.model
 
     id: _root
 
@@ -53,31 +55,13 @@ Item {
                 }
 
                 Repeater {
-                    model: _root.penalties
-                    delegate: Item {
+                    id: _symptoms
+                    delegate: Symptom {
                         width: _root.width
-                        height: _col.implicitHeight
-
-                        Column {
-                            id: _col
-                            spacing: 5
-
-                            Text {
-                                text: "<b>"+model.name+"</b> - " + model.description
-                                width: _root.width
-                                font.pointSize: 10
-                                wrapMode: Text.WordWrap
-                            }
-
-                            Text {
-                                text: model.penalties
-                                width: _root.width
-                                font.pointSize: 10
-                                wrapMode: Text.WordWrap
-                            }
-                        }
+                        symptom: modelData
                     }
                 } // Repeater
+
             } // Column
         } // Scrollview
     } // Column
