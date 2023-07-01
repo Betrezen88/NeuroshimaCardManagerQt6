@@ -5,6 +5,9 @@ qt_add_qml_module(View
     VERSION 1.0
     SOURCES
         Card/Pages/Page.h
+        Card/Pages/Statistics.h
+        Card/Pages/Statistics.cpp
+
         Card/Statistics/Attribute.h
         Card/Statistics/Attribute.cpp
         Card/Statistics/Disease.h
