@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(QmlUI VERSION 0.1 LANGUAGES CXX)
 
-find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
+find_package(Qt6 6.4 COMPONENTS Quick REQUIRED)
 
 qt_add_executable(appQmlUI
     main.cpp
@@ -89,7 +89,9 @@ set_target_properties(appQmlUI PROPERTIES
 )
 
 target_link_libraries(appQmlUI
-    PRIVATE Qt6::Quick)
+    PRIVATE
+        Qt6::Quick
+        Data
 
 install(TARGETS appQmlUI
     BUNDLE DESTINATION .
