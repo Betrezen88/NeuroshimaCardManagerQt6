@@ -148,14 +148,14 @@ Page {
                 right: parent.right; bottom: parent.bottom
             }
 
-            model: 5
+            model: cardManager.cards
 
             delegate: Rectangle {
                 width: ListView.view.width; height: 50
                 color: "lightgray"
 
                 Text {
-                    text: "Placeholder"
+                    text: model.filename
                     anchors.centerIn: parent
                 }
             }
