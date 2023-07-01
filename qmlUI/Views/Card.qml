@@ -124,6 +124,25 @@ Item {
         }
     }
 
+    function pageData(type) {
+        switch(type) {
+        case Types.Page.Statistics:
+            return card.statistics
+        case Types.Page.Equipment:
+            return null
+        case Types.Page.Notes:
+            return null
+        case Types.Page.Friend:
+            return null
+        case Types.Page.Beast:
+            return null
+        case Types.Page.Vehicle:
+            return null
+        default:
+            return null
+        }
+    }
+
     function pageTitle(type) {
         switch(type) {
         case Types.Page.Statistics:
