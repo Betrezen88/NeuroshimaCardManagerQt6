@@ -27,7 +27,7 @@ Page {
         }
 
         Label {
-            text: "Name 'Nickanem' Surname - Page Title"
+            id: _pageTitle
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             height: 50
@@ -165,6 +165,14 @@ Page {
     Card {
         id: _cardView
         anchors.fill: parent
+
+        card: cardManager.currentCard
+
+        onPageChanged: function(name) {
+            _pageTitle.text = cardManager.currentCard
+                                ? cardManager.currentCard.filename + " - " + name
+                                : "Unknown - " + name
+        }
     }
 
 } // Page
