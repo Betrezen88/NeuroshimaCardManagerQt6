@@ -26,4 +26,6 @@ qt_add_qml_module(View
         Card/Statistics/Skillpack.cpp
         Card/Statistics/Specialization.h
         Card/Statistics/Specialization.cpp
+        Card/Statistics/Wound.h
+        Card/Statistics/Wound.cpp
 )
