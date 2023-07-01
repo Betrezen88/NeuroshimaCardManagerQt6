@@ -104,6 +104,26 @@ Item {
         }
     } // SplitView
 
+
+    function pagePath(type) {
+        switch(type) {
+        case Types.Page.Statistics:
+            return "qrc:/QmlUI/Pages/Card/Statistics.qml"
+        case Types.Page.Equipment:
+            return "qrc:/QmlUI/Pages/Card/Equipment.qml"
+        case Types.Page.Notes:
+            return "qrc:/QmlUI/Pages/Card/Notes.qml"
+        case Types.Page.Friend:
+            return ""
+        case Types.Page.Beast:
+            return "qrc:/QmlUI/Views/Pets.qml"
+        case Types.Page.Vehicle:
+            return ""
+        default:
+            return ""
+        }
+    }
+
     function pageTitle(type) {
         switch(type) {
         case Types.Page.Statistics:
