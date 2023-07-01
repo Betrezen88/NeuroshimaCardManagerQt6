@@ -6,6 +6,8 @@ qt_add_qml_module(View
     SOURCES
         Card/Statistics/Feature.h
         Card/Statistics/Feature.cpp
+        Card/Statistics/Origin.h
+        Card/Statistics/Origin.cpp
         Card/Statistics/Otherskill.h
         Card/Statistics/Otherskill.cpp
         Card/Statistics/Place.h
