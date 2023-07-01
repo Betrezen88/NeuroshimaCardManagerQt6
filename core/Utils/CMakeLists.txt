@@ -7,6 +7,8 @@ add_library(Utils
     CardReader.cpp
     CardWriter.h
     CardWriter.cpp
+    CardConverter.h
+    CardConverter.cpp
 )
 
 target_link_libraries(Utils
