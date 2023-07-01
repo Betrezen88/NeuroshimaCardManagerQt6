@@ -103,4 +103,24 @@ Item {
             SplitView.minimumWidth: 200
         }
     } // SplitView
+
+    function pageTitle(type) {
+        switch(type) {
+        case Types.Page.Statistics:
+            return "Statystyki"
+        case Types.Page.Equipment:
+            return "Eqwipunek"
+        case Types.Page.Notes:
+            return "Notatki"
+        case Types.Page.Friend:
+            return "Znajomi"
+        case Types.Page.Beast:
+            return "Bestie"
+        case Types.Page.Vehicle:
+            return "Pojazdy"
+        default:
+            return null
+        }
+    }
+
 } // Item
