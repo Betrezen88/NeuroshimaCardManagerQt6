@@ -4,6 +4,7 @@ qt_add_qml_module(View
     URI core.view
     VERSION 1.0
     SOURCES
+        Card/Pages/Page.h
         Card/Statistics/Attribute.h
         Card/Statistics/Attribute.cpp
         Card/Statistics/Disease.h

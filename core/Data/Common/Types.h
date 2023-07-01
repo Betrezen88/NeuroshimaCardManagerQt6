@@ -7,6 +7,8 @@
 namespace Types {
 Q_NAMESPACE
 
+enum class Page { Statistics, Equipment, Notes, Friend, Beast, Vehicle };
+Q_ENUM_NS(Page)
 
 enum class Requirement { Attribute, Skill, Profession };
 Q_ENUM_NS(Requirement)
