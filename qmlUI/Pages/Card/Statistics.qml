@@ -124,14 +124,15 @@ Page {
                     width: parent.colWidth; height: 40
                 }
 
-                OtherSkills {
+                List {
                     id: _otherSkills
                     width: parent.colWidth; height: _charisma.height + _perception.height - _cleaverness.height
-                    skillsModel: ListModel {
-                        ListElement { name: "Pilotowanie"; attribute: "Sp"; value: 1 }
-                        ListElement { name: "Zeglowanie"; attribute: "Sp"; value: 1 }
-                        ListElement { name: "Dluga nazwa bardzo specjalistycznego skilla"; attribute: "Zr"; value: 1 }
-                        ListElement { name: "Gra na gitarze"; attribute: "Zr"; value: 1 }
+                    spacing: 3
+                    model: sData.otherSkills
+
+                    delegate: OtherSkill {
+                        otherSkill: modelData
+                        width: ListView.view.width
                     }
                 }
 
@@ -152,4 +153,5 @@ Page {
         } // Grid
 
     } // ScrollView
+
 } // Page
