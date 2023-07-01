@@ -1,14 +1,18 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
+
+import core.view
 
 Item {
+    property Skill skill: null
+
     id: _root
 
     height: 40
 
     CheckBox {
         id: _used
+        checked: skill != null ? skill.used : false
         height: parent.height
         width: parent.height
         anchors { top: parent.top; left: parent.left }
@@ -16,7 +20,7 @@ Item {
 
     Label {
         id: _name
-        text: "Skillname"
+        text: skill != null ? skill.name : "Skillname"
         color: "#000"
         verticalAlignment: Text.AlignVCenter
         height: parent.height
@@ -26,7 +30,7 @@ Item {
 
     Label {
         id: _value
-        text: "1"
+        text: skill != null ? skill.value : 0
         color: "#000"
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
