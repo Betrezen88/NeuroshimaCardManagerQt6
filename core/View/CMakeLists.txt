@@ -10,4 +10,6 @@ qt_add_qml_module(View
         Card/Statistics/Otherskill.cpp
         Card/Statistics/Skill.h
         Card/Statistics/Skill.cpp
+        Card/Statistics/Specialization.h
+        Card/Statistics/Specialization.cpp
 )
