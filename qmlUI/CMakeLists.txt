@@ -36,6 +36,7 @@ qt_add_qml_module(appQmlUI
         Delegates/Card/Equipment/Resource.qml
         Delegates/Card/Equipment/Weapon.qml
         Delegates/Card/Notes/FormQuestion.qml
+        Delegates/Card/Statistics/Symptom.qml
         Delegates/Card/Statistics/Trick.qml
         Delegates/Card/Statistics/Modifiers/ModifierCategory.qml
         Delegates/Card/Statistics/Wounds/Wound.qml
