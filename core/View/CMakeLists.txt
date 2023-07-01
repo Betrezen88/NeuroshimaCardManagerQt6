@@ -49,4 +49,11 @@ qt_add_qml_module(View
     DEPENDENCIES
         Data
 )
+
+target_include_directories(View
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/Card
+        ${CMAKE_CURRENT_SOURCE_DIR}/Card/Common
+        ${CMAKE_CURRENT_SOURCE_DIR}/Card/Pages
+        ${CMAKE_CURRENT_SOURCE_DIR}/Card/Statistics
 )
