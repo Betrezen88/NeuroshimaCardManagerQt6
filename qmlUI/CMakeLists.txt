@@ -67,6 +67,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Statistics/Attribute.qml
         Elements/Card/Statistics/AttributeLabel.qml
         Elements/Card/Statistics/DifficultyLevels.qml
+        Elements/Card/Statistics/DifficultyLevelValue.qml
         Elements/Card/Statistics/DiseaseTooltip.qml
         Elements/Card/Statistics/Experience.qml
         Elements/Card/Statistics/Modifiers.qml
