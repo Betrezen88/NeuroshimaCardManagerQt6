@@ -1,6 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
+
+import Qt.labs.platform
 
 Page {
     id: _root
@@ -53,9 +56,17 @@ Page {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
                 onClicked: {
-                    // TODO: open load dialog.
-                    console.log( "Open load dialog." )
-                    _root.showCardsView()
+                    _loadFileDialog.open()
+                }
+
+                FileDialog {
+                    id: _loadFileDialog
+                    folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+
+                    onAccepted: {
+                        manager.cardManager.load(currentFile)
+                        _root.showCardsView()
+                    }
                 }
             }
 
