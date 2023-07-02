@@ -1,8 +1,8 @@
-import QtQuick 2.15
+import QtQuick
 
 Rectangle {
     property alias name: _name.text
-    property alias value: _value.text
+    property int value: 0
 
     id: _root
 
@@ -18,7 +18,6 @@ Rectangle {
 
         Text {
             id: _name
-            text: "Text"
             width: 40
             topPadding: 3
             font.pointSize: 8
@@ -27,7 +26,7 @@ Rectangle {
 
         Text {
             id: _value
-            text: "0"
+            text: _root.value > 0 ? _root.value : "N"
             width: 40; height: _root.height - _name.height - parent.spacing
             font.pointSize: 12
             horizontalAlignment: Text.AlignHCenter
