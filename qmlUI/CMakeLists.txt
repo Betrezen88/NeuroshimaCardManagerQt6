@@ -94,6 +94,8 @@ target_link_libraries(appQmlUI
         Qt6::Quick
         View
         Data
+        Managers
+)
 
 install(TARGETS appQmlUI
     BUNDLE DESTINATION .
