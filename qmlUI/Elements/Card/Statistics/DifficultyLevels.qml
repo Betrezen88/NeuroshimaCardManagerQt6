@@ -1,7 +1,5 @@
 import QtQuick
 
-import "../../Card/Common"
-
 Rectangle {
     id: _root
     color: "lightgray"
@@ -26,7 +24,7 @@ Rectangle {
                 ListElement { name: "Fuks"; value: "-14" }
             }
 
-            delegate: ValueLabel {
+            delegate: DifficultyLevelValue {
                 name: model.name
                 value: model.value
             }
