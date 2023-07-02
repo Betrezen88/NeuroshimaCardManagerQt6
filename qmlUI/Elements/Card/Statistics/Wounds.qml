@@ -1,6 +1,6 @@
 import QtQuick
 
-import "../../../Delegates/Card/Statistics/Wounds"
+import "../../../Delegates/Card/Statistics"
 
 Rectangle {
     id: _root
