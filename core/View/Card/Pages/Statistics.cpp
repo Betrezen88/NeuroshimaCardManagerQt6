@@ -215,6 +215,12 @@ void Statistics::clearWounds()
     m_wounds.clear();
 }
 
+
+QStringList Statistics::locations() const
+{
+    return m_locations;
+}
+
 StatisticsData Statistics::data()
 {
     QVector<AttributeData> attributes;

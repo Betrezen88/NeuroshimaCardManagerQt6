@@ -34,6 +34,7 @@ class Statistics : public Page
     Q_PROPERTY(QQmlListProperty<Trick> tricks READ tricks CONSTANT)
     Q_PROPERTY(Reputation* reputation READ reputation CONSTANT)
     Q_PROPERTY(QQmlListProperty<Wound> wounds READ wounds NOTIFY woundsChanged)
+    Q_PROPERTY(QStringList locations READ locations CONSTANT)
 
 public:
     explicit Statistics(QObject *parent = nullptr);
@@ -69,6 +70,8 @@ public:
     Wound* wound(qsizetype index);
     void clearWounds();
 
+    QStringList locations() const;
+
     StatisticsData data();
 
 signals:
@@ -101,6 +104,8 @@ private:
     QVector<Trick*> m_tricks;
     Reputation* m_reputation{nullptr};
     QVector<Wound*> m_wounds;
+
+    const QStringList m_locations{ "Głowa", "Lewa ręka", "Prawa ręka", "Tors", "Lewa noga", "Prawa noga" };
 };
 
 #endif // STATISTICS_H
