@@ -1,8 +1,12 @@
 import QtQuick
 
+import core.view
+
 import "../../../Delegates/Card/Statistics"
 
 Rectangle {
+    property Statistics statistics: null
+
     id: _root
 
     border.color: "#000"
@@ -14,18 +18,12 @@ Rectangle {
         spacing: 3
 
         Repeater {
-            model: ListModel {
-                ListElement { name: "Glowa"; value: "D, D, L, L, C, C, K, K" }
-                ListElement { name: "Prawa Reka"; value: "D, D, L, L, C, C, K, K" }
-                ListElement { name: "Lewa Reka"; value: "D, D, L, L, C, C, K, K" }
-                ListElement { name: "Tulow"; value: "D, D, L, L, C, C, K, K" }
-                ListElement { name: "Prawa Noga"; value: "D, D, L, L, C, C, K, K" }
-                ListElement { name: "Lewa Noga"; value: "D, D, L, L, C, C, K, K" }
-            }
+            model: statistics != null ? statistics.locations : 0
+
             delegate: Wound {
                 width: _root.width
-                bodyPartName: model.name
-                bodyPartWounds: model.value
+                bodyPartName: modelData
+                bodyPartWounds: statistics.woundsForLocation(modelData)
             }
         }
     } // Column
