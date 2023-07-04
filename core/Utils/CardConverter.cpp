@@ -278,6 +278,11 @@ StatisticsData CardConverter::statisticsData(const QJsonObject &object)
         statistics.tricks.append( trickData(trick.toObject()) );
     }
 
+    const QJsonArray& wounds = object.value("wounds").toArray();
+    for ( const auto& wound: wounds ) {
+        statistics.wounds.append( woundData(wound.toObject()) );
+    }
+
     return statistics;
 }
 

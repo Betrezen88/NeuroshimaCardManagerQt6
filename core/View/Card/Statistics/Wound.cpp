@@ -6,6 +6,15 @@ Wound::Wound(QObject *parent)
 
 }
 
+Wound::Wound(const WoundData &data, QObject *parent)
+    : QObject{parent}
+    , m_location(data.location)
+    , m_penalty(new Modifier(data.penalty, this))
+    , m_type(data.type)
+{
+
+}
+
 QString Wound::name() const
 {
     switch (m_type) {
