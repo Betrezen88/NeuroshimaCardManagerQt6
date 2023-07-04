@@ -31,6 +31,10 @@ Statistics::Statistics(const StatisticsData &data, QObject *parent)
     for (const auto &trick: data.tricks) {
         m_tricks.append(new Trick(trick, this));
     }
+
+    for (const auto &wound: data.wounds) {
+        m_wounds.append(new Wound(wound, this));
+    }
 }
 
 QString Statistics::fullname() const
@@ -213,6 +217,17 @@ Wound *Statistics::wound(qsizetype index)
 void Statistics::clearWounds()
 {
     m_wounds.clear();
+}
+
+QString Statistics::woundsForLocation(const QString &location)
+{
+    QString result;
+    std::for_each(m_wounds.begin(), m_wounds.end(), [&result, &location](const Wound* wound){
+        if ( location == wound->location() ) {
+            result.append( wound->name().first(1) + ", " );
+        }
+    });
+    return result;
 }
 
 

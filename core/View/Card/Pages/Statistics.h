@@ -70,6 +70,8 @@ public:
     Wound* wound(qsizetype index);
     void clearWounds();
 
+    Q_INVOKABLE QString woundsForLocation(const QString& location);
+
     QStringList locations() const;
 
     StatisticsData data();
