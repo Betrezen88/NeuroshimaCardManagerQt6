@@ -19,6 +19,7 @@ Statistics::Statistics(const StatisticsData &data, QObject *parent)
     , m_profession(new Profession(data.profession, this))
     , m_specialization(new Specialization(data.specialization, this))
     , m_reputation(new Reputation(data.places, this))
+    , m_wounds(new WoundsHandler(data.wounds, this))
 {
     for (const auto &attribute: data.attributes) {
         m_attributes.append(new Attribute(attribute, this));
@@ -30,10 +31,6 @@ Statistics::Statistics(const StatisticsData &data, QObject *parent)
 
     for (const auto &trick: data.tricks) {
         m_tricks.append(new Trick(trick, this));
-    }
-
-    for (const auto &wound: data.wounds) {
-        m_wounds.append(new Wound(wound, this));
     }
 }
 
@@ -148,26 +145,6 @@ Trick *Statistics::trick(QQmlListProperty<Trick> *list, qsizetype index)
     return reinterpret_cast<Statistics*>(list->data)->trick(index);
 }
 
-void Statistics::addWound(QQmlListProperty<Wound> *list, Wound *wound)
-{
-    return reinterpret_cast<Statistics*>(list->data)->addWound(wound);
-}
-
-qsizetype Statistics::woundsCount(QQmlListProperty<Wound> *list)
-{
-    return reinterpret_cast<Statistics*>(list->data)->woundsCount();
-}
-
-Wound *Statistics::wound(QQmlListProperty<Wound> *list, qsizetype index)
-{
-    return reinterpret_cast<Statistics*>(list->data)->wound(index);
-}
-
-void Statistics::clearWounds(QQmlListProperty<Wound> *list)
-{
-    return reinterpret_cast<Statistics*>(list->data)->clearWounds();
-}
-
 Reputation *Statistics::reputation() const
 {
     return m_reputation;
@@ -190,50 +167,9 @@ Trick *Statistics::trick(qsizetype index)
     return m_tricks.at(index);
 }
 
-QQmlListProperty<Wound> Statistics::wounds()
+WoundsHandler *Statistics::wounds() const
 {
-    return QQmlListProperty<Wound>(this, this,
-                                   &Statistics::addWound,
-                                   &Statistics::woundsCount,
-                                   &Statistics::wound,
-                                   &Statistics::clearWounds);
-}
-
-void Statistics::addWound(Wound *wound)
-{
-    m_wounds.append(wound);
-}
-
-qsizetype Statistics::woundsCount() const
-{
-    return m_wounds.count();
-}
-
-Wound *Statistics::wound(qsizetype index)
-{
-    return m_wounds.at(index);
-}
-
-void Statistics::clearWounds()
-{
-    m_wounds.clear();
-}
-
-QString Statistics::woundsForLocation(const QString &location)
-{
-    QString result;
-    std::for_each(m_wounds.begin(), m_wounds.end(), [&result, &location](const Wound* wound){
-        if ( location == wound->location() ) {
-            result.append( wound->name().first(1) + ", " );
-        }
-    });
-    return result;
-}
-
-
-QStringList Statistics::locations() const
-{
-    return m_locations;
+    return m_wounds;
 }
 
 StatisticsData Statistics::data()
@@ -253,11 +189,6 @@ StatisticsData Statistics::data()
         tricks.append( trick->data() );
     }
 
-    QVector<WoundData> wounds;
-    for ( const auto& wound: m_wounds ) {
-        wounds.append( wound->data() );
-    }
-
     return StatisticsData{
         .name = m_name,
         .surname = m_surname,
@@ -270,7 +201,7 @@ StatisticsData Statistics::data()
         .otherSkills = otherSkills,
         .tricks = tricks,
         .experience = m_experience->data(),
-        .wounds = wounds,
+        .wounds = m_wounds->data(),
         .places = m_reputation->data()
     };
 }

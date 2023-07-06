@@ -5,7 +5,7 @@ import core.view
 import "../../../Delegates/Card/Statistics"
 
 Rectangle {
-    property Statistics statistics: null
+    property WoundsHandler wounds: null
 
     id: _root
 
@@ -18,13 +18,23 @@ Rectangle {
         spacing: 3
 
         Repeater {
-            model: statistics != null ? statistics.locations : 0
+            id: _wounds
+            model: wounds != null ? wounds.locations : 0
 
             delegate: Wound {
                 width: _root.width
                 bodyPartName: modelData
-                bodyPartWounds: statistics.woundsForLocation(modelData)
+                bodyPartWounds: wounds.woundsForLocation(modelData)
             }
         }
     } // Column
+
+    Connections {
+        target: wounds
+        function onWoundsChanged() {
+            console.log("Wounds.onWoundsChanged()")
+            _wounds.model = 0
+            _wounds.model = wounds.locations
+        }
+    }
 } // Rectangle

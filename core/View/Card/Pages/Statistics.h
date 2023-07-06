@@ -15,7 +15,7 @@
 #include "../Statistics/Reputation.h"
 #include "../Statistics/Specialization.h"
 #include "../Statistics/Trick.h"
-#include "../Statistics/Wound.h"
+#include "../Statistics/WoundsHandler.h"
 
 #include "../../../Data/Pages/StatisticsData.h"
 
@@ -33,8 +33,7 @@ class Statistics : public Page
     Q_PROPERTY(Specialization* specialization READ specialization CONSTANT)
     Q_PROPERTY(QQmlListProperty<Trick> tricks READ tricks CONSTANT)
     Q_PROPERTY(Reputation* reputation READ reputation CONSTANT)
-    Q_PROPERTY(QQmlListProperty<Wound> wounds READ wounds NOTIFY woundsChanged)
-    Q_PROPERTY(QStringList locations READ locations CONSTANT)
+    Q_PROPERTY(WoundsHandler* wounds READ wounds CONSTANT)
 
 public:
     explicit Statistics(QObject *parent = nullptr);
@@ -64,20 +63,9 @@ public:
     qsizetype tricksCount() const;
     Trick* trick(qsizetype index);
 
-    QQmlListProperty<Wound> wounds();
-    void addWound(Wound* wound);
-    qsizetype woundsCount() const;
-    Wound* wound(qsizetype index);
-    void clearWounds();
-
-    Q_INVOKABLE QString woundsForLocation(const QString& location);
-
-    QStringList locations() const;
+    WoundsHandler *wounds() const;
 
     StatisticsData data();
-
-signals:
-    void woundsChanged();
 
 private:
     static qsizetype attributesCount(QQmlListProperty<Attribute> *list);
@@ -86,10 +74,6 @@ private:
     static OtherSkill* otherSkill(QQmlListProperty<OtherSkill> *list, qsizetype index);
     static qsizetype tricksCount(QQmlListProperty<Trick> *list);
     static Trick* trick(QQmlListProperty<Trick> *list, qsizetype index);
-    static void addWound(QQmlListProperty<Wound> *list, Wound* wound);
-    static qsizetype woundsCount(QQmlListProperty<Wound> *list);
-    static Wound* wound(QQmlListProperty<Wound> *list, qsizetype index);
-    static void clearWounds(QQmlListProperty<Wound> *list);
 
 private:
     Types::Page m_type;
@@ -105,9 +89,7 @@ private:
     QVector<OtherSkill*> m_otherSkills;
     QVector<Trick*> m_tricks;
     Reputation* m_reputation{nullptr};
-    QVector<Wound*> m_wounds;
-
-    const QStringList m_locations{ "Głowa", "Lewa ręka", "Prawa ręka", "Tors", "Lewa noga", "Prawa noga" };
+    WoundsHandler* m_wounds{nullptr};
 };
 
 #endif // STATISTICS_H

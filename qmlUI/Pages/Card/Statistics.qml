@@ -107,7 +107,7 @@ Page {
                 Wounds {
                     id: _wounds
                     width: parent.colWidth; height: 200
-                    statistics: sData
+                    wounds: sData.wounds
                 }
             } // Column
 
