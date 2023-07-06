@@ -7,6 +7,9 @@ qt_add_qml_module(Data
         CardData.h
 
         Common/Types.h
+        Common/EnumConverter.h
+        Common/EnumConverter.cpp
+
         Pages/StatisticsData.h
 
         Statistics/AttributeData.h
