@@ -6,6 +6,8 @@ import core.view
 import "../../Elements/Card/Statistics"
 import "../../Elements/Card/Common"
 import "../../Delegates/Card/Statistics"
+import "../../Forms"
+import "../../Common"
 
 Page {
     property Statistics sData
@@ -102,7 +104,30 @@ Page {
                 HeaderLabel {
                     text: "Rany"
                     width: parent.colWidth; height: 40
-                }
+
+                    RoundButton {
+                        text: "+"
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.rightMargin: 5
+                        height: 35; width: 35
+                        onClicked: _woundsForm.open()
+
+                        FormPopup {
+                            id: _woundsForm
+                            contentItem: WoundForm {
+                                wounds: sData.wounds.woundTypes
+                                locations: sData.wounds.locations
+
+                                onAccepted: function(wound, location, penalty) {
+                                    sData.wounds.addWound(wound, location, penalty)
+                                    _woundsForm.close()
+                                }
+                                onRejected: _woundsForm.close()
+                            }
+                        }
+                    } // RoundButton
+                } // HeaderLabel
 
                 Wounds {
                     id: _wounds
