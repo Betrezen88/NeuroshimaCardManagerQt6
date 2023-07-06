@@ -26,6 +26,7 @@ qt_add_qml_module(appQmlUI
         Views/Welcome.qml
 
         Common/TooltipPopup.qml
+        Common/FormPopup.qml
 
         Delegates/Card/Beast/CombatAction.qml
         Delegates/Card/Beast/Command.qml
