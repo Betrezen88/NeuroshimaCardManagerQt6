@@ -28,6 +28,8 @@ qt_add_qml_module(appQmlUI
         Common/TooltipPopup.qml
         Common/FormPopup.qml
 
+        Forms/WoundForm.qml
+
         Delegates/Card/Beast/CombatAction.qml
         Delegates/Card/Beast/Command.qml
         Delegates/Card/Beast/Condition.qml
