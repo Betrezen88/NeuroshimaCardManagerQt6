@@ -43,6 +43,8 @@ qt_add_qml_module(View
         Card/Statistics/Trick.cpp
         Card/Statistics/Wound.h
         Card/Statistics/Wound.cpp
+        Card/Statistics/WoundsHandler.h
+        Card/Statistics/WoundsHandler.cpp
 
         Card/Common/Modifier.h
         Card/Common/Modifier.cpp
