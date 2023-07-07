@@ -172,6 +172,18 @@ Page {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.rightMargin: 5
                         height: 35; width: 35
+                        onClicked: _experienceForm.open()
+
+                        FormPopup {
+                            id: _experienceForm
+                            contentItem: ExperienceForm {
+                                onAccepted: function(value) {
+                                    sData.experience.add(value);
+                                    _experienceForm.close()
+                                }
+                                onRejected: _experienceForm.close()
+                            }
+                        }
                     } // RoundButton
                 } // HeaderLabel
 
