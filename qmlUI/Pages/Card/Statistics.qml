@@ -165,7 +165,15 @@ Page {
                 HeaderLabel {
                     text: "Doświadczenie"
                     width: parent.colWidth; height: 40
-                }
+
+                    RoundButton {
+                        text: "+"
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.rightMargin: 5
+                        height: 35; width: 35
+                    } // RoundButton
+                } // HeaderLabel
 
                 Experience {
                     id: _experience
