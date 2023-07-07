@@ -178,6 +178,7 @@ Page {
                 Experience {
                     id: _experience
                     width: parent.colWidth
+                    experience: sData.experience
                 }
 
                 DifficultyLevels {

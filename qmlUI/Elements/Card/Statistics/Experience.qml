@@ -1,7 +1,11 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.view
+
 Rectangle {
+    property Experience experience: null
+
     id: _root
 
     color: "#FFF"
@@ -21,7 +25,7 @@ Rectangle {
         }
         Label {
             id: _available
-            text: qsTr("500")
+            text: experience != null ? experience.left() : 0
             width: 210
             padding: 5
             color: "#000"
@@ -42,7 +46,7 @@ Rectangle {
         }
         Label {
             id: _spended
-            text: qsTr("1500")
+            text: experience != null ? experience.spended : 0
             width: 210
             padding: 5
             color: "#000"
@@ -63,7 +67,7 @@ Rectangle {
         }
         Label {
             id: _gathered
-            text: qsTr("2000")
+            text: experience != null ? experience.gathered : 0
             width: 210
             padding: 5
             color: "#000"
@@ -77,6 +81,13 @@ Rectangle {
         }
 
         onImplicitHeightChanged: _root.height = implicitHeight
+
+        Connections {
+            target: _root.experience
+            function onGatheredChanged() {
+                _available.text = _root.experience.left()
+            }
+        }
 
     } // Grid
 } // Rectangle
