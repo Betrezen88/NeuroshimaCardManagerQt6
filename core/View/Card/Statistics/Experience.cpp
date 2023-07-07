@@ -29,6 +29,18 @@ int Experience::left() const
     return m_gathered - m_spended;
 }
 
+void Experience::add(const int value)
+{
+    m_gathered += value;
+    emit gatheredChanged();
+}
+
+void Experience::spend(const int value)
+{
+    m_spended += value;
+    emit spendedChanged();
+}
+
 ExperienceData Experience::data() const
 {
     return ExperienceData{
