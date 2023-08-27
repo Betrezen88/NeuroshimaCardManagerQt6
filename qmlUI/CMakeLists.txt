@@ -90,6 +90,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Statistics/Wounds.qml
 
         Placeholders/PagePlaceholder.qml
+        Elements/Creation/Skills/Skill.qml
 )
 
 set_target_properties(appQmlUI PROPERTIES
