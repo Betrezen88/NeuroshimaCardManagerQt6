@@ -29,6 +29,9 @@ SourceConverter::SourceConverter()
 void SourceConverter::convertSourceDocument(const SourceDocument &document)
 {
     switch (document.type()) {
+    case SourceDocument::Type::Attributes:
+        convertAttributes(document);
+        break;
     case SourceDocument::Type::Origins:
         convertOrigins(document);
         break;
@@ -42,6 +45,20 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
         qDebug() << "Unknown type.";
         break;
     }
+}
+
+void SourceConverter::convertAttributes(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+    if ( data.isEmpty() ) {
+        return;
+    }
+
+    QVector<AttributeSource*> attributeSources;
+    for ( const QJsonValue& attribute: data ) {
+        attributeSources.append( attributeSource(attribute.toObject()) );
+    }
+    emit attributesConverted(attributeSources);
 }
 
 void SourceConverter::convertOrigins(const SourceDocument &document)
@@ -92,6 +109,18 @@ void SourceConverter::convertSpecializations(const SourceDocument &document)
     emit specializationsConverted(specilizationSources);
 }
 
+AttributeSource *SourceConverter::attributeSource(const QJsonObject &object)
+{
+    QVector<SkillpackSource*> skillpackSources;
+    const QJsonArray& skillpacks = object.value("skillpacks").toArray();
+    for ( const QJsonValue& skillpack: skillpacks ) {
+        skillpackSources.append( skillpackSource(skillpack.toObject()) );
+    }
+
+    return new AttributeSource{object.value("name").toString(),
+                               object.value("description").toString(),
+                               skillpackSources};
+}
 
 SkillpackSource *SourceConverter::skillpackSource(const QJsonObject &object)
 {
