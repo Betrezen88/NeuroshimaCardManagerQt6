@@ -4,6 +4,7 @@ qt_add_qml_module(Source
     URI core.source
     VERSION 1.0
     SOURCES
+        Statistics/Bonus/BonusSource.h
         SourceDocument.h
         SourceDocument.cpp
 
