@@ -4,6 +4,7 @@ qt_add_qml_module(Source
     URI core.source
     VERSION 1.0
     SOURCES
+        Statistics/Bonus/AttributeBonusSource.h
         Statistics/Bonus/BonusSource.h
         Statistics/Bonus/BonusBeast.h
         Statistics/Bonus/BonusBeast.cpp
