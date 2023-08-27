@@ -95,7 +95,6 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Statistics/NSSkill.qml
         Elements/Card/Statistics/Wounds.qml
 
-        Placeholders/PagePlaceholder.qml
         Elements/Creation/Diseases/Symptom.qml
         Elements/Creation/Reputation/Place.qml
         Elements/Creation/Form/Question.qml
