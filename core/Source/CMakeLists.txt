@@ -4,6 +4,9 @@ qt_add_qml_module(Source
     URI core.source
     VERSION 1.0
     SOURCES
+        Common/ModifierSource.h
+        Common/ModifierSource.cpp
+
         Statistics/Bonus/AttributeBonusSource.h
         Statistics/Bonus/AttributeBonusSingle.h
         Statistics/Bonus/AttributeBonusSingle.cpp
