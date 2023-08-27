@@ -47,6 +47,7 @@ qt_add_qml_module(appQmlUI
         Delegates/Card/Statistics/Modifiers/ModifierCategory.qml
         Delegates/Card/Statistics/OtherSkill.qml
         Delegates/Card/Statistics/Wound.qml
+        Delegates/Creation/AttributeDescription.qml
         Delegates/Creation/Feature.qml
 
         Elements/Card/Common/DataField.qml
