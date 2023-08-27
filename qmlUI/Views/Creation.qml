@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "../Pages/Creation"
+
 Page {
     id: _root
 
@@ -65,51 +67,81 @@ Page {
             anchors { top: _label.bottom; bottom: parent.bottom; left: parent.left }
 
             model: ListModel {
-                ListElement { name: "Pochodzenie" }
-                ListElement { name: "Profesje" }
-                ListElement { name: "Wspolczynniki" }
-                ListElement { name: "Specjalizacje" }
-                ListElement { name: "Umiejetnosci" }
-                ListElement { name: "Sztuczki" }
-                ListElement { name: "Choroby" }
-                ListElement { name: "Reputacja" }
-                ListElement { name: "Formularz" }
-                ListElement { name: "Sprzet" }
-                ListElement { name: "Znajomosci" }
+                ListElement { name: "Pochodzenie"; type: 0 }
+                ListElement { name: "Profesje"; type: 1 }
+                ListElement { name: "Wspolczynniki"; type: 2 }
+                ListElement { name: "Specjalizacje"; type: 3 }
+                ListElement { name: "Umiejetnosci"; type: 4 }
+                ListElement { name: "Sztuczki"; type: 5 }
+                ListElement { name: "Choroby"; type: 6; }
+                ListElement { name: "Reputacja"; type: 7 }
+                ListElement { name: "Formularz"; type: 8 }
+                ListElement { name: "Sprzet"; type: 9 }
+                ListElement { name: "Znajomosci"; type: 10 }
+                ListElement { name: "Zakończ"; type: 11 }
             }
 
             delegate: Button {
                 text: model.name
                 height: 50; width: ListView.view.width
+                onClicked: loadPage(model.type)
             }
         } // ListView
     }
 
     StackView {
-        id: _stagePageView
+        id: _creationPage
         anchors {
             top: parent.top; bottom: parent.bottom
             left: _stagesPanel.right; right: parent.right
             leftMargin: 5; topMargin: 5
         }
+        clip: true
 
-        initialItem: Item {
-            ScrollView {
-                anchors.fill: parent
-
-                Column {
-                    anchors.fill: parent
-
-                    Rectangle {
-                        color: "green"
-                        width: 700; height: 700
-                        Text {
-                            text: "Placeholder"
-                            anchors.centerIn: parent
-                        }
-                    }
-                }
-            }
-        }
+        Component.onCompleted: loadPage(0)
     } // StackView
-}
+
+    function loadPage(type) {
+        if ( _creationPage.count > 0 ) {
+            _creationPage.pop( _creationPage.currentItem )
+        }
+
+        var item = Qt.createComponent( pagePath(type) )
+        if (item.status === Component.Ready) {
+            _creationPage.push(item.createObject(_creationPage), {})
+        }
+        else if (item.status === Component.Error) {
+            console.log("Error: ", item.errorString())
+        }
+    }
+
+    function pagePath(type) {
+        switch(type) {
+        case 0:
+            return "qrc:/QmlUI/Pages/Creation/Origin.qml"
+        case 1:
+            return "qrc:/QmlUI/Pages/Creation/Profession.qml"
+        case 2:
+            return "qrc:/QmlUI/Pages/Creation/Attributes.qml"
+        case 3:
+            return "qrc:/QmlUI/Pages/Creation/Specialization.qml"
+        case 4:
+            return "qrc:/QmlUI/Pages/Creation/Skills.qml"
+        case 5:
+            return "qrc:/QmlUI/Pages/Creation/Tricks.qml"
+        case 6:
+            return "qrc:/QmlUI/Pages/Creation/Diseases.qml"
+        case 7:
+            return "qrc:/QmlUI/Pages/Creation/Reputation.qml"
+        case 8:
+            return "qrc:/QmlUI/Pages/Creation/Form.qml"
+        case 9:
+            return "qrc:/QmlUI/Pages/Creation/Shop.qml"
+        case 10:
+            return "qrc:/QmlUI/Pages/Creation/Tricks.qml"
+        default:
+            return "qrc:/QmlUI/Pages/Creation/Diseases.qml"
+        }
+    }
+
+} // Page
