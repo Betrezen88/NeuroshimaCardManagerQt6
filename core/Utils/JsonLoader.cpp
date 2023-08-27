@@ -1,14 +1,14 @@
-#include "CardReader.h"
+#include "JsonLoader.h"
 
 #include <QFile>
 
-CardReader::CardReader(QObject *parent)
+JsonLoader::JsonLoader(QObject *parent)
     : QObject{parent}
 {
 
 }
 
-QJsonDocument CardReader::load(const QString &filepath)
+QJsonDocument JsonLoader::load(const QString &filepath)
 {
     QByteArray data = readFile(filepath);
 
@@ -29,7 +29,7 @@ QJsonDocument CardReader::load(const QString &filepath)
     return json;
 }
 
-QByteArray CardReader::readFile(const QString &filepath)
+QByteArray JsonLoader::readFile(const QString &filepath)
 {
     if (filepath.isEmpty()) {
         emit error("Pusta nazwa pliku do odczytania.");

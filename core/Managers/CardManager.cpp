@@ -1,7 +1,7 @@
 #include "CardManager.h"
 
-#include "../Utils/CardReader.h"
 #include "../Utils/CardConverter.h"
+#include "../Utils/JsonLoader.h"
 
 #include <QUrl>
 #include <QDebug>
@@ -30,10 +30,10 @@ void CardManager::load(const QString &filepath)
     }
     QUrl fileUrl{filepath};
 
-    CardReader reader;
-    reader.connect(&reader, &CardReader::error, this, &CardManager::error);
+    JsonLoader loader;
+    loader.connect(&loader, &JsonLoader::error, this, &CardManager::error);
 
-    QJsonDocument json = reader.load(fileUrl.toLocalFile());
+    QJsonDocument json = loader.load(fileUrl.toLocalFile());
 
     if (json.isEmpty()) {
         return;
