@@ -19,6 +19,7 @@ qt_add_qml_module(appQmlUI
         Pages/Card/Equipment.qml
         Pages/Card/Notes.qml
         Pages/Creation/Origin.qml
+        Pages/Creation/Profession.qml
 
         Views/Card.qml
         Views/Cards.qml
