@@ -121,6 +121,7 @@ target_link_libraries(appQmlUI
         View
         Data
         Managers
+        Source
 )
 
 install(TARGETS appQmlUI
