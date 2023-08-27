@@ -74,6 +74,13 @@ AttributeBonusSource *SourceConverter::attributeBonus(const QJsonObject &object)
     }
 }
 
+FeatureSource *SourceConverter::featureSource(const QJsonObject &object)
+{
+    return new FeatureSource{object.value("name").toString(),
+                             object.value("description").toString(),
+                             featureBonus(object.value("bonus").toObject())};
+}
+
 BonusSource *SourceConverter::featureBonus(const QJsonObject &object)
 {
     if ( object.isEmpty() )
