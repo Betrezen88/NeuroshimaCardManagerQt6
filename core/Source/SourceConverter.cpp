@@ -41,6 +41,9 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
     case SourceDocument::Type::Professions:
         convertProfessions(document);
         break;
+    case SourceDocument::Type::Tricks:
+        convertTricks(document);
+        break;
     case SourceDocument::Type::Specializations:
         convertSpecializations(document);
         break;
@@ -125,6 +128,21 @@ void SourceConverter::convertSpecializations(const SourceDocument &document)
     }
 
     emit specializationsConverted(specilizationSources);
+}
+
+void SourceConverter::convertTricks(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+    if ( data.isEmpty() ) {
+        return;
+    }
+
+    QVector<TrickSource*> trickSources;
+    for ( const QJsonValue& trick: data ) {
+        trickSources.append( trickSource(trick.toObject()) );
+    }
+
+    emit tricksConverted(document.name(), trickSources);
 }
 
 AttributeSource *SourceConverter::attributeSource(const QJsonObject &object)
@@ -297,6 +315,20 @@ ModifierSource *SourceConverter::modifierSource(const QJsonObject &object)
     };
 
     return new ModifierSource{stringToType(object.value("type").toString()), object.value("name").toString(), object.value("value").toInt()};
+}
+
+TrickSource *SourceConverter::trickSource(const QJsonObject &object)
+{
+    QVector<RequirementSource*> requirementSources;
+    const QJsonArray& requirements = object.value("requirements").toArray();
+    for ( const QJsonValue& requirement: requirements ) {
+        requirementSources.append( requirementSource(requirement.toObject()) );
+    }
+
+    return new TrickSource{object.value("name").toString(),
+                           object.value("description").toString(),
+                           object.value("action").toString(),
+                           requirementSources};
 }
 
 RequirementSource *SourceConverter::requirementSource(const QJsonObject &object)

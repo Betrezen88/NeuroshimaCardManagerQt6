@@ -23,6 +23,7 @@ signals:
     void origisConverted(const QString& name, QVector<OriginSource*>& origins);
     void professionsConverted(const QString& name, QVector<ProfessionSource*>& professions);
     void specializationsConverted(const QVector<SpecializationSource*>& specializations);
+    void tricksConverted(const QString& name, QVector<TrickSource*>& tricks);
 
 public slots:
     void convertSourceDocument(const SourceDocument& document);
@@ -33,6 +34,7 @@ private:
     void convertOrigins(const SourceDocument& document);
     void convertProfessions(const SourceDocument& document);
     void convertSpecializations(const SourceDocument& document);
+    void convertTricks(const SourceDocument& document);
 
     AttributeSource* attributeSource(const QJsonObject& object);
     SkillpackSource* skillpackSource(const QJsonObject& object);
@@ -45,6 +47,7 @@ private:
     DiseaseSource* diseaseSource(const QJsonObject& object);
     SymptomSource* symptomSource(const QJsonObject& object);
     ModifierSource* modifierSource(const QJsonObject& object);
+    TrickSource* trickSource(const QJsonObject& object);
     RequirementSource* requirementSource(const QJsonObject& object);
 };
 
