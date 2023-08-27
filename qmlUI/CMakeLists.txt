@@ -23,6 +23,7 @@ qt_add_qml_module(appQmlUI
         Pages/Creation/Profession.qml
         Pages/Creation/Specialization.qml
         Pages/Creation/Skills.qml
+        Pages/Creation/Tricks.qml
 
         Views/Card.qml
         Views/Cards.qml
