@@ -13,6 +13,8 @@ qt_add_qml_module(Source
         Statistics/Bonus/BonusFeatures.cpp
         Statistics/Bonus/BonusFriend.h
         Statistics/Bonus/BonusFriend.cpp
+        Statistics/Bonus/BonusHealth.h
+        Statistics/Bonus/BonusHealth.cpp
         SourceDocument.h
         SourceDocument.cpp
 
