@@ -20,6 +20,7 @@ qt_add_qml_module(appQmlUI
         Pages/Card/Notes.qml
         Pages/Creation/Attributes.qml
         Pages/Creation/Diseases.qml
+        Pages/Creation/Form.qml
         Pages/Creation/Origin.qml
         Pages/Creation/Profession.qml
         Pages/Creation/Specialization.qml
