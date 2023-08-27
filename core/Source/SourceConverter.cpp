@@ -92,6 +92,12 @@ void SourceConverter::convertSpecializations(const SourceDocument &document)
     emit specializationsConverted(specilizationSources);
 }
 
+
+SkillSource *SourceConverter::skillSource(const QJsonObject &object)
+{
+    return new SkillSource{object.value("name").toString(), object.value("description").toString()};
+}
+
 OriginSource *SourceConverter::originSource(const QJsonObject &object)
 {
     const QJsonArray& features = object.value("features").toArray();

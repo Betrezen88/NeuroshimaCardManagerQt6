@@ -4,6 +4,7 @@
 #include <QObject>
 
 #include "SourceDocument.h"
+#include "AttributeSource.h"
 #include "OriginSource.h"
 #include "ProfessionSource.h"
 #include "SpecializationSource.h"
@@ -26,6 +27,7 @@ private:
     void convertOrigins(const SourceDocument& document);
     void convertProfessions(const SourceDocument& document);
     void convertSpecializations(const SourceDocument& document);
+    SkillSource* skillSource(const QJsonObject& object);
     OriginSource* originSource(const QJsonObject& object);
     AttributeBonusSource* attributeBonus(const QJsonObject& object);
     ProfessionSource* professionSource(const QJsonObject& object);
