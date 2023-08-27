@@ -97,6 +97,7 @@ qt_add_qml_module(appQmlUI
         Elements/Creation/Skills/OtherSkill.qml
         Elements/Creation/Skills/Skillpack.qml
         Elements/Creation/Skills/Skill.qml
+        Elements/Creation/Tricks/Trick.qml
 )
 
 set_target_properties(appQmlUI PROPERTIES
