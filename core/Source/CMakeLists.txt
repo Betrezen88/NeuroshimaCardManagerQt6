@@ -34,6 +34,8 @@ qt_add_qml_module(Source
         Statistics/Bonus/BonusTrick.cpp
         Statistics/FeatureSource.h
         Statistics/FeatureSource.cpp
+        Statistics/OriginSource.h
+        Statistics/OriginSource.cpp
         SourceDocument.h
         SourceDocument.cpp
 
