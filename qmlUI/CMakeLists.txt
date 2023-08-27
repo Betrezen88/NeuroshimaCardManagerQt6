@@ -92,6 +92,7 @@ qt_add_qml_module(appQmlUI
         Elements/Card/Statistics/Wounds.qml
 
         Placeholders/PagePlaceholder.qml
+        Elements/Creation/Diseases/Symptom.qml
         Elements/Creation/Skills/Attribute.qml
         Elements/Creation/Skills/AttributeDiffcultyLevels.qml
         Elements/Creation/Skills/DifficultyLevel.qml
