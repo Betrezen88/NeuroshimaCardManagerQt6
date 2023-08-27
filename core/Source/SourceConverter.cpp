@@ -32,6 +32,9 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
     case SourceDocument::Type::Attributes:
         convertAttributes(document);
         break;
+    case SourceDocument::Type::Diseases:
+        convertDiseases(document);
+        break;
     case SourceDocument::Type::Origins:
         convertOrigins(document);
         break;
@@ -59,6 +62,21 @@ void SourceConverter::convertAttributes(const SourceDocument &document)
         attributeSources.append( attributeSource(attribute.toObject()) );
     }
     emit attributesConverted(attributeSources);
+}
+
+void SourceConverter::convertDiseases(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+    if ( data.isEmpty() ) {
+        return;
+    }
+
+    QVector<DiseaseSource*> diseaseSources;
+    for ( const QJsonValue& disease: data ) {
+        diseaseSources.append( diseaseSource(disease.toObject()) );
+    }
+
+    emit diseasesConverted(document.name(), diseaseSources);
 }
 
 void SourceConverter::convertOrigins(const SourceDocument &document)
@@ -247,6 +265,19 @@ BonusSource *SourceConverter::featureBonus(const QJsonObject &object)
     return nullptr;
 }
 
+DiseaseSource *SourceConverter::diseaseSource(const QJsonObject &object)
+{
+    QVector<SymptomSource*> symptomSources;
+    const QJsonArray& symptoms = object.value("symptoms").toArray();
+    for ( const QJsonValue& symptom: symptoms ) {
+        symptomSources.append( symptomSource(symptom.toObject()) );
+    }
+
+    return new DiseaseSource{object.value("name").toString(),
+                             object.value("description").toString(),
+                             object.value("curse").toString(),
+                             symptomSources};
+}
 
 SymptomSource *SourceConverter::symptomSource(const QJsonObject &object)
 {

@@ -18,6 +18,7 @@ public:
 
 signals:
     void attributesConverted(const QVector<AttributeSource*>& attributes);
+    void diseasesConverted(const QString& name, const QVector<DiseaseSource*>& diseases);
     void origisConverted(const QString& name, QVector<OriginSource*>& origins);
     void professionsConverted(const QString& name, QVector<ProfessionSource*>& professions);
     void specializationsConverted(const QVector<SpecializationSource*>& specializations);
@@ -27,6 +28,7 @@ public slots:
 
 private:
     void convertAttributes(const SourceDocument& document);
+    void convertDiseases(const SourceDocument& document);
     void convertOrigins(const SourceDocument& document);
     void convertProfessions(const SourceDocument& document);
     void convertSpecializations(const SourceDocument& document);
@@ -39,6 +41,7 @@ private:
     ProfessionSource* professionSource(const QJsonObject& object);
     FeatureSource* featureSource(const QJsonObject& object);
     BonusSource* featureBonus(const QJsonObject& object);
+    DiseaseSource* diseaseSource(const QJsonObject& object);
     SymptomSource* symptomSource(const QJsonObject& object);
     ModifierSource* modifierSource(const QJsonObject& object);
 };
