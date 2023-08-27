@@ -9,6 +9,8 @@ qt_add_qml_module(Source
         Statistics/Bonus/BonusBeast.cpp
         Statistics/Bonus/BonusFame.h
         Statistics/Bonus/BonusFame.cpp
+        Statistics/Bonus/BonusFeatures.h
+        Statistics/Bonus/BonusFeatures.cpp
         SourceDocument.h
         SourceDocument.cpp
 
