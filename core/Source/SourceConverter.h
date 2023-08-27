@@ -20,6 +20,7 @@ public slots:
 
 private:
     void convertSpecializations(const SourceDocument& document);
+    BonusSource* featureBonus(const QJsonObject& object);
 };
 
 #endif // SOURCECONVERTER_H
