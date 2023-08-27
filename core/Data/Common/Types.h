@@ -19,6 +19,12 @@ Q_ENUM_NS(Modifier)
 enum class Wound { Scratch, Light, Heavy, Critical };
 Q_ENUM_NS(Wound)
 
+enum class Bonus { Pet, Health, Fame, Features, Connections, Reputation, Skillpoints, Skills, Skillpack, SkillpackDL, Trick };
+Q_ENUM_NS(Bonus)
+
+enum class AttributeBonus { Single, List };
+Q_ENUM_NS(AttributeBonus)
+
 } // Types
 
 #endif // TYPES_H
