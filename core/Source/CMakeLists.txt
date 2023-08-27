@@ -36,6 +36,8 @@ qt_add_qml_module(Source
         Statistics/FeatureSource.cpp
         Statistics/OriginSource.h
         Statistics/OriginSource.cpp
+        Statistics/ProfessionSource.h
+        Statistics/ProfessionSource.cpp
         SourceDocument.h
         SourceDocument.cpp
 
