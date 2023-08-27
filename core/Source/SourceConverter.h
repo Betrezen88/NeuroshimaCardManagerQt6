@@ -4,6 +4,7 @@
 #include <QObject>
 
 #include "SourceDocument.h"
+#include "SpecializationSource.h"
 
 class SourceConverter : public QObject
 {
@@ -12,11 +13,13 @@ public:
     explicit SourceConverter();
 
 signals:
+    void specializationsConverted(const QVector<SpecializationSource*>& specializations);
 
 public slots:
     void convertSourceDocument(const SourceDocument& document);
 
 private:
+    void convertSpecializations(const SourceDocument& document);
 };
 
 #endif // SOURCECONVERTER_H
