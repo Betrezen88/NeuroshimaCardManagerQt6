@@ -57,6 +57,8 @@ qt_add_qml_module(Source
         Statistics/StatisticsSource.cpp
         Statistics/SymptomSource.h
         Statistics/SymptomSource.cpp
+        Statistics/TrickSource.h
+        Statistics/TrickSource.cpp
 
         SourceConverter.h
         SourceConverter.cpp
