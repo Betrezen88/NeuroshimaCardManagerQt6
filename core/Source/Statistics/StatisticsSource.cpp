@@ -1,0 +1,135 @@
+#include "StatisticsSource.h"
+
+#include <QDebug>
+
+StatisticsSource::StatisticsSource(QObject *parent)
+    : QObject{parent}
+{
+
+}
+
+QQmlListProperty<OriginSource> StatisticsSource::origins()
+{
+    return QQmlListProperty<OriginSource>(this, this,
+                                          &StatisticsSource::originsCount,
+                                          &StatisticsSource::origin);
+}
+
+QQmlListProperty<AttributeSource> StatisticsSource::attributes()
+{
+    return QQmlListProperty<AttributeSource>();
+}
+
+qsizetype StatisticsSource::attributesCount() const
+{
+    return m_attributes.count();
+}
+
+AttributeSource *StatisticsSource::attribute(qsizetype index)
+{
+    return m_attributes.at(index);
+}
+
+qsizetype StatisticsSource::originsCount() const
+{
+    return m_origins.count();
+}
+
+OriginSource *StatisticsSource::origin(qsizetype index)
+{
+    return m_origins.at(index);
+}
+
+QQmlListProperty<ProfessionSource> StatisticsSource::professions()
+{
+    return QQmlListProperty<ProfessionSource>(this, this,
+                                              &StatisticsSource::professionsCount,
+                                              &StatisticsSource::profession);
+}
+
+qsizetype StatisticsSource::professionsCount() const
+{
+    return m_professions.count();
+}
+
+ProfessionSource *StatisticsSource::profession(qsizetype index)
+{
+    return m_professions.at(index);
+}
+
+QQmlListProperty<SpecializationSource> StatisticsSource::specializations()
+{
+    return QQmlListProperty<SpecializationSource>();
+}
+
+qsizetype StatisticsSource::specializationsCount() const
+{
+    return m_specializations.count();
+}
+
+SpecializationSource *StatisticsSource::specialization(qsizetype index)
+{
+    return m_specializations.at(index);
+}
+
+void StatisticsSource::addAttributes(const QVector<AttributeSource *> &attributes)
+{
+    m_attributes = attributes;
+    emit attributesChanged();
+}
+
+void StatisticsSource::addOrigins(const QString &name, const QVector<OriginSource *> &origins)
+{
+    m_originSources.insert(name, origins);
+}
+
+void StatisticsSource::addProfessions(const QString &name, const QVector<ProfessionSource *> &professions)
+{
+    m_professionSource.insert(name, professions);
+}
+
+void StatisticsSource::addSpecializations(const QVector<SpecializationSource *> &specializations)
+{
+    m_specializations = specializations;
+    emit specializationsChanged();
+}
+
+qsizetype StatisticsSource::attribtuesCount(QQmlListProperty<AttributeSource> *list)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->attributesCount();
+}
+
+AttributeSource *StatisticsSource::attribute(QQmlListProperty<AttributeSource> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->attribute(index);
+}
+
+qsizetype StatisticsSource::originsCount(QQmlListProperty<OriginSource> *list)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->originsCount();
+}
+
+OriginSource *StatisticsSource::origin(QQmlListProperty<OriginSource> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->origin(index);
+}
+
+qsizetype StatisticsSource::professionsCount(QQmlListProperty<ProfessionSource> *list)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->professionsCount();
+}
+
+ProfessionSource *StatisticsSource::profession(QQmlListProperty<ProfessionSource> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->profession(index);
+}
+
+qsizetype StatisticsSource::specializationsCount(QQmlListProperty<SpecializationSource> *list)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->specializationsCount();
+}
+
+SpecializationSource *StatisticsSource::specialization(QQmlListProperty<SpecializationSource> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->specialization(index);
+}
