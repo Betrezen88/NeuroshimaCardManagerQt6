@@ -59,7 +59,16 @@ qt_add_qml_module(Source
     DEPENDENCIES
         Data
 )
+
+target_include_directories(Source
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/Common
+        ${CMAKE_CURRENT_SOURCE_DIR}/Statistics
+        ${CMAKE_CURRENT_SOURCE_DIR}/Statistics/Bonus
+)
+
 target_link_libraries(Source
     PRIVATE
         Data
+        Utils
 )
