@@ -5,6 +5,8 @@ qt_add_qml_module(Source
     VERSION 1.0
     SOURCES
         Statistics/Bonus/BonusSource.h
+        Statistics/Bonus/BonusBeast.h
+        Statistics/Bonus/BonusBeast.cpp
         SourceDocument.h
         SourceDocument.cpp
 
