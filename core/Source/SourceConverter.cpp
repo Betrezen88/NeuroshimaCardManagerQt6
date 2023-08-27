@@ -93,6 +93,23 @@ void SourceConverter::convertSpecializations(const SourceDocument &document)
 }
 
 
+SkillpackSource *SourceConverter::skillpackSource(const QJsonObject &object)
+{
+    const QJsonArray& specializationArray = object.value("specializations").toArray();
+    QStringList specializations;
+    for ( const QJsonValue& specialization: specializationArray ) {
+        specializations << specialization.toString();
+    }
+
+    QVector<SkillSource*> skillSources;
+    const QJsonArray& skills = object.value("skills").toArray();
+    for ( const QJsonValue& skill: skills ) {
+        skillSources.append( skillSource(skill.toObject()) );
+    }
+
+    return new SkillpackSource{object.value("name").toString(), specializations, skillSources};
+}
+
 SkillSource *SourceConverter::skillSource(const QJsonObject &object)
 {
     return new SkillSource{object.value("name").toString(), object.value("description").toString()};

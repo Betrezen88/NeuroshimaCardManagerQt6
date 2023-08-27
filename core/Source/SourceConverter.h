@@ -27,6 +27,7 @@ private:
     void convertOrigins(const SourceDocument& document);
     void convertProfessions(const SourceDocument& document);
     void convertSpecializations(const SourceDocument& document);
+    SkillpackSource* skillpackSource(const QJsonObject& object);
     SkillSource* skillSource(const QJsonObject& object);
     OriginSource* originSource(const QJsonObject& object);
     AttributeBonusSource* attributeBonus(const QJsonObject& object);
