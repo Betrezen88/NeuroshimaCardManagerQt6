@@ -247,6 +247,18 @@ BonusSource *SourceConverter::featureBonus(const QJsonObject &object)
     return nullptr;
 }
 
+
+SymptomSource *SourceConverter::symptomSource(const QJsonObject &object)
+{
+    QVector<ModifierSource*> penaltySources;
+    const QJsonArray& penalties = object.value("penalty").toArray();
+    for ( const QJsonValue& penalty: penalties ) {
+        penaltySources.append( modifierSource(penalty.toObject()) );
+    }
+
+    return new SymptomSource{object.value("name").toString(), object.value("description").toString(), penaltySources};
+}
+
 ModifierSource *SourceConverter::modifierSource(const QJsonObject &object)
 {
     auto stringToType = [](const QString& name){

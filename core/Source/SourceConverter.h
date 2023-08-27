@@ -39,6 +39,7 @@ private:
     ProfessionSource* professionSource(const QJsonObject& object);
     FeatureSource* featureSource(const QJsonObject& object);
     BonusSource* featureBonus(const QJsonObject& object);
+    SymptomSource* symptomSource(const QJsonObject& object);
     ModifierSource* modifierSource(const QJsonObject& object);
 };
 
