@@ -29,6 +29,9 @@ SourceConverter::SourceConverter()
 void SourceConverter::convertSourceDocument(const SourceDocument &document)
 {
     switch (document.type()) {
+    case SourceDocument::Type::Origins:
+        convertOrigins(document);
+        break;
     case SourceDocument::Type::Specializations:
         convertSpecializations(document);
         break;
@@ -37,7 +40,21 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
         break;
     }
 }
+
+void SourceConverter::convertOrigins(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+
+    if ( data.isEmpty() ) {
+        return;
     }
+
+    QVector<OriginSource*> originSources;
+    for ( const QJsonValue& origin: data ) {
+        originSources.append( originSource(origin.toObject()) );
+    }
+
+    emit origisConverted(document.name(), originSources);
 }
 
 
@@ -57,6 +74,19 @@ void SourceConverter::convertSpecializations(const SourceDocument &document)
     emit specializationsConverted(specilizationSources);
 }
 
+OriginSource *SourceConverter::originSource(const QJsonObject &object)
+{
+    const QJsonArray& features = object.value("features").toArray();
+    QVector<FeatureSource*> featureSources;
+    for ( const QJsonValue& feature: features ) {
+        featureSources.append( featureSource(feature.toObject()) );
+    }
+
+    return new OriginSource{object.value("name").toString(),
+                            object.value("description").toString(),
+                            attributeBonus(object.value("bonus").toObject()),
+                            featureSources};
+}
 
 AttributeBonusSource *SourceConverter::attributeBonus(const QJsonObject &object)
 {
