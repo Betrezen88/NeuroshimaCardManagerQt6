@@ -298,3 +298,19 @@ ModifierSource *SourceConverter::modifierSource(const QJsonObject &object)
 
     return new ModifierSource{stringToType(object.value("type").toString()), object.value("name").toString(), object.value("value").toInt()};
 }
+
+RequirementSource *SourceConverter::requirementSource(const QJsonObject &object)
+{
+    auto stringToType = [](const QString& name){
+        if ( "Attribute" == name )
+            return Types::Requirement::Attribute;
+        if ( "Skill" == name )
+            return Types::Requirement::Skill;
+        return Types::Requirement::Profession;
+    };
+
+    return new RequirementSource{stringToType(object.value("type").toString()),
+                                 object.value("name").toString(),
+                                 object.value("value").toInt(),
+                                 object.value("optional").toBool()};
+}

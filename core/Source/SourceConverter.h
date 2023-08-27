@@ -9,6 +9,7 @@
 #include "OriginSource.h"
 #include "ProfessionSource.h"
 #include "SpecializationSource.h"
+#include "TrickSource.h"
 
 class SourceConverter : public QObject
 {
@@ -44,6 +45,7 @@ private:
     DiseaseSource* diseaseSource(const QJsonObject& object);
     SymptomSource* symptomSource(const QJsonObject& object);
     ModifierSource* modifierSource(const QJsonObject& object);
+    RequirementSource* requirementSource(const QJsonObject& object);
 };
 
 #endif // SOURCECONVERTER_H
