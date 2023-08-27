@@ -37,6 +37,8 @@ qt_add_qml_module(Source
         Statistics/Bonus/BonusTrick.cpp
         Statistics/AttributeSource.h
         Statistics/AttributeSource.cpp
+        Statistics/DiseaseSource.h
+        Statistics/DiseaseSource.cpp
         Statistics/FeatureSource.h
         Statistics/FeatureSource.cpp
         Statistics/OriginSource.h
