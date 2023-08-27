@@ -6,6 +6,8 @@ qt_add_qml_module(Source
     SOURCES
         Common/ModifierSource.h
         Common/ModifierSource.cpp
+        Common/RequirementSource.h
+        Common/RequirementSource.cpp
 
         Statistics/Bonus/AttributeBonusSource.h
         Statistics/Bonus/AttributeBonusSingle.h
