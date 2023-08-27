@@ -92,6 +92,7 @@ qt_add_qml_module(appQmlUI
         Placeholders/PagePlaceholder.qml
         Elements/Creation/Skills/Attribute.qml
         Elements/Creation/Skills/AttributeDiffcultyLevels.qml
+        Elements/Creation/Skills/DifficultyLevel.qml
         Elements/Creation/Skills/OtherSkill.qml
         Elements/Creation/Skills/Skillpack.qml
         Elements/Creation/Skills/Skill.qml
