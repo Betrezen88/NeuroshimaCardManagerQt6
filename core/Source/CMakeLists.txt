@@ -49,6 +49,8 @@ qt_add_qml_module(Source
         Statistics/SkillpackSource.cpp
         Statistics/SpecializationSource.h
         Statistics/SpecializationSource.cpp
+        Statistics/SymptomSource.h
+        Statistics/SymptomSource.cpp
         SourceDocument.h
         SourceDocument.cpp
 
