@@ -32,6 +32,9 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
     case SourceDocument::Type::Origins:
         convertOrigins(document);
         break;
+    case SourceDocument::Type::Professions:
+        convertProfessions(document);
+        break;
     case SourceDocument::Type::Specializations:
         convertSpecializations(document);
         break;
@@ -57,6 +60,21 @@ void SourceConverter::convertOrigins(const SourceDocument &document)
     emit origisConverted(document.name(), originSources);
 }
 
+void SourceConverter::convertProfessions(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+
+    if ( data.isEmpty() ) {
+        return;
+    }
+
+    QVector<ProfessionSource*> professionSources;
+    for ( const QJsonValue& profession: data ) {
+        professionSources.append( professionSource(profession.toObject()) );
+    }
+
+    emit professionsConverted(document.name(), professionSources);
+}
 
 void SourceConverter::convertSpecializations(const SourceDocument &document)
 {
@@ -102,6 +120,20 @@ AttributeBonusSource *SourceConverter::attributeBonus(const QJsonObject &object)
         }
         return new AttributeBonusList{names, value};
     }
+}
+
+ProfessionSource *SourceConverter::professionSource(const QJsonObject &object)
+{
+    QVector<FeatureSource*> featureSources;
+    const QJsonArray& features = object.value("features").toArray();
+    for ( const QJsonValue& feature: features ) {
+        featureSources.append( featureSource(feature.toObject()) );
+    }
+
+    return new ProfessionSource{object.value("name").toString(),
+                                object.value("descritpion").toString(),
+                                object.value("quote").toString(),
+                                featureSources};
 }
 
 FeatureSource *SourceConverter::featureSource(const QJsonObject &object)

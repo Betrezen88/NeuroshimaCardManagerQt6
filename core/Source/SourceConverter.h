@@ -5,6 +5,7 @@
 
 #include "SourceDocument.h"
 #include "OriginSource.h"
+#include "ProfessionSource.h"
 #include "SpecializationSource.h"
 
 class SourceConverter : public QObject
@@ -15,6 +16,7 @@ public:
 
 signals:
     void origisConverted(const QString& name, QVector<OriginSource*>& origins);
+    void professionsConverted(const QString& name, QVector<ProfessionSource*>& professions);
     void specializationsConverted(const QVector<SpecializationSource*>& specializations);
 
 public slots:
@@ -22,9 +24,11 @@ public slots:
 
 private:
     void convertOrigins(const SourceDocument& document);
+    void convertProfessions(const SourceDocument& document);
     void convertSpecializations(const SourceDocument& document);
     OriginSource* originSource(const QJsonObject& object);
     AttributeBonusSource* attributeBonus(const QJsonObject& object);
+    ProfessionSource* professionSource(const QJsonObject& object);
     FeatureSource* featureSource(const QJsonObject& object);
     BonusSource* featureBonus(const QJsonObject& object);
 };
