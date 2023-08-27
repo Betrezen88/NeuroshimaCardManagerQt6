@@ -25,6 +25,8 @@ qt_add_qml_module(Source
         Statistics/Bonus/BonusSkillpackDL.cpp
         Statistics/Bonus/BonusSkillpoints.h
         Statistics/Bonus/BonusSkillpoints.cpp
+        Statistics/Bonus/BonusTrick.h
+        Statistics/Bonus/BonusTrick.cpp
         SourceDocument.h
         SourceDocument.cpp
 
