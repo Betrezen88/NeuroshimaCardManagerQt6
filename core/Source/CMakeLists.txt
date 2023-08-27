@@ -53,6 +53,8 @@ qt_add_qml_module(Source
         Statistics/SpecializationSource.cpp
         Statistics/SymptomSource.h
         Statistics/SymptomSource.cpp
+        SourceConverter.h
+        SourceConverter.cpp
         SourceLoader.h
         SourceLoader.cpp
         SourceDocument.h
