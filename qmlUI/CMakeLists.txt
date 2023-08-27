@@ -23,6 +23,7 @@ qt_add_qml_module(appQmlUI
         Pages/Creation/Form.qml
         Pages/Creation/Origin.qml
         Pages/Creation/Profession.qml
+        Pages/Creation/Reputation.qml
         Pages/Creation/Shop.qml
         Pages/Creation/Specialization.qml
         Pages/Creation/Skills.qml
