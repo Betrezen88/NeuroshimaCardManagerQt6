@@ -18,6 +18,9 @@ public:
 signals:
 
 private:
+    void createResourceDirectory();
+
+private:
     CardManager *m_cardManager{nullptr};
 };
 
