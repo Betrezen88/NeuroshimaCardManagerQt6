@@ -1,5 +1,7 @@
 #include "SourceConverter.h"
 
+#include "AttributeBonusSingle.h"
+#include "AttributeBonusList.h"
 
 #include "BonusBeast.h"
 #include "BonusFame.h"
@@ -55,6 +57,22 @@ void SourceConverter::convertSpecializations(const SourceDocument &document)
     emit specializationsConverted(specilizationSources);
 }
 
+
+AttributeBonusSource *SourceConverter::attributeBonus(const QJsonObject &object)
+{
+    const int value = object.value("value").toInt();
+    if ( !object.value("name").isArray() ) {
+        return new AttributeBonusSingle{object.value("name").toString(), value};
+    }
+    else {
+        QStringList names;
+        const QJsonArray& list = object.value("name").toArray();
+        for ( const QJsonValue& name: list ) {
+            names << name.toString();
+        }
+        return new AttributeBonusList{names, value};
+    }
+}
 
 BonusSource *SourceConverter::featureBonus(const QJsonObject &object)
 {
