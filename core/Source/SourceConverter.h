@@ -5,6 +5,7 @@
 
 #include "SourceDocument.h"
 #include "AttributeSource.h"
+#include "DiseaseSource.h"
 #include "OriginSource.h"
 #include "ProfessionSource.h"
 #include "SpecializationSource.h"
@@ -38,6 +39,7 @@ private:
     ProfessionSource* professionSource(const QJsonObject& object);
     FeatureSource* featureSource(const QJsonObject& object);
     BonusSource* featureBonus(const QJsonObject& object);
+    ModifierSource* modifierSource(const QJsonObject& object);
 };
 
 #endif // SOURCECONVERTER_H

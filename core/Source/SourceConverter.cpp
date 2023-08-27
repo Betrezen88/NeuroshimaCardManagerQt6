@@ -246,3 +246,12 @@ BonusSource *SourceConverter::featureBonus(const QJsonObject &object)
     }
     return nullptr;
 }
+
+ModifierSource *SourceConverter::modifierSource(const QJsonObject &object)
+{
+    auto stringToType = [](const QString& name){
+        return name == "Attribute" ? Types::Modifier::Attribute : Types::Modifier::Test;
+    };
+
+    return new ModifierSource{stringToType(object.value("type").toString()), object.value("name").toString(), object.value("value").toInt()};
+}
