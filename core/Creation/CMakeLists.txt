@@ -6,6 +6,8 @@ qt_add_qml_module(Creation
     SOURCES
         Statistics/SkillCreation.h
         Statistics/SkillCreation.cpp
+        Statistics/SkillpackCreation.h
+        Statistics/SkillpackCreation.cpp
 )
 
 )
