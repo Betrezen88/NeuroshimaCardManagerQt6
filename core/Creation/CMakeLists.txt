@@ -12,6 +12,9 @@ qt_add_qml_module(Creation
         Statistics/SkillpackCreation.cpp
         Statistics/StatisticsCreation.h
         Statistics/StatisticsCreation.cpp
+
+        CardCreation.h
+        CardCreation.cpp
 )
 
 target_include_directories(Creation
