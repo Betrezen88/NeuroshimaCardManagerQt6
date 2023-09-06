@@ -12,13 +12,15 @@ qt_add_qml_module(Managers
 
 target_include_directories(Managers
     PUBLIC
-        ${CMAKE_SOURCE_DIR}/../View/Card/
-        ${CMAKE_SOURCE_DIR}/../View/Card/Pages
-        ${CMAKE_SOURCE_DIR}/../View/Card/Statistics
+        ${CMAKE_CURRENT_SOURCE_DIR}/../View/Card/
+        ${CMAKE_CURRENT_SOURCE_DIR}/../View/Card/Pages
+        ${CMAKE_CURRENT_SOURCE_DIR}/../View/Card/Statistics
+        ${CMAKE_CURRENT_SOURCE_DIR}/../Creation
 )
 
 target_link_libraries(Managers
     PUBLIC
+        Creation
         Data
         View
         Utils
