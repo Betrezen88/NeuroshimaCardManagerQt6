@@ -4,6 +4,8 @@ qt_add_qml_module(Creation
     URI core.creation
     VERSION 1.0
     SOURCES
+        Statistics/AttributeCreation.h
+        Statistics/AttributeCreation.cpp
         Statistics/SkillCreation.h
         Statistics/SkillCreation.cpp
         Statistics/SkillpackCreation.h
