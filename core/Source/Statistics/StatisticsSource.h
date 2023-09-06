@@ -10,6 +10,7 @@
 #include "ProfessionSource.h"
 #include "QuestionSource.h"
 #include "SpecializationSource.h"
+#include "TrickSource.h"
 
 class StatisticsSource : public QObject
 {
@@ -20,6 +21,7 @@ class StatisticsSource : public QObject
     Q_PROPERTY(QQmlListProperty<ProfessionSource> professions READ professions NOTIFY professionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<QuestionSource> questions READ questions NOTIFY questionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<SpecializationSource> specializations READ specializations NOTIFY specializationsChanged FINAL)
+    Q_PROPERTY(QQmlListProperty<TrickSource> tricks READ tricks NOTIFY tricksChanged FINAL)
     Q_PROPERTY(QStringList places READ places NOTIFY placesChanged FINAL)
     QML_ELEMENT
 
@@ -50,6 +52,10 @@ public:
     qsizetype specializationsCount() const;
     SpecializationSource* specialization(qsizetype index);
 
+    QQmlListProperty<TrickSource> tricks();
+    qsizetype tricksCount() const;
+    TrickSource* trick(qsizetype index);
+
     QStringList places() const;
 
 signals:
@@ -58,6 +64,7 @@ signals:
     void originsChanged();
     void professionsChanged();
     void specializationsChanged();
+    void tricksChanged();
     void placesChanged();
     void questionsChanged();
 
@@ -68,6 +75,7 @@ public slots:
     void addProfessions(const QString& name, const QVector<ProfessionSource*>& professions);
     void addQuestions(const QString& name, const QVector<QuestionSource*>& questions);
     void addSpecializations(const QVector<SpecializationSource*>& specializations);
+    void addTricks(const QString& name, const QVector<TrickSource *> &tricks);
     void addPlaces(const QStringList& places);
 
 private:
@@ -89,6 +97,9 @@ private:
     static qsizetype specializationsCount(QQmlListProperty<SpecializationSource> *list);
     static SpecializationSource* specialization(QQmlListProperty<SpecializationSource> *list, qsizetype index);
 
+    static qsizetype tricksCount(QQmlListProperty<TrickSource> *list);
+    static TrickSource* trick(QQmlListProperty<TrickSource> *list, qsizetype index);
+
 private:
     QVector<AttributeSource*> m_attributes;
     QVector<DiseaseSource*> m_diseases;
@@ -96,12 +107,14 @@ private:
     QVector<ProfessionSource*> m_professions;
     QVector<QuestionSource*> m_questions;
     QVector<SpecializationSource*> m_specializations;
+    QVector<TrickSource*> m_tricks;
     QStringList m_places;
 
     QMap<QString, QVector<DiseaseSource*>> m_diseaseSources;
     QMap<QString, QVector<OriginSource*>> m_originSources;
     QMap<QString, QVector<ProfessionSource*>> m_professionSource;
     QMap<QString, QVector<QuestionSource*>> m_questionSources;
+    QMap<QString, QVector<TrickSource*>> m_trickSources;
 };
 
 #endif // STATISTICSSOURCE_H

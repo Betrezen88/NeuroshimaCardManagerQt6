@@ -108,6 +108,23 @@ SpecializationSource *StatisticsSource::specialization(qsizetype index)
     return m_specializations.at(index);
 }
 
+QQmlListProperty<TrickSource> StatisticsSource::tricks()
+{
+    return QQmlListProperty<TrickSource>(this, this,
+                                         &StatisticsSource::tricksCount,
+                                         &StatisticsSource::trick);
+}
+
+qsizetype StatisticsSource::tricksCount() const
+{
+    return m_tricks.count();
+}
+
+TrickSource *StatisticsSource::trick(qsizetype index)
+{
+    return m_tricks.at(index);
+}
+
 QStringList StatisticsSource::places() const
 {
     return m_places;
@@ -153,6 +170,11 @@ void StatisticsSource::addSpecializations(const QVector<SpecializationSource *> 
 {
     m_specializations = specializations;
     emit specializationsChanged();
+}
+
+void StatisticsSource::addTricks(const QString &name, const QVector<TrickSource *> &tricks)
+{
+    m_trickSources.insert(name, tricks);
 }
 
 void StatisticsSource::addPlaces(const QStringList &places)
@@ -218,4 +240,14 @@ qsizetype StatisticsSource::specializationsCount(QQmlListProperty<Specialization
 SpecializationSource *StatisticsSource::specialization(QQmlListProperty<SpecializationSource> *list, qsizetype index)
 {
     return reinterpret_cast<StatisticsSource*>(list->data)->specialization(index);
+}
+
+qsizetype StatisticsSource::tricksCount(QQmlListProperty<TrickSource> *list)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->tricksCount();
+}
+
+TrickSource *StatisticsSource::trick(QQmlListProperty<TrickSource> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->trick(index);
 }
