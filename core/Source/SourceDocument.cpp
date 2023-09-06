@@ -38,8 +38,14 @@ SourceDocument::Type SourceDocument::stringToType(const QString &string)
         return SourceDocument::Type::Origins;
     if ( "Professions" == string )
         return SourceDocument::Type::Professions;
+    if ( "Questions" == string )
+        return SourceDocument::Type::Questions;
+    if ( "Places" == string )
+        return SourceDocument::Type::Places;
     if ( "Diseases" == string )
         return SourceDocument::Type::Diseases;
+    if ( "Features" == string )
+        return SourceDocument::Type::Form;
     if ( "Features" == string )
         return SourceDocument::Type::Features;
     if ( "Tricks" == string )
