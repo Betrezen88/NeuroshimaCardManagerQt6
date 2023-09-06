@@ -30,6 +30,11 @@ AttributeSource *StatisticsSource::attribute(qsizetype index)
     return m_attributes.at(index);
 }
 
+const QVector<AttributeSource *> &StatisticsSource::attributes() const
+{
+    return m_attributes;
+}
+
 QQmlListProperty<DiseaseSource> StatisticsSource::diseases()
 {
     return QQmlListProperty<DiseaseSource>(this, this,

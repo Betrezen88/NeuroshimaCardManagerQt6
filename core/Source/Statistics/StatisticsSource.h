@@ -32,6 +32,8 @@ public:
     qsizetype attributesCount() const;
     AttributeSource* attribute(qsizetype index);
 
+    const QVector<AttributeSource*>& attributes() const;
+
     QQmlListProperty<DiseaseSource> diseases();
     qsizetype diseasesCount() const;
     DiseaseSource* disease(qsizetype index);
