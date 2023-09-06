@@ -4,4 +4,13 @@ qt_add_qml_module(Creation
     URI core.creation
     VERSION 1.0
     SOURCES
+        Statistics/SkillCreation.h
+        Statistics/SkillCreation.cpp
+)
+
+)
+
+target_link_libraries(Creation
+    PRIVATE
+        Source
 )
