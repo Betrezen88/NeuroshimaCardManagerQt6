@@ -1,8 +1,8 @@
 import QtQuick
+import core.creation 1.0
 
 Item {
-    property alias name: _name.text
-    property alias description: _description.text
+    property AttributeCreation attribute: null
 
     id: _root
     height: _column.implicitHeight
@@ -12,6 +12,7 @@ Item {
 
         Text {
             id: _name
+            text: attribute !== null ? attribute.source.name : ""
             font.bold: true
             font.pointSize: 14
             verticalAlignment: Text.AlignVCenter
@@ -25,7 +26,7 @@ Item {
 
         Text {
             id: _description
-            text: "Jeśli przeznaczysz ma nią mało punktów, wyciągniesz kopyta przy pierwszym starciu. Jeden cios w papę i będzie po tobie. Albo inaczej - zatrzasną się za tobą drzwi i co? I dechniesz z głodu, bo nie będziesz i potrafił wyważyć. Spadnie na ciebie kupa żelastwa i zostaniesz wprasowany w ziemię. Bez wysokiej Budowy nie przetrasz tu ani godziny."
+            text: attribute !== null ? attribute.source.description : ""
             font.pointSize: 14
             padding: 5
             wrapMode: Text.WordWrap
