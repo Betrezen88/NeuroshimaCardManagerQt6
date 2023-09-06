@@ -2,9 +2,13 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import core.creation 1.0
+
 import "../Pages/Creation"
 
 Page {
+    property CardCreation cardCreation: null
+
     id: _root
 
     signal cancelCreation()
@@ -108,7 +112,7 @@ Page {
 
         var item = Qt.createComponent( pagePath(type) )
         if (item.status === Component.Ready) {
-            _creationPage.push(item.createObject(_creationPage), {})
+            _creationPage.push(item.createObject(_creationPage), { cardCreation: _root.cardCreation })
         }
         else if (item.status === Component.Error) {
             console.log("Error: ", item.errorString())
