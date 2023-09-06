@@ -130,6 +130,11 @@ void StatisticsSource::addOrigins(const QString &name, const QVector<OriginSourc
 void StatisticsSource::addProfessions(const QString &name, const QVector<ProfessionSource *> &professions)
 {
     m_professionSource.insert(name, professions);
+
+    if ( m_professions.isEmpty() ) {
+        m_professions = m_professionSource.value(name);
+        emit professionsChanged();
+    }
 }
 
 void StatisticsSource::addQuestions(const QString &name, const QVector<QuestionSource *> &questions)
