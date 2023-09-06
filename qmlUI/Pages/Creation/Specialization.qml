@@ -2,7 +2,14 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import core.creation 1.0
+import core.source 1.0
+
+import "../../Delegates/Creation"
+
 Page {
+    property CardCreation cardCreation: null
+
     id: _root
 
     ScrollView {
@@ -20,7 +27,8 @@ Page {
             spacing: 10
 
             Text {
-                text: "Wojownik"
+                text: cardCreation !== null && cardCreation.statisticsCreation.specialization !== null
+                      ? cardCreation.statisticsCreation.specialization.name : ""
                 font.bold: true
                 font.pointSize: 16
                 verticalAlignment: Text.AlignVCenter
@@ -29,7 +37,8 @@ Page {
             }
 
             Text {
-                text: "Opis specjalizacji"
+                text: cardCreation !== null && cardCreation.statisticsCreation.specialization !== null
+                      ? cardCreation.statisticsCreation.specialization.description : ""
                 font.pointSize: 14
                 wrapMode: Text.WordWrap
                 width: _root.width - _rightPanel.width - 50
@@ -73,24 +82,15 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            model: ListModel {
-                ListElement { name: "Wojownik" }
-                ListElement { name: "Ranger" }
-                ListElement { name: "Cwniak" }
-                ListElement { name: "Technik" }
-            }
+            model: cardCreation !== null && cardCreation.statisticsSource !== null
+                   ? cardCreation.statisticsSource.specializations : []
 
-            delegate: Rectangle {
-                width: ListView.view.width; height: 40
-                color: "lightgray"
-
-                Text {
-                    text: model.name
-                    width: parent.width; height: parent.height
-                    wrapMode: Text.WordWrap
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
+            delegate: SelectionButton {
+                name: model.name
+                selected: cardCreation !== null && cardCreation.statisticsCreation !== null
+                          && cardCreation.statisticsCreation.specialization.name === model.name
+                width: ListView.view.width; height: 50
+                onClicked: cardCreation.statisticsCreation.specialization = modelData
             }
         } // ListView
     } // ColumnLayout
