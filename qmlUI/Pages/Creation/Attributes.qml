@@ -4,7 +4,12 @@ import QtQuick.Layouts
 
 import "../../Delegates/Creation"
 
+import core.creation 1.0
+import core.source 1.0
+
 Page {
+    property CardCreation cardCreation: null
+
     id: _root
 
     ScrollView {
@@ -40,10 +45,11 @@ Page {
             }
 
             Repeater {
-                model: ["Budowa", "Zręczność", "Charakter", "Spryt", "Percepcja"]
+                model: cardCreation !== null && cardCreation.statisticsCreation !== null
+                       ? cardCreation.statisticsCreation.attributes : []
 
                 delegate: AttributeValue {
-                    name: modelData
+                    attribute: modelData
                 }
             } // Repeater
 
@@ -54,10 +60,11 @@ Page {
                 spacing: 5
 
                 Repeater {
-                    model: ["Budowa", "Zręczność", "Charakter", "Percepcja", "Spryt"]
+                    model: cardCreation !== null && cardCreation.statisticsCreation !== null
+                           ? cardCreation.statisticsCreation.attributes : []
 
                     delegate: AttributeDescription {
-                        name: modelData
+                        attribute: modelData
                         width: (_root.width - _rightPanel.width - 15)/2
                     }
                 }
@@ -101,17 +108,10 @@ Page {
                 ListElement { name: "Punkty" }
             }
 
-            delegate: Rectangle {
-                width: ListView.view.width; height: 40
-                color: "lightgray"
-
-                Text {
-                    text: model.name
-                    width: parent.width; height: parent.height
-                    wrapMode: Text.WordWrap
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
+            delegate: SelectionButton {
+                name: model.name
+                selected: ListView.isCurrentItem
+                width: ListView.view.width; height: 50
             }
         } // ListView
     } // ColumnLayout
