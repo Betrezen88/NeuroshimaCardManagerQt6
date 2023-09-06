@@ -46,6 +46,11 @@ SkillpackSource *AttributeSource::skillpack(qsizetype index)
     return m_skillpacks.at(index);
 }
 
+const QVector<SkillpackSource *> &AttributeSource::skillpacks() const
+{
+    return m_skillpacks;
+}
+
 qsizetype AttributeSource::skillpacksCount(QQmlListProperty<SkillpackSource> *list)
 {
     return reinterpret_cast<AttributeSource*>(list->data)->skillpacksCount();

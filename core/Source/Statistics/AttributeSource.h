@@ -28,6 +28,8 @@ public:
     qsizetype skillpacksCount() const;
     SkillpackSource* skillpack(qsizetype index);
 
+    const QVector<SkillpackSource*>& skillpacks() const;
+
 private:
     static qsizetype skillpacksCount(QQmlListProperty<SkillpackSource> *list);
     static SkillpackSource* skillpack(QQmlListProperty<SkillpackSource> *list, qsizetype index);
