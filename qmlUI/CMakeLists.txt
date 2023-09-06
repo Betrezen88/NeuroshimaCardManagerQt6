@@ -58,6 +58,7 @@ qt_add_qml_module(appQmlUI
         Delegates/Creation/AttributeDescription.qml
         Delegates/Creation/AttributeValue.qml
         Delegates/Creation/Feature.qml
+        Delegates/Creation/SelectionButton.qml
 
         Elements/Card/Common/DataField.qml
         Elements/Card/Common/HeaderLabel.qml
@@ -98,6 +99,7 @@ qt_add_qml_module(appQmlUI
         Elements/Creation/Diseases/Symptom.qml
         Elements/Creation/Reputation/Place.qml
         Elements/Creation/Form/Question.qml
+        Elements/Creation/Origin/AttributeBonus.qml
         Elements/Creation/Skills/Attribute.qml
         Elements/Creation/Skills/AttributeDiffcultyLevels.qml
         Elements/Creation/Skills/DifficultyLevel.qml
@@ -118,6 +120,7 @@ set_target_properties(appQmlUI PROPERTIES
 target_link_libraries(appQmlUI
     PRIVATE
         Qt6::Quick
+        Creation
         View
         Data
         Managers
