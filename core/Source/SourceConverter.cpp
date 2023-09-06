@@ -237,7 +237,7 @@ ProfessionSource *SourceConverter::professionSource(const QJsonObject &object)
     }
 
     return new ProfessionSource{object.value("name").toString(),
-                                object.value("descritpion").toString(),
+                                object.value("description").toString(),
                                 object.value("quote").toString(),
                                 featureSources};
 }
