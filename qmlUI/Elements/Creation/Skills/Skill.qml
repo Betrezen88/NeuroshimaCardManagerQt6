@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.creation 1.0
+
 Item {
-    property alias name: _name.text
+    property SkillCreation skill: null
 
     id: _root
 
@@ -14,7 +16,7 @@ Item {
 
         Text {
             id: _name
-            text: "Skill name"
+            text: skill !== null ? skill.source.name : ""
             font.pointSize: 12
             height: _value.height
         }
@@ -25,7 +27,9 @@ Item {
 
         SpinBox {
             id: _value
-            from: 0; to: 5
+            from: skill !== null ? skill.min : 0
+            to: skill !== null ? skill.max : 5
+            value: skill !== null ? skill.value : 0
         }
     }
 } // Item
