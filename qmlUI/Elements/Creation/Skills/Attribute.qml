@@ -1,9 +1,9 @@
 import QtQuick
 
+import core.creation 1.0
+
 Rectangle {
-    property alias name: _name.text
-    property int value: 0
-    property var skillpacks
+    property AttributeCreation attribute: null
 
     id: _root
 
@@ -20,14 +20,14 @@ Rectangle {
 
         Text {
             id: _name
-            text: "Attribute Name"
+            text: attribute !== null ? attribute.source.name : ""
             padding: 5
             font.bold: true
             font.pointSize: 14
         }
 
         AttributeDiffcultyLevels {
-            value: _root.value
+            value: attribute !== null ? attribute.value : 0
             height: 40
         }
 
@@ -36,9 +36,9 @@ Rectangle {
         }
 
         Repeater {
-            model: skillpacks
+            model: attribute !== null ? attribute.skillpacks : []
             delegate: Skillpack {
-                name: modelData
+                skillpack: modelData
                 width: _root.width - 10
                 anchors.horizontalCenter: parent.horizontalCenter
             }
