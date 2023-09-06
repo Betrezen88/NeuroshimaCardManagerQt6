@@ -74,6 +74,23 @@ ProfessionSource *StatisticsSource::profession(qsizetype index)
     return m_professions.at(index);
 }
 
+QQmlListProperty<QuestionSource> StatisticsSource::questions()
+{
+    return QQmlListProperty<QuestionSource>(this, this,
+                                            &StatisticsSource::questionsCount,
+                                            &StatisticsSource::question);
+}
+
+qsizetype StatisticsSource::questionsCount() const
+{
+    return m_questions.count();
+}
+
+QuestionSource *StatisticsSource::question(qsizetype index)
+{
+    return m_questions.at(index);
+}
+
 QQmlListProperty<SpecializationSource> StatisticsSource::specializations()
 {
     return QQmlListProperty<SpecializationSource>();
@@ -108,6 +125,11 @@ void StatisticsSource::addOrigins(const QString &name, const QVector<OriginSourc
 void StatisticsSource::addProfessions(const QString &name, const QVector<ProfessionSource *> &professions)
 {
     m_professionSource.insert(name, professions);
+}
+
+void StatisticsSource::addQuestions(const QString &name, const QVector<QuestionSource *> &questions)
+{
+    m_questionSources.insert( name, questions );
 }
 
 void StatisticsSource::addSpecializations(const QVector<SpecializationSource *> &specializations)
@@ -154,6 +176,16 @@ qsizetype StatisticsSource::professionsCount(QQmlListProperty<ProfessionSource> 
 ProfessionSource *StatisticsSource::profession(QQmlListProperty<ProfessionSource> *list, qsizetype index)
 {
     return reinterpret_cast<StatisticsSource*>(list->data)->profession(index);
+}
+
+qsizetype StatisticsSource::questionsCount(QQmlListProperty<QuestionSource> *list)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->questionsCount();
+}
+
+QuestionSource *StatisticsSource::question(QQmlListProperty<QuestionSource> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->question(index);
 }
 
 qsizetype StatisticsSource::specializationsCount(QQmlListProperty<SpecializationSource> *list)
