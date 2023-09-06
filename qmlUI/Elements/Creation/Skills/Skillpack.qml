@@ -2,8 +2,10 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import core.creation 1.0
+
 Rectangle {
-    property alias name: _name.text
+    property SkillpackCreation skillpack: null
 
     id: _root
 
@@ -22,6 +24,7 @@ Rectangle {
 
             Text {
                 id: _name
+                text: skillpack !== null ? skillpack.source.name : ""
                 font.pointSize: 12
                 font.bold: true
                 leftPadding: 10
@@ -31,7 +34,7 @@ Rectangle {
 
             Text {
                 id: _specializations
-                text: "(R)"
+                text: skillpack !== null ? skillpack.source.specializationsShort() : ""
                 font.pointSize: 12
                 font.bold: true
                 verticalAlignment: Text.AlignVCenter
@@ -45,6 +48,7 @@ Rectangle {
             CheckBox {
                 id: _bought
                 text: "Kup"
+                checked: skillpack !== null ? skillpack.bought : false
                 contentItem: Text {
                     text: parent.text
                     color: "#000"
@@ -52,12 +56,19 @@ Rectangle {
                     leftPadding: _bought.indicator.width + _bought.spacing
                     verticalAlignment: Text.AlignVCenter
                 }
+                onCheckedChanged: {
+                    if ( checked )
+                        skillpack.buy()
+                    else
+                        skillpack.sell()
+                }
             }
         } // Row
 
         Repeater {
-            model: 3
+            model: skillpack !== null ? skillpack.skills : []
             delegate: Skill {
+                skill: modelData
                 width: _root.width
             }
         }
