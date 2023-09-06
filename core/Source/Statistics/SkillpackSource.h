@@ -29,6 +29,8 @@ public:
     qsizetype skillsCount() const;
     SkillSource* skill(qsizetype index);
 
+    const QVector<SkillSource *> &skills() const;
+
 private:
     static qsizetype skillsCount(QQmlListProperty<SkillSource> *list);
     static SkillSource* skill(QQmlListProperty<SkillSource> *list, qsizetype index);
