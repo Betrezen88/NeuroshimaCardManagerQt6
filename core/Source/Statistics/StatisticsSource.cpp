@@ -30,6 +30,23 @@ AttributeSource *StatisticsSource::attribute(qsizetype index)
     return m_attributes.at(index);
 }
 
+QQmlListProperty<DiseaseSource> StatisticsSource::diseases()
+{
+    return QQmlListProperty<DiseaseSource>(this, this,
+                                           &StatisticsSource::diseasesCount,
+                                           &StatisticsSource::disease);
+}
+
+qsizetype StatisticsSource::diseasesCount() const
+{
+    return m_diseases.count();
+}
+
+DiseaseSource *StatisticsSource::disease(qsizetype index)
+{
+    return m_diseases.at(index);
+}
+
 qsizetype StatisticsSource::originsCount() const
 {
     return m_origins.count();
@@ -78,6 +95,11 @@ void StatisticsSource::addAttributes(const QVector<AttributeSource *> &attribute
     emit attributesChanged();
 }
 
+void StatisticsSource::addDiseases(const QString &name, const QVector<DiseaseSource *> &diseases)
+{
+    m_diseaseSources.insert(name, diseases);
+}
+
 void StatisticsSource::addOrigins(const QString &name, const QVector<OriginSource *> &origins)
 {
     m_originSources.insert(name, origins);
@@ -102,6 +124,16 @@ qsizetype StatisticsSource::attribtuesCount(QQmlListProperty<AttributeSource> *l
 AttributeSource *StatisticsSource::attribute(QQmlListProperty<AttributeSource> *list, qsizetype index)
 {
     return reinterpret_cast<StatisticsSource*>(list->data)->attribute(index);
+}
+
+qsizetype StatisticsSource::diseasesCount(QQmlListProperty<DiseaseSource> *list)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->diseasesCount();
+}
+
+DiseaseSource *StatisticsSource::disease(QQmlListProperty<DiseaseSource> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsSource*>(list->data)->disease(index);
 }
 
 qsizetype StatisticsSource::originsCount(QQmlListProperty<OriginSource> *list)

@@ -5,6 +5,7 @@
 #include "qqmlintegration.h"
 
 #include "AttributeSource.h"
+#include "DiseaseSource.h"
 #include "OriginSource.h"
 #include "ProfessionSource.h"
 #include "SpecializationSource.h"
@@ -13,6 +14,7 @@ class StatisticsSource : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<AttributeSource> attributes READ attributes NOTIFY attributesChanged FINAL)
+    Q_PROPERTY(QQmlListProperty<DiseaseSource> diseases READ diseases NOTIFY diseasesChanged FINAL)
     Q_PROPERTY(QQmlListProperty<OriginSource> origins READ origins NOTIFY originsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<ProfessionSource> professions READ professions NOTIFY professionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<SpecializationSource> specializations READ specializations NOTIFY specializationsChanged FINAL)
@@ -24,6 +26,10 @@ public:
     QQmlListProperty<AttributeSource> attributes();
     qsizetype attributesCount() const;
     AttributeSource* attribute(qsizetype index);
+
+    QQmlListProperty<DiseaseSource> diseases();
+    qsizetype diseasesCount() const;
+    DiseaseSource* disease(qsizetype index);
 
     QQmlListProperty<OriginSource> origins();
     qsizetype originsCount() const;
@@ -39,12 +45,14 @@ public:
 
 signals:
     void attributesChanged();
+    void diseasesChanged();
     void originsChanged();
     void professionsChanged();
     void specializationsChanged();
 
 public slots:
     void addAttributes(const QVector<AttributeSource*>& attributes);
+    void addDiseases(const QString& name, const QVector<DiseaseSource*>& diseases);
     void addOrigins(const QString& name, const QVector<OriginSource*>& origins);
     void addProfessions(const QString& name, const QVector<ProfessionSource*>& professions);
     void addSpecializations(const QVector<SpecializationSource*>& specializations);
@@ -52,6 +60,9 @@ public slots:
 private:
     static qsizetype attribtuesCount(QQmlListProperty<AttributeSource> *list);
     static AttributeSource* attribute(QQmlListProperty<AttributeSource> *list, qsizetype index);
+
+    static qsizetype diseasesCount(QQmlListProperty<DiseaseSource> *list);
+    static DiseaseSource* disease(QQmlListProperty<DiseaseSource> *list, qsizetype index);
 
     static qsizetype originsCount(QQmlListProperty<OriginSource> *list);
     static OriginSource* origin(QQmlListProperty<OriginSource> *list, qsizetype index);
@@ -64,10 +75,12 @@ private:
 
 private:
     QVector<AttributeSource*> m_attributes;
+    QVector<DiseaseSource*> m_diseases;
     QVector<OriginSource*> m_origins;
     QVector<ProfessionSource*> m_professions;
     QVector<SpecializationSource*> m_specializations;
 
+    QMap<QString, QVector<DiseaseSource*>> m_diseaseSources;
     QMap<QString, QVector<OriginSource*>> m_originSources;
     QMap<QString, QVector<ProfessionSource*>> m_professionSource;
 };
