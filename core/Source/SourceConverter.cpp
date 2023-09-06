@@ -44,6 +44,9 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
     case SourceDocument::Type::Professions:
         convertProfessions(document);
         break;
+    case SourceDocument::Type::Questions:
+        convertQuestions(document);
+        break;
     case SourceDocument::Type::Tricks:
         convertTricks(document);
         break;
@@ -115,6 +118,22 @@ void SourceConverter::convertProfessions(const SourceDocument &document)
     }
 
     emit professionsConverted(document.name(), professionSources);
+}
+
+void SourceConverter::convertQuestions(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+
+    if ( data.isEmpty() ) {
+        return;
+    }
+
+    QVector<QuestionSource*> questionSources;
+    for ( const QJsonValue& question: data ) {
+        questionSources.append( questionSource(question.toObject()) );
+    }
+
+    emit questionsConverted(document.name(), questionSources);
 }
 
 void SourceConverter::convertSpecializations(const SourceDocument &document)
@@ -240,6 +259,11 @@ ProfessionSource *SourceConverter::professionSource(const QJsonObject &object)
                                 object.value("description").toString(),
                                 object.value("quote").toString(),
                                 featureSources};
+}
+
+QuestionSource *SourceConverter::questionSource(const QJsonObject &object)
+{
+    return new QuestionSource{object.value("question").toString(), object.value("description").toString()};
 }
 
 FeatureSource *SourceConverter::featureSource(const QJsonObject &object)
