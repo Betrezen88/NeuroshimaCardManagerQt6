@@ -120,6 +120,11 @@ void StatisticsSource::addDiseases(const QString &name, const QVector<DiseaseSou
 void StatisticsSource::addOrigins(const QString &name, const QVector<OriginSource *> &origins)
 {
     m_originSources.insert(name, origins);
+
+    if ( m_origins.isEmpty() ) {
+        m_origins = m_originSources.value(name);
+        emit originsChanged();
+    }
 }
 
 void StatisticsSource::addProfessions(const QString &name, const QVector<ProfessionSource *> &professions)
