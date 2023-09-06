@@ -20,6 +20,7 @@ class StatisticsSource : public QObject
     Q_PROPERTY(QQmlListProperty<ProfessionSource> professions READ professions NOTIFY professionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<QuestionSource> questions READ questions NOTIFY questionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<SpecializationSource> specializations READ specializations NOTIFY specializationsChanged FINAL)
+    Q_PROPERTY(QStringList places READ places NOTIFY placesChanged FINAL)
     QML_ELEMENT
 
 public:
@@ -49,12 +50,15 @@ public:
     qsizetype specializationsCount() const;
     SpecializationSource* specialization(qsizetype index);
 
+    QStringList places() const;
+
 signals:
     void attributesChanged();
     void diseasesChanged();
     void originsChanged();
     void professionsChanged();
     void specializationsChanged();
+    void placesChanged();
     void questionsChanged();
 
 public slots:
@@ -64,6 +68,7 @@ public slots:
     void addProfessions(const QString& name, const QVector<ProfessionSource*>& professions);
     void addQuestions(const QString& name, const QVector<QuestionSource*>& questions);
     void addSpecializations(const QVector<SpecializationSource*>& specializations);
+    void addPlaces(const QStringList& places);
 
 private:
     static qsizetype attribtuesCount(QQmlListProperty<AttributeSource> *list);
@@ -91,6 +96,7 @@ private:
     QVector<ProfessionSource*> m_professions;
     QVector<QuestionSource*> m_questions;
     QVector<SpecializationSource*> m_specializations;
+    QStringList m_places;
 
     QMap<QString, QVector<DiseaseSource*>> m_diseaseSources;
     QMap<QString, QVector<OriginSource*>> m_originSources;

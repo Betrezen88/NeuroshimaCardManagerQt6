@@ -108,6 +108,11 @@ SpecializationSource *StatisticsSource::specialization(qsizetype index)
     return m_specializations.at(index);
 }
 
+QStringList StatisticsSource::places() const
+{
+    return m_places;
+}
+
 void StatisticsSource::addAttributes(const QVector<AttributeSource *> &attributes)
 {
     m_attributes = attributes;
@@ -148,6 +153,11 @@ void StatisticsSource::addSpecializations(const QVector<SpecializationSource *> 
 {
     m_specializations = specializations;
     emit specializationsChanged();
+}
+
+void StatisticsSource::addPlaces(const QStringList &places)
+{
+    m_places = places;
 }
 
 qsizetype StatisticsSource::attribtuesCount(QQmlListProperty<AttributeSource> *list)
