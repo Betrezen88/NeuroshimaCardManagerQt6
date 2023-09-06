@@ -8,6 +8,7 @@ MainManager::MainManager(QObject *parent)
     : QObject{parent}
     , m_cardManager(new CardManager(this))
 {
+    connect(this, &MainManager::createCardCreation, this, &MainManager::onCreateCardCreation);
     createResourceDirectory();
 }
 
@@ -31,4 +32,17 @@ void MainManager::createResourceDirectory()
 
     if ( !directory.exists(images) )
         directory.mkpath(images);
+}
+
+void MainManager::onCreateCardCreation()
+{
+    if ( m_cardCreation == nullptr ) {
+        m_cardCreation = new CardCreation(this);
+    }
+}
+
+CardCreation *MainManager::cardCreation() const
+{
+    emit createCardCreation();
+    return m_cardCreation;
 }
