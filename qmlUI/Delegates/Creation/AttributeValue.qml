@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.creation 1.0
+
 Item {
-    property alias name: _name.text
+    property AttributeCreation attribute: null
 
     id: _root
     width: _row.implicitWidth
@@ -13,6 +15,7 @@ Item {
 
         Text {
             id: _name
+            text: attribute !== null ? attribute.source.name : ""
             font.pointSize: 14
             verticalAlignment: Text.AlignVCenter
             width: 150; height: 40
@@ -20,9 +23,12 @@ Item {
 
         SpinBox {
             id: _value
+            value: attribute !== null ? attribute.value : 6
             font.pointSize: 14
             from: 6; to: 20
             height: 40
+
+            onValueChanged: attribute.value = value
         }
     } // Row
 } // Item
