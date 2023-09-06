@@ -15,7 +15,7 @@ class FeatureSource : public QObject
 
 public:
     explicit FeatureSource(QObject *parent = nullptr);
-    explicit FeatureSource(const QString& name, const QString& description, const BonusSource* bonus, QObject* parent = nullptr);
+    explicit FeatureSource(const QString& name, const QString& description, BonusSource *bonus, QObject* parent = nullptr);
 
     QString name() const;
     QString description() const;

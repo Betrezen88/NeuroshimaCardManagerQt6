@@ -6,7 +6,11 @@ FeatureSource::FeatureSource(QObject *parent)
 
 }
 
-FeatureSource::FeatureSource(const QString &name, const QString &description, const BonusSource *bonus, QObject *parent)
+FeatureSource::FeatureSource(const QString &name, const QString &description, BonusSource *bonus, QObject *parent)
+    : QObject{parent}
+    , m_name{name}
+    , m_description{description}
+    , m_bonus{bonus}
 {
 
 }
