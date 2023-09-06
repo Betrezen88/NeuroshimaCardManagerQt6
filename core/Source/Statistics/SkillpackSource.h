@@ -24,6 +24,7 @@ public:
 
     QString name() const;
     QStringList specializations() const;
+    Q_INVOKABLE const QString specializationsShort() const;
 
     QQmlListProperty<SkillSource> skills();
     qsizetype skillsCount() const;
