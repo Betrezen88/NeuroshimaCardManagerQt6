@@ -29,6 +29,7 @@ Window {
 
         Creation {
             id: _creationView
+            cardCreation: manager.cardCreation
             visible: false
             onCancelCreation: _stackView.pop()
         }
