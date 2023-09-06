@@ -47,6 +47,8 @@ qt_add_qml_module(Source
         Statistics/OriginSource.cpp
         Statistics/ProfessionSource.h
         Statistics/ProfessionSource.cpp
+        Statistics/QuestionSource.h
+        Statistics/QuestionSource.cpp
         Statistics/SkillSource.h
         Statistics/SkillSource.cpp
         Statistics/SkillpackSource.h
@@ -66,9 +68,6 @@ qt_add_qml_module(Source
         SourceLoader.cpp
         SourceDocument.h
         SourceDocument.cpp
-
-    DEPENDENCIES
-        Data
 )
 
 target_include_directories(Source
