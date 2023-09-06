@@ -10,8 +10,15 @@ qt_add_qml_module(Creation
         Statistics/SkillCreation.cpp
         Statistics/SkillpackCreation.h
         Statistics/SkillpackCreation.cpp
+        Statistics/StatisticsCreation.h
+        Statistics/StatisticsCreation.cpp
 )
 
+target_include_directories(Creation
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/Statistics
+        ${CMAKE_CURRENT_SOURCE_DIR}/../Source/Statistics
+        ${CMAKE_CURRENT_SOURCE_DIR}/../Source/Statistics/Bonus
 )
 
 target_link_libraries(Creation
