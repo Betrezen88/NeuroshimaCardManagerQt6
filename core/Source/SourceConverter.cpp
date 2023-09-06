@@ -38,6 +38,9 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
     case SourceDocument::Type::Origins:
         convertOrigins(document);
         break;
+    case SourceDocument::Type::Places:
+        convertPlaces(document);
+        break;
     case SourceDocument::Type::Professions:
         convertProfessions(document);
         break;
@@ -143,6 +146,21 @@ void SourceConverter::convertTricks(const SourceDocument &document)
     }
 
     emit tricksConverted(document.name(), trickSources);
+}
+
+void SourceConverter::convertPlaces(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+    if ( data.isEmpty() ) {
+        return;
+    }
+
+    QStringList places;
+    for ( const QJsonValue& place: data ) {
+        places.append( place.toString() );
+    }
+
+    emit placesConverted( places );
 }
 
 AttributeSource *SourceConverter::attributeSource(const QJsonObject &object)
