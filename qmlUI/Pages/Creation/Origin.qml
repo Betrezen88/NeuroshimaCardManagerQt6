@@ -2,9 +2,15 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import core.creation 1.0
+import core.source 1.0
+
 import "../../Delegates/Creation"
+import "../../Elements/Creation/Origin"
 
 Page {
+    property CardCreation cardCreation: null
+
     id: _root
 
     ScrollView {
@@ -19,36 +25,20 @@ Page {
         }
 
         Column {
-
             Row {
-
                 Text {
                     id: _name
-                    text: "Południow Hegemonia"
+                    text: cardCreation.statisticsCreation.origin !== null ? cardCreation.statisticsCreation.origin.name : ""
                     font.bold: true
                     font.pointSize: 16
                     verticalAlignment: Text.AlignVCenter
                     height: 40
-                    width: _root.width - _rightPanel.width - _value.width - _attribute.width - 50
+                    width: _root.width - _rightPanel.width - _bonus.width - 50
                 }
 
-                Text {
-                    id: _value
-                    text: "+1"
-                    rightPadding: 5
-                    font.pointSize: 16
-                    verticalAlignment: Text.AlignVCenter
-                    width: _value.implicitWidth
-                    height: 40
-                }
-
-                Text {
-                    id: _attribute
-                    text: "Budowa"
-                    font.pointSize: 16
-                    verticalAlignment: Text.AlignVCenter
-                    width: _attribute.implicitWidth
-                    height: 40
+                AttributeBonus {
+                    id: _bonus
+                    bonus: cardCreation.statisticsCreation.origin !== null ? cardCreation.statisticsCreation.origin.bonus : null
                 }
             } // Row
 
@@ -57,10 +47,7 @@ Page {
 
                 Text {
                     id: _description
-                    text: "W świecie rządzonym prze mordercę, reguły są jasne i proste. Trzeba umieć walczyć, by przeżyć. Jeśli ktoś coś Ci ukradł, to znaczy, że źle tego strzegłeś. Jeśli ktoś obił Ci mordę, to znaczy, że Ci sie należało.
-            Nie ma sądów. Nie ma dziesięciu przykazań. Nie ma gadki o nie pożądaniu żony bliźniego swego. Co się tak gapisz?! Tak, pochodzę z Hegemoni i jakoś nie narzekam. To twarda szkoła życia, ale wierz mi, nie chciałbym urodzić się gdzie indziej. Nasz świat jest prosty, albo ktoś mówi Ci prawdę, albo strzelasz mu w łeb. Albo potrafisz udowodnić, że jesteś mężczyzną, albo kopiesz w kalendarz nim dożyjesz dwudziestki.
-            Dlatego Hegemonia się rozrasta, a Ty szczasz na mój widok i kulisz za każdym razem, kiedy podnoszę głos. Pochodzę z Hegemonii i we mnie jest siła.
-            Jeśli spotkasz kogoś, kto wychował się u nas, nie zadzieraj z nim. Nie próbuj go oszukać, ani okłamać. Nie próbuj być cwany. Nie warto."
+                    text: cardCreation.statisticsCreation.origin !== null ?  cardCreation.statisticsCreation.origin.description : ""
                     font.pointSize: 14
                     wrapMode: Text.WordWrap
                     horizontalAlignment: Text.AlignJustify
@@ -81,22 +68,27 @@ Page {
                 }
             } // Row
 
+            Item { height: 10; width: 1 }
+
             Text {
                 text: "Cechy (Wybierz jedną):"
                 font.bold: true
                 font.pointSize: 14
-
                 width: _root.width - _rightPanel.width - 10
             }
 
             ButtonGroup { id: _featureButtons }
 
             Repeater {
-                model: 3
+                model: cardCreation.statisticsCreation.origin !== null ? cardCreation.statisticsCreation.origin.features : []
 
                 delegate: Feature {
                     width: _root.width - _rightPanel.width - 10
                     buttonGroup: _featureButtons
+                    source: modelData
+                    selected: index === 0
+
+                    onSelectedChanged: cardCreation.statisticsCreation.originFeature = source
                 }
             } // Repeater
         } // Column
@@ -131,32 +123,13 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            model: ListModel {
-                ListElement { name: "Południowa Hegemonia" }
-                ListElement { name: "Człowiek z... nie twój zasrany interes" }
-                ListElement { name: "Detroit" }
-                ListElement { name: "Federacja Appalachów" }
-                ListElement { name: "Człowiek Pustyni" }
-                ListElement { name: "Miami" }
-                ListElement { name: "Missisipi" }
-                ListElement { name: "Nowy Jork" }
-                ListElement { name: "Posterunek" }
-                ListElement { name: "Salt Lake Sity" }
-                ListElement { name: "Texas" }
-                ListElement { name: "Vegas" }
-            }
+            model: cardCreation.statisticsSource.origins
 
-            delegate: Rectangle {
-                width: ListView.view.width; height: 40
-                color: "lightgray"
-
-                Text {
-                    text: model.name
-                    width: parent.width; height: parent.height
-                    wrapMode: Text.WordWrap
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
+            delegate: SelectionButton {
+                name: model.name
+                selected: cardCreation.statisticsCreation.origin !== null && cardCreation.statisticsCreation.origin.name === model.name
+                width: ListView.view.width; height: 50
+                onClicked: cardCreation.statisticsCreation.origin = modelData
             }
         } // ListView
     } // ColumnLayout
