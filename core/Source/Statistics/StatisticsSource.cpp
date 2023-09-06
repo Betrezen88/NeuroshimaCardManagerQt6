@@ -93,7 +93,9 @@ QuestionSource *StatisticsSource::question(qsizetype index)
 
 QQmlListProperty<SpecializationSource> StatisticsSource::specializations()
 {
-    return QQmlListProperty<SpecializationSource>();
+    return QQmlListProperty<SpecializationSource>(this, this,
+                                                  &StatisticsSource::specializationsCount,
+                                                  &StatisticsSource::specialization);
 }
 
 qsizetype StatisticsSource::specializationsCount() const
