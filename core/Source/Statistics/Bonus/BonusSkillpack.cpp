@@ -30,3 +30,16 @@ int BonusSkillpack::value() const
 {
     return m_value;
 }
+
+QString BonusSkillpack::selected() const
+{
+    return m_selected;
+}
+
+void BonusSkillpack::setSelected(const QString &newSelected)
+{
+    if (m_selected == newSelected)
+        return;
+    m_selected = newSelected;
+    emit selectedChanged();
+}
