@@ -1,10 +1,15 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.creation 1.0
+import core.source 1.0
+
 import "../../Elements/Creation/Skills"
 import "../../Elements/Card/Common"
 
 Page {
+    property CardCreation cardCreation: null
+
     id: _root
 
     ScrollView {
@@ -67,15 +72,13 @@ Page {
                     spacing: 5
 
                     Attribute {
-                        name: "Budowa"
-                        value: 0
-                        skillpacks: [ "Sprawność", "Jeździectwo" ]
+                        attribute: cardCreation !== null && cardCreation.statisticsCreation !== null
+                                   ? cardCreation.statisticsCreation.attribute("Budowa") : null
                     }
 
                     Attribute {
-                        name: "Zręczność"
-                        value: 0
-                        skillpacks: [ "Walka wręcz", "Prowadzenie pojazdów", "Zdolności manualne", "Broń strzelecka", "Broń dystansowa" ]
+                        attribute: cardCreation !== null && cardCreation.statisticsCreation !== null
+                                   ? cardCreation.statisticsCreation.attribute("Zręczność") : null
                     }
                 } // Column
 
@@ -84,16 +87,14 @@ Page {
 
                     Attribute {
                         id: _character
-                        name: "Charakter"
-                        value: 0
-                        skillpacks: [ "Negocjacje", "Empatia", "Siła woli" ]
+                        attribute: cardCreation !== null && cardCreation.statisticsCreation !== null
+                                   ? cardCreation.statisticsCreation.attribute("Charakter") : null
                     }
 
                     Attribute {
                         id: _perception
-                        name: "Percepcja"
-                        value: 0
-                        skillpacks: [ "Orientacja w terenie", "Spostrzegawczość", "Kamuflaż", "Przerwanie" ]
+                        attribute: cardCreation !== null && cardCreation.statisticsCreation !== null
+                                   ? cardCreation.statisticsCreation.attribute("Percepcja") : null
                     }
                 } // Column
 
@@ -102,9 +103,8 @@ Page {
 
                     Attribute {
                         id: _cleaverness
-                        name: "Spryt"
-                        value: 0
-                        skillpacks: [ "Medycyna", "Technika", "Wiedza ogólna", "Sprzęta", "Pirotechnika" ]
+                        attribute: cardCreation !== null && cardCreation.statisticsCreation !== null
+                                   ? cardCreation.statisticsCreation.attribute("Spryt") : null
                     }
 
                     HeaderLabel {
