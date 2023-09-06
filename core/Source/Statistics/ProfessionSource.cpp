@@ -37,7 +37,9 @@ QString ProfessionSource::quote() const
 
 QQmlListProperty<FeatureSource> ProfessionSource::features()
 {
-    return QQmlListProperty<FeatureSource>();
+    return QQmlListProperty<FeatureSource>(this, this,
+                                           &ProfessionSource::featuresCount,
+                                           &ProfessionSource::feature);
 }
 
 qsizetype ProfessionSource::featuresCount() const
