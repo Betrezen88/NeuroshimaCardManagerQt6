@@ -20,6 +20,7 @@ public:
     virtual ~AttributeBonusSource() {}
 
     virtual Types::AttributeBonus type() const = 0;
+    virtual QString name() const = 0;
 
     inline int value() const {
         return m_value;

@@ -24,3 +24,17 @@ QStringList AttributeBonusList::list() const
 {
     return m_list;
 }
+
+QString AttributeBonusList::name() const
+{
+    return m_name;
+}
+
+void AttributeBonusList::setName(const QString &newName)
+{
+    if (m_name == newName)
+        return;
+    emit nameWasChanged(m_name, newName);
+    m_name = newName;
+    emit nameChanged();
+}
