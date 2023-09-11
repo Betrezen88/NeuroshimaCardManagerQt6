@@ -73,6 +73,8 @@ private slots:
 
 private:
     void init();
+    SkillpackCreation* findSkillpack(const QString& name);
+
     static qsizetype attributesCount(QQmlListProperty<AttributeCreation>* list);
     static AttributeCreation* attribute(QQmlListProperty<AttributeCreation>* list, qsizetype index);
 

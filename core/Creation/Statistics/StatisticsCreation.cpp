@@ -226,6 +226,21 @@ void StatisticsCreation::init()
     connect(this, &StatisticsCreation::removeAttributeBonus, this, &StatisticsCreation::onRemoveAttributeBonus);
 }
 
+SkillpackCreation *StatisticsCreation::findSkillpack(const QString &name)
+{
+    for ( const AttributeCreation* attribute: m_attributes ) {
+        const QVector<SkillpackCreation*>& skillpacks = attribute->skillpacks();
+        auto found = std::find_if(skillpacks.constBegin(), skillpacks.constEnd(), [&name](const SkillpackCreation* skillpack){
+            return skillpack->source()->name() == name;
+        });
+
+        if ( found != skillpacks.constEnd() ) {
+            return *found;
+        }
+    }
+    return nullptr;
+}
+
 qsizetype StatisticsCreation::attributesCount(QQmlListProperty<AttributeCreation> *list)
 {
     return reinterpret_cast<StatisticsCreation*>(list->data)->attribitesCount();
