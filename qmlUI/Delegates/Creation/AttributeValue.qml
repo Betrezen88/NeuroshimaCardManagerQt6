@@ -23,12 +23,13 @@ Item {
 
         SpinBox {
             id: _value
-            value: attribute !== null ? attribute.value : 6
+            value: attribute !== null ? attribute.baseValue : 6
             font.pointSize: 14
             from: 6; to: 20
             height: 40
 
-            onValueChanged: attribute.value = value
+            onValueChanged: attribute.baseValue = value
         }
     } // Row
+
 } // Item
