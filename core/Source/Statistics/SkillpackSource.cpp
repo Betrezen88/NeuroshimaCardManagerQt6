@@ -34,7 +34,7 @@ const QString SkillpackSource::specializationsShort() const
     QString result{"("};
     for ( const QString& specialization: m_specializations ) {
         result.append(specialization.front());
-        if (m_specializations.last() == specialization)
+        if (m_specializations.last() != specialization)
             result.append(", ");
     }
     result.append(")");
