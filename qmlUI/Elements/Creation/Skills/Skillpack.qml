@@ -56,12 +56,7 @@ Rectangle {
                     leftPadding: _bought.indicator.width + _bought.spacing
                     verticalAlignment: Text.AlignVCenter
                 }
-                onCheckedChanged: {
-                    if ( checked )
-                        skillpack.buy()
-                    else
-                        skillpack.sell()
-                }
+                onCheckedChanged: skillpack.bought = checked
             }
         } // Row
 

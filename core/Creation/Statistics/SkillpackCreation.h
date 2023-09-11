@@ -14,7 +14,7 @@ class SkillpackCreation : public QObject
     Q_OBJECT
     Q_PROPERTY(SkillpackSource* source READ source CONSTANT)
     Q_PROPERTY(QQmlListProperty<SkillCreation> skills READ skills CONSTANT)
-    Q_PROPERTY(bool bought READ bought NOTIFY boughtChanged FINAL)
+    Q_PROPERTY(bool bought READ bought WRITE setBought NOTIFY boughtChanged FINAL)
     QML_ELEMENT
 
 public:
@@ -28,6 +28,10 @@ public:
     SkillCreation* skill(qsizetype index);
 
     bool bought() const;
+    void setBought(const bool newBougth);
+
+    void increaseSkillsBy(const int value);
+    void decreaseSkillsBy(const int value);
 
 signals:
     void boughtChanged(const bool bought);
@@ -35,13 +39,9 @@ signals:
     void skillDecreased(const QStringList& specializations, const int level);
 
 public slots:
-    void buy();
-    void sell();
+    void onBoughtChanged(const bool bougth);
 
 private:
-    void increaseSkillsBy(const int value);
-    void decreaseSkillsBy(const int value);
-
     static qsizetype skillsCount(QQmlListProperty<SkillCreation>* list);
     static SkillCreation* skill(QQmlListProperty<SkillCreation>* list, qsizetype index);
 

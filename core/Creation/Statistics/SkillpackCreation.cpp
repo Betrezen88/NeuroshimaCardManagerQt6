@@ -10,6 +10,8 @@ SkillpackCreation::SkillpackCreation(SkillpackSource *source, QObject *parent)
     : QObject{parent}
     , m_source{source}
 {
+    connect(this, &SkillpackCreation::boughtChanged, this, &SkillpackCreation::onBoughtChanged);
+
     for ( SkillSource* skill: const_cast<const SkillpackSource*>(source)->skills() ) {
         SkillCreation* pSkill = new SkillCreation(skill, this);
         connect(pSkill, &SkillCreation::increased, this, [this](const int value){
@@ -50,18 +52,13 @@ bool SkillpackCreation::bought() const
     return m_bought;
 }
 
-void SkillpackCreation::buy()
+void SkillpackCreation::setBought(const bool newBougth)
 {
-    m_bought = true;
-    emit boughtChanged(m_bought);
-    increaseSkillsBy(1);
-}
+    if ( m_bought == newBougth )
+        return;
 
-void SkillpackCreation::sell()
-{
-    m_bought = false;
+    m_bought = newBougth;
     emit boughtChanged(m_bought);
-    decreaseSkillsBy(1);
 }
 
 void SkillpackCreation::increaseSkillsBy(const int value)
@@ -75,6 +72,16 @@ void SkillpackCreation::decreaseSkillsBy(const int value)
 {
     for ( SkillCreation* skill: m_skills ) {
         skill->decreaseBy(value);
+    }
+}
+
+void SkillpackCreation::onBoughtChanged(const bool bougth)
+{
+    if ( bougth ) {
+        increaseSkillsBy(1);
+    }
+    else {
+        decreaseSkillsBy(1);
     }
 }
 
