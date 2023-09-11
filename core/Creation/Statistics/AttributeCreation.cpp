@@ -1,5 +1,7 @@
 #include "AttributeCreation.h"
 
+#include <QDebug>
+
 AttributeCreation::AttributeCreation(QObject *parent)
     : QObject{parent}
 {
@@ -18,6 +20,11 @@ AttributeCreation::AttributeCreation(AttributeSource *source, QObject *parent)
 AttributeSource *AttributeCreation::source() const
 {
     return m_source;
+}
+
+const QVector<SkillpackCreation *> &AttributeCreation::skillpacks() const
+{
+    return m_skillpacks;
 }
 
 QQmlListProperty<SkillpackCreation> AttributeCreation::skillpacks()
@@ -39,14 +46,20 @@ SkillpackCreation *AttributeCreation::skillpack(qsizetype index)
 
 int AttributeCreation::value() const
 {
-    return m_value + m_bonus;
+    return m_baseValue + m_bonus;
 }
 
-void AttributeCreation::setValue(int newValue)
+int AttributeCreation::baseValue() const
 {
-    if (m_value == newValue)
+    return m_baseValue;
+}
+
+void AttributeCreation::setBaseValue(int newBaseValue)
+{
+    if (m_baseValue == newBaseValue)
         return;
-    m_value = newValue;
+    m_baseValue = newBaseValue;
+    emit baseValueChanged();
     emit valueChanged();
 }
 
