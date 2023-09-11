@@ -5,13 +5,14 @@
 StatisticsCreation::StatisticsCreation(QObject *parent)
     : QObject{parent}
 {
-
+    init();
 }
 
 StatisticsCreation::StatisticsCreation(const QVector<AttributeCreation *> &attributes, QObject *parent)
     : QObject{parent}
     , m_attributes{attributes}
 {
+    init();
     for ( AttributeCreation* attribute: m_attributes ) {
         attribute->setParent(this);
     }
@@ -179,6 +180,13 @@ void StatisticsCreation::onApplyAttributeBonus(const AttributeBonusSource *bonus
         (*found)->setBonus(bonus->value());
     }
 }
+
+void StatisticsCreation::init()
+{
+    connect(this, &StatisticsCreation::applyAttributeBonus, this, &StatisticsCreation::onApplyAttributeBonus);
+    connect(this, &StatisticsCreation::removeAttributeBonus, this, &StatisticsCreation::onRemoveAttributeBonus);
+}
+
 qsizetype StatisticsCreation::attributesCount(QQmlListProperty<AttributeCreation> *list)
 {
     return reinterpret_cast<StatisticsCreation*>(list->data)->attribitesCount();

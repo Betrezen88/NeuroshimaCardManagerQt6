@@ -71,6 +71,7 @@ private slots:
     void onApplyAttributeBonus(const AttributeBonusSource* bonus);
 
 private:
+    void init();
     static qsizetype attributesCount(QQmlListProperty<AttributeCreation>* list);
     static AttributeCreation* attribute(QQmlListProperty<AttributeCreation>* list, qsizetype index);
 
