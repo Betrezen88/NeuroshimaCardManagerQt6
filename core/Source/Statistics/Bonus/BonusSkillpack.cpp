@@ -1,5 +1,7 @@
 #include "BonusSkillpack.h"
 
+#include <QDebug>
+
 BonusSkillpack::BonusSkillpack(QObject *parent)
     : BonusSource{parent}
     , m_type{Types::Bonus::Skillpack}
@@ -40,6 +42,7 @@ void BonusSkillpack::setSelected(const QString &newSelected)
 {
     if (m_selected == newSelected)
         return;
+    emit selectedWasChanged(m_selected, newSelected);
     m_selected = newSelected;
     emit selectedChanged();
 }

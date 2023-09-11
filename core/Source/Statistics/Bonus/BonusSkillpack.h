@@ -25,6 +25,7 @@ public:
 
 signals:
     void selectedChanged();
+    void selectedWasChanged(const QString& from, const QString& to);
 
 private:
     Types::Bonus m_type;
