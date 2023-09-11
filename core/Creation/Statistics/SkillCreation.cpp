@@ -58,7 +58,7 @@ void SkillCreation::increasedBy(const int value)
 
 void SkillCreation::decreaseBy(const int value)
 {
-    m_min -= value;
+    m_min = m_min-value < 0 ? 0 : m_min-value;
     emit minChanged();
 
     m_value -= value;
