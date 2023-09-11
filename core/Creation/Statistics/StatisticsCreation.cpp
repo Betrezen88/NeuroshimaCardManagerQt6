@@ -218,6 +218,18 @@ void StatisticsCreation::onAttributeBonusListChanged(const QString &from, const 
     }
 }
 
+void StatisticsCreation::onSkillpackChanged(const QString &from, const QString &to, const int value)
+{
+    SkillpackCreation* fromSkillpack = from.isEmpty() ? nullptr : findSkillpack(from);
+    SkillpackCreation* toSkillpack = to.isEmpty() ? nullptr : findSkillpack(to);
+
+    if ( fromSkillpack != nullptr ) {
+        fromSkillpack->decreaseSkillsBy(value);
+    }
+
+    if ( toSkillpack != nullptr ) {
+        toSkillpack->increaseSkillsBy(value);
+    }
 }
 
 void StatisticsCreation::init()

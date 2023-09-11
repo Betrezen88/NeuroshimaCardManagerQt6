@@ -70,6 +70,7 @@ private slots:
     void onRemoveAttributeBonus(const AttributeBonusSource *bonus);
     void onApplyAttributeBonus(const AttributeBonusSource* bonus);
     void onAttributeBonusListChanged(const QString& from, const QString& to);
+    void onSkillpackChanged(const QString& from, const QString& to, const int value);
 
 private:
     void init();
