@@ -19,7 +19,7 @@ Item {
                 ListElement { name: "Trud."; mod: -5 }
                 ListElement { name: "B.Tr"; mod: -8 }
                 ListElement { name: "Ch.Tr."; mod: -11 }
-                ListElement { name: "Fuks"; mod: 14 }
+                ListElement { name: "Fuks"; mod: -14 }
             }
             delegate: DifficultyLevel {
                 name: model.name
