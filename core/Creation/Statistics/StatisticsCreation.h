@@ -66,9 +66,14 @@ signals:
     void specializationChanged();
     void applyAttributeBonus(const AttributeBonusSource* bonus);
     void removeAttributeBonus(const AttributeBonusSource* bonus);
+    void applyFeatureBonus(const BonusSource* bonus);
+    void removeFeatureBonus(const BonusSource* bonus);
+
 private slots:
     void onRemoveAttributeBonus(const AttributeBonusSource *bonus);
     void onApplyAttributeBonus(const AttributeBonusSource* bonus);
+    void onApplyFeatureBonus(const BonusSource* bonus);
+    void onRemoveFeatureBonus(const BonusSource* bonus);
     void onAttributeBonusListChanged(const QString& from, const QString& to);
     void onSkillpackChanged(const QString& from, const QString& to, const int value);
 

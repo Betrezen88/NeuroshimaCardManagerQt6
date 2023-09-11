@@ -1,6 +1,8 @@
 #include "StatisticsCreation.h"
 
 #include "AttributeBonusList.h"
+#include <Bonus/BonusSkillpack.h>
+
 
 StatisticsCreation::StatisticsCreation(QObject *parent)
     : QObject{parent}
@@ -191,12 +193,35 @@ void StatisticsCreation::onApplyFeatureBonus(const BonusSource *bonus)
     if ( bonus == nullptr )
         return;
 
+    switch (bonus->type()) {
+    case Types::Bonus::Skillpack: {
+        connect(static_cast<const BonusSkillpack*>(bonus), &BonusSkillpack::selectedWasChanged,
+                this, [this, bonus](const QString& from, const QString& to){
+                    onSkillpackChanged(from, to, static_cast<const BonusSkillpack*>(bonus)->value());
+        });
+        auto bonusSkillpack = static_cast<const BonusSkillpack*>(bonus);
+        const_cast<BonusSkillpack*>(bonusSkillpack)->setSelected(bonusSkillpack->list().constFirst());
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 void StatisticsCreation::onRemoveFeatureBonus(const BonusSource *bonus)
 {
     if ( bonus == nullptr )
         return;
+
+    switch (bonus->type()) {
+    case Types::Bonus::Skillpack: {
+        auto bonusSkillpack = static_cast<const BonusSkillpack*>(bonus);
+        onSkillpackChanged(bonusSkillpack->selected(), "", bonusSkillpack->value());
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 void StatisticsCreation::onAttributeBonusListChanged(const QString &from, const QString &to)
