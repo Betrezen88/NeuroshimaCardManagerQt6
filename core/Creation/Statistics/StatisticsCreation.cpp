@@ -1,5 +1,7 @@
 #include "StatisticsCreation.h"
 
+#include "AttributeBonusList.h"
+
 StatisticsCreation::StatisticsCreation(QObject *parent)
     : QObject{parent}
 {
@@ -33,6 +35,17 @@ OriginSource *StatisticsCreation::origin() const
     return m_origin;
 }
 
+void StatisticsCreation::setOrigin(OriginSource *newOrigin)
+{
+    if (m_origin == newOrigin)
+        return;
+
+    m_origin = newOrigin;
+    setAttributeBonus(m_origin->bonus());
+
+    emit originChanged();
+}
+
 FeatureSource *StatisticsCreation::originFeature() const
 {
     return m_originFeature;
@@ -46,12 +59,19 @@ void StatisticsCreation::setOriginFeature(FeatureSource *newOriginFeature)
     emit originFeatureChanged();
 }
 
-void StatisticsCreation::setOrigin(OriginSource *newOrigin)
+AttributeBonusSource *StatisticsCreation::attributeBonus() const
 {
-    if (m_origin == newOrigin)
+    return m_attributeBonus;
+}
+
+void StatisticsCreation::setAttributeBonus(AttributeBonusSource *newAttributeBonus)
+{
+    if (m_attributeBonus == newAttributeBonus)
         return;
-    m_origin = newOrigin;
-    emit originChanged();
+    emit removeAttributeBonus(m_attributeBonus);
+    m_attributeBonus = newAttributeBonus;
+    emit applyAttributeBonus(m_attributeBonus);
+    emit attributeBonusChanged();
 }
 
 ProfessionSource *StatisticsCreation::profession() const

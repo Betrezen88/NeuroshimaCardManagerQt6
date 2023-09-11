@@ -19,6 +19,7 @@ class StatisticsCreation : public QObject
     Q_PROPERTY(DiseaseSource* disease READ disease WRITE setDisease NOTIFY diseaseChanged FINAL)
     Q_PROPERTY(OriginSource* origin READ origin WRITE setOrigin NOTIFY originChanged FINAL)
     Q_PROPERTY(FeatureSource* originFeature READ originFeature WRITE setOriginFeature NOTIFY originFeatureChanged FINAL)
+    Q_PROPERTY(AttributeBonusSource* attributeBonus READ attributeBonus WRITE setAttributeBonus NOTIFY attributeBonusChanged FINAL)
     Q_PROPERTY(ProfessionSource* profession READ profession WRITE setProfession NOTIFY professionChanged FINAL)
     Q_PROPERTY(FeatureSource* professionFeature READ professionFeature WRITE setProfessionFeature NOTIFY professionFeatureChanged FINAL)
     Q_PROPERTY(SpecializationSource* specialization READ specialization WRITE setSpecialization NOTIFY specializationChanged FINAL)
@@ -36,6 +37,9 @@ public:
 
     FeatureSource *originFeature() const;
     void setOriginFeature(FeatureSource *newOriginFeature);
+
+    AttributeBonusSource *attributeBonus() const;
+    void setAttributeBonus(AttributeBonusSource *newAttributeBonus);
 
     ProfessionSource *profession() const;
     void setProfession(ProfessionSource *newProfession);
@@ -56,6 +60,7 @@ signals:
     void diseaseChanged();
     void originChanged();
     void originFeatureChanged();
+    void attributeBonusChanged();
     void professionChanged();
     void professionFeatureChanged();
     void specializationChanged();
@@ -68,6 +73,7 @@ private:
     DiseaseSource *m_disease{nullptr};
     OriginSource *m_origin{nullptr};
     FeatureSource *m_originFeature{nullptr};
+    AttributeBonusSource *m_attributeBonus{nullptr};
     ProfessionSource *m_profession{nullptr};
     FeatureSource *m_professionFeature{nullptr};
     SpecializationSource *m_specialization{nullptr};
