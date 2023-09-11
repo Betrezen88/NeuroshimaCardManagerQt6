@@ -55,6 +55,10 @@ void StatisticsCreation::setOriginFeature(FeatureSource *newOriginFeature)
 {
     if (m_originFeature == newOriginFeature)
         return;
+
+    if (m_originFeature != nullptr)
+        emit removeFeatureBonus(m_originFeature->bonus());
+
     m_originFeature = newOriginFeature;
 
     if (m_originFeature != nullptr)
@@ -141,6 +145,25 @@ AttributeCreation *StatisticsCreation::attribute(const QString &name)
     });
 
     return *found;
+}
+
+void StatisticsCreation::onRemoveAttributeBonus(const AttributeBonusSource *bonus)
+{
+    if ( bonus == nullptr )
+        return;
+
+    auto found = std::find_if(m_attributes.begin(), m_attributes.end(), [&bonus](const AttributeCreation* attribute){
+        return bonus->name() == attribute->source()->name();
+    });
+
+    if ( found != m_attributes.end() ) {
+        (*found)->setBonus(0);
+    }
+
+    if ( Types::AttributeBonus::List == bonus->type() ) {
+        const AttributeBonusList* listBonus = static_cast<const AttributeBonusList*>(bonus);
+        disconnect(listBonus, &AttributeBonusList::nameWasChanged, this, &StatisticsCreation::onAttributeBonusListChanged);
+    }
 }
 
 void StatisticsCreation::onApplyAttributeBonus(const AttributeBonusSource *bonus)

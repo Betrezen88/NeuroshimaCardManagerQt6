@@ -65,7 +65,9 @@ signals:
     void professionFeatureChanged();
     void specializationChanged();
     void applyAttributeBonus(const AttributeBonusSource* bonus);
+    void removeAttributeBonus(const AttributeBonusSource* bonus);
 private slots:
+    void onRemoveAttributeBonus(const AttributeBonusSource *bonus);
     void onApplyAttributeBonus(const AttributeBonusSource* bonus);
 
 private:
