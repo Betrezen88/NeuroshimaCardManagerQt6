@@ -179,6 +179,11 @@ void StatisticsCreation::onApplyAttributeBonus(const AttributeBonusSource *bonus
     if ( found != m_attributes.end() ) {
         (*found)->setBonus(bonus->value());
     }
+
+    if ( Types::AttributeBonus::List == bonus->type() ) {
+        const AttributeBonusList* listBonus = static_cast<const AttributeBonusList*>(bonus);
+        connect(listBonus, &AttributeBonusList::nameWasChanged, this, &StatisticsCreation::onAttributeBonusListChanged);
+    }
 }
 
 void StatisticsCreation::onApplyFeatureBonus(const BonusSource *bonus)
@@ -192,6 +197,25 @@ void StatisticsCreation::onRemoveFeatureBonus(const BonusSource *bonus)
 {
     if ( bonus == nullptr )
         return;
+}
+
+void StatisticsCreation::onAttributeBonusListChanged(const QString &from, const QString &to)
+{
+    auto remove = std::find_if(m_attributes.begin(), m_attributes.end(), [&from](const AttributeCreation* attribute){
+        return from == attribute->source()->name();
+    });
+
+    if ( remove != m_attributes.end() ) {
+        (*remove)->setBonus(0);
+    }
+
+    auto apply = std::find_if(m_attributes.begin(), m_attributes.end(), [&to](const AttributeCreation* attribute){
+        return to == attribute->source()->name();
+    });
+
+    if ( apply != m_attributes.end() ) {
+        (*apply)->setBonus(m_origin->bonus()->value());
+    }
 }
 
 }

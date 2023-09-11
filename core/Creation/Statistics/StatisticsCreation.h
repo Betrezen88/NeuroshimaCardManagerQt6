@@ -69,6 +69,7 @@ signals:
 private slots:
     void onRemoveAttributeBonus(const AttributeBonusSource *bonus);
     void onApplyAttributeBonus(const AttributeBonusSource* bonus);
+    void onAttributeBonusListChanged(const QString& from, const QString& to);
 
 private:
     void init();
