@@ -181,6 +181,21 @@ void StatisticsCreation::onApplyAttributeBonus(const AttributeBonusSource *bonus
     }
 }
 
+void StatisticsCreation::onApplyFeatureBonus(const BonusSource *bonus)
+{
+    if ( bonus == nullptr )
+        return;
+
+}
+
+void StatisticsCreation::onRemoveFeatureBonus(const BonusSource *bonus)
+{
+    if ( bonus == nullptr )
+        return;
+}
+
+}
+
 void StatisticsCreation::init()
 {
     connect(this, &StatisticsCreation::applyAttributeBonus, this, &StatisticsCreation::onApplyAttributeBonus);
