@@ -28,7 +28,8 @@ Page {
             Row {
                 Text {
                     id: _name
-                    text: cardCreation.statisticsCreation.origin !== null ? cardCreation.statisticsCreation.origin.name : ""
+                    text: cardCreation !== null && cardCreation.statisticsCreation.origin !== null
+                          ? cardCreation.statisticsCreation.origin.name : ""
                     font.bold: true
                     font.pointSize: 16
                     verticalAlignment: Text.AlignVCenter
@@ -38,7 +39,8 @@ Page {
 
                 AttributeBonus {
                     id: _bonus
-                    bonus: cardCreation.statisticsCreation.origin !== null ? cardCreation.statisticsCreation.origin.bonus : null
+                    bonus: cardCreation !== null && cardCreation.statisticsCreation.origin !== null
+                           ? cardCreation.statisticsCreation.origin.bonus : null
                 }
             } // Row
 
@@ -47,7 +49,8 @@ Page {
 
                 Text {
                     id: _description
-                    text: cardCreation.statisticsCreation.origin !== null ?  cardCreation.statisticsCreation.origin.description : ""
+                    text: cardCreation !== null && cardCreation.statisticsCreation.origin !== null
+                          ? cardCreation.statisticsCreation.origin.description : ""
                     font.pointSize: 14
                     wrapMode: Text.WordWrap
                     horizontalAlignment: Text.AlignJustify
@@ -80,7 +83,8 @@ Page {
             ButtonGroup { id: _featureButtons }
 
             Repeater {
-                model: cardCreation.statisticsCreation.origin !== null ? cardCreation.statisticsCreation.origin.features : []
+                model: cardCreation !== null && cardCreation.statisticsCreation.origin !== null
+                       ? cardCreation.statisticsCreation.origin.features : []
 
                 delegate: Feature {
                     width: _root.width - _rightPanel.width - 10
@@ -88,7 +92,11 @@ Page {
                     source: modelData
                     selected: index === 0
 
-                    onSelectedChanged: cardCreation.statisticsCreation.originFeature = source
+                    onSelectedChanged: {
+                        if ( selected ) {
+                            cardCreation.statisticsCreation.originFeature = source
+                        }
+                    }
                 }
             } // Repeater
         } // Column
@@ -123,7 +131,7 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            model: cardCreation.statisticsSource.origins
+            model: cardCreation !== null ? cardCreation.statisticsSource.origins : []
 
             delegate: SelectionButton {
                 name: model.name
