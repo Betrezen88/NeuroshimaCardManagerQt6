@@ -64,6 +64,9 @@ signals:
     void professionChanged();
     void professionFeatureChanged();
     void specializationChanged();
+    void applyAttributeBonus(const AttributeBonusSource* bonus);
+private slots:
+    void onApplyAttributeBonus(const AttributeBonusSource* bonus);
 
 private:
     static qsizetype attributesCount(QQmlListProperty<AttributeCreation>* list);
