@@ -30,6 +30,13 @@ Item {
             from: skill !== null ? skill.min : 0
             to: skill !== null ? skill.max : 5
             value: skill !== null ? skill.value : 0
+
+            up.onPressedChanged: {
+                if ( up.pressed && skill !== null ) {
+                    skill.increase()
+                    up.pressed = false
+                }
+            }
         }
     }
 } // Item
