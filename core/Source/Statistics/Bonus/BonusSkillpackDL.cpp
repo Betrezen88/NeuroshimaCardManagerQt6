@@ -24,3 +24,16 @@ QStringList BonusSkillpackDL::list() const
 {
     return m_list;
 }
+
+QString BonusSkillpackDL::selected() const
+{
+    return m_selected;
+}
+
+void BonusSkillpackDL::setSelected(const QString &newSelected)
+{
+    if (m_selected == newSelected)
+        return;
+    m_selected = newSelected;
+    emit selectedChanged();
+}
