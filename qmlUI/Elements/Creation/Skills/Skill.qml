@@ -37,6 +37,13 @@ Item {
                     up.pressed = false
                 }
             }
+
+            down.onPressedChanged: {
+                if ( down.pressed && skill !== null) {
+                    skill.decrease()
+                    down.pressed = false
+                }
+            }
         }
     }
 } // Item
