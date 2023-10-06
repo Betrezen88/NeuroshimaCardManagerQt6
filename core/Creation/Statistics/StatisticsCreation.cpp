@@ -6,6 +6,7 @@
 
 StatisticsCreation::StatisticsCreation(QObject *parent)
     : QObject{parent}
+    , m_skillpointsManager(new SkillpointsCreationManager(this))
 {
     init();
 }
@@ -13,6 +14,7 @@ StatisticsCreation::StatisticsCreation(QObject *parent)
 StatisticsCreation::StatisticsCreation(const QVector<AttributeCreation *> &attributes, QObject *parent)
     : QObject{parent}
     , m_attributes{attributes}
+    , m_skillpointsManager(new SkillpointsCreationManager(this))
 {
     init();
     for ( AttributeCreation* attribute: m_attributes ) {
@@ -122,6 +124,7 @@ void StatisticsCreation::setSpecialization(SpecializationSource *newSpecializati
         return;
     m_specialization = newSpecialization;
     emit specializationChanged();
+    emit specializationChangedTo(m_specialization->name());
 }
 
 QQmlListProperty<AttributeCreation> StatisticsCreation::attributes()
@@ -259,10 +262,24 @@ void StatisticsCreation::onSkillpackChanged(const QString &from, const QString &
 
 void StatisticsCreation::init()
 {
+    connect(this, &StatisticsCreation::specializationChangedTo, m_skillpointsManager, &SkillpointsCreationManager::setSpecialization);
     connect(this, &StatisticsCreation::applyAttributeBonus, this, &StatisticsCreation::onApplyAttributeBonus);
     connect(this, &StatisticsCreation::removeAttributeBonus, this, &StatisticsCreation::onRemoveAttributeBonus);
     connect(this, &StatisticsCreation::applyFeatureBonus, this, &StatisticsCreation::onApplyFeatureBonus);
     connect(this, &StatisticsCreation::removeFeatureBonus, this, &StatisticsCreation::onRemoveFeatureBonus);
+
+    for ( const AttributeCreation* attribute: m_attributes ) {
+        for ( const SkillpackCreation* skillpack: attribute->skillpacks() ) {
+            connect(skillpack, &SkillpackCreation::skillIncreased, m_skillpointsManager, &SkillpointsCreationManager::onSkillBought);
+            connect(skillpack, &SkillpackCreation::skillDecreased, m_skillpointsManager, &SkillpointsCreationManager::onSkillSold);
+            connect(skillpack, &SkillpackCreation::boughtChanged, [this, skillpack](const bool bought){
+                if ( bought )
+                    m_skillpointsManager->onSkillpackBought(skillpack->source()->specializations());
+                else
+                    m_skillpointsManager->onSkillpackSold(skillpack->source()->specializations());
+            });
+        }
+    }
 }
 
 SkillpackCreation *StatisticsCreation::findSkillpack(const QString &name)
@@ -288,4 +305,9 @@ qsizetype StatisticsCreation::attributesCount(QQmlListProperty<AttributeCreation
 AttributeCreation *StatisticsCreation::attribute(QQmlListProperty<AttributeCreation> *list, qsizetype index)
 {
     return reinterpret_cast<StatisticsCreation*>(list->data)->attribute(index);
+}
+
+SkillpointsCreationManager *StatisticsCreation::skillpointsManager() const
+{
+    return m_skillpointsManager;
 }

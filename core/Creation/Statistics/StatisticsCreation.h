@@ -10,6 +10,7 @@
 #include <DiseaseSource.h>
 #include <OriginSource.h>
 #include <ProfessionSource.h>
+#include <SkillpointsCreationManager.h>
 #include <SpecializationSource.h>
 
 class StatisticsCreation : public QObject
@@ -23,6 +24,7 @@ class StatisticsCreation : public QObject
     Q_PROPERTY(ProfessionSource* profession READ profession WRITE setProfession NOTIFY professionChanged FINAL)
     Q_PROPERTY(FeatureSource* professionFeature READ professionFeature WRITE setProfessionFeature NOTIFY professionFeatureChanged FINAL)
     Q_PROPERTY(SpecializationSource* specialization READ specialization WRITE setSpecialization NOTIFY specializationChanged FINAL)
+    Q_PROPERTY(SkillpointsCreationManager* skillpointsManager READ skillpointsManager CONSTANT)
     QML_ELEMENT
 
 public:
@@ -56,6 +58,8 @@ public:
 
     Q_INVOKABLE AttributeCreation* attribute(const QString& name);
 
+    SkillpointsCreationManager* skillpointsManager() const;
+
 signals:
     void diseaseChanged();
     void originChanged();
@@ -64,6 +68,7 @@ signals:
     void professionChanged();
     void professionFeatureChanged();
     void specializationChanged();
+    void specializationChangedTo(const QString& specialization);
     void applyAttributeBonus(const AttributeBonusSource* bonus);
     void removeAttributeBonus(const AttributeBonusSource* bonus);
     void applyFeatureBonus(const BonusSource* bonus);
@@ -93,6 +98,7 @@ private:
     FeatureSource *m_professionFeature{nullptr};
     SpecializationSource *m_specialization{nullptr};
     QVector<AttributeCreation*> m_attributes;
+    SkillpointsCreationManager* m_skillpointsManager{nullptr};
 };
 
 #endif // STATISTICSCREATION_H
