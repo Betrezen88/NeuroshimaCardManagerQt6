@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterUncreatableMetaObject(Types::staticMetaObject, "data.types", 1, 0, "Types", "Data enums.");
+    qmlRegisterUncreatableMetaObject(Types::staticMetaObject, "creation.types", 1, 0, "CreationTypes", "Creation enums.");
 
     MainManager manager{&app};
 
