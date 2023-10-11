@@ -1,4 +1,6 @@
 #include "AttributeCreation.h"
+#include "SkillpackCreationGeneral.h"
+#include "SkillpackCreationChoosable.h"
 
 #include <QDebug>
 
@@ -13,7 +15,16 @@ AttributeCreation::AttributeCreation(AttributeSource *source, QObject *parent)
     , m_source{source}
 {
     for ( SkillpackSource* skillpack: const_cast<const AttributeSource*>(source)->skillpacks() ) {
-        m_skillpacks.append( new SkillpackCreation{skillpack, this} );
+        SkillpackCreation *pSkillpack{nullptr};
+
+        if ( skillpack->skillsCount() > 3 ) {
+            pSkillpack = new SkillpackCreationChoosable{skillpack, this};
+        }
+        else {
+            pSkillpack = new SkillpackCreationGeneral{skillpack, this};
+        }
+
+        m_skillpacks.append( pSkillpack );
     }
 }
 
