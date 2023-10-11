@@ -74,6 +74,8 @@ Column {
         tooltipItem: DiseaseTooltip {
             width: 350
             height: 300
+            defaultWidth: 350
+            defaultHeight: 300
             title: _disease.value
             description: pData.disease.description
             cure: pData.disease.cure

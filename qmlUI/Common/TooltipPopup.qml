@@ -5,6 +5,7 @@ Popup {
     id: _root
 
     padding: 5
+    clip: true
 
     background: Rectangle {
         border.width: 2

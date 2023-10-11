@@ -8,8 +8,15 @@ Item {
     property string description
     property string cure
     property alias symptoms: _symptoms.model
+    property int defaultWidth: 0
+    property int defaultHeight: 0
 
     id: _root
+
+    onVisibleChanged: {
+        width = defaultWidth
+        height = defaultHeight
+    }
 
     Column {
         id: _column
