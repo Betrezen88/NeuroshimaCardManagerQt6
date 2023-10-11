@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 import core.creation 1.0
+import creation.types 1.0
 
 Item {
     property SkillCreation skill: null
@@ -14,12 +15,29 @@ Item {
 
         onImplicitHeightChanged: _root.height = implicitHeight
 
-        Text {
+        Item {
             id: _name
-            text: skill !== null ? skill.source.name : ""
-            font.pointSize: 12
             height: _value.height
-        }
+            width: implicitContentWidth
+
+            Text {
+                text: skill !== null ? skill.source.name : ""
+                font.pointSize: 12
+                visible: skill.type === CreationTypes.Single
+            } // Text
+
+            ComboBox {
+                model: skill !== null ? skill.list : []
+                displayText: skill !== null ? skill.selected : ""
+                font.pointSize: 12
+                visible: skill.type === CreationTypes.List
+                onCurrentTextChanged: {
+                    if ( skill !== null ) {
+                        skill.selected = currentText
+                    }
+                }
+            } // ComboBox
+        } // Item
 
         Item {
             height: 1; width: _root.width - _name.width - _value.width - (parent.spacing*3) - parent.leftPadding
@@ -44,6 +62,6 @@ Item {
                     down.pressed = false
                 }
             }
-        }
-    }
+        } // SpinBox
+    } // Row
 } // Item
