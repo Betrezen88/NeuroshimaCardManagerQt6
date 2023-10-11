@@ -10,6 +10,8 @@ qt_add_qml_module(Creation
         Statistics/AttributeCreation.cpp
         Statistics/SkillCreation.h
         Statistics/SkillCreation.cpp
+        Statistics/SkillCreationSingle.h
+        Statistics/SkillCreationSingle.cpp
         Statistics/SkillpackCreation.h
         Statistics/SkillpackCreation.cpp
         Statistics/SkillpointsCreationManager.h
