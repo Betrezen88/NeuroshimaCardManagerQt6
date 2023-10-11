@@ -127,6 +127,14 @@ target_link_libraries(appQmlUI
         Source
 )
 
+target_include_directories(appQmlUI
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/../core/Creation/Common
+        ${CMAKE_CURRENT_SOURCE_DIR}/../core/Data/Common
+        ${CMAKE_CURRENT_SOURCE_DIR}/../core/Managers
+
+)
+
 install(TARGETS appQmlUI
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

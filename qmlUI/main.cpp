@@ -2,8 +2,9 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "../core/Managers/MainManager.h"
-#include "../core/Data/Common/Types.h"
+#include <MainManager.h>
+#include <../Data/Common/Types.h>
+#include <Common/Types.h>
 
 int main(int argc, char *argv[])
 {
