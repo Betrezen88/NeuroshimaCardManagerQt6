@@ -8,6 +8,7 @@
 #include <SkillpackSource.h>
 
 #include "SkillCreation.h"
+#include "Common/Types.h"
 
 class SkillpackCreation : public QObject
 {
@@ -20,6 +21,8 @@ class SkillpackCreation : public QObject
 public:
     explicit SkillpackCreation(QObject *parent = nullptr);
     explicit SkillpackCreation(SkillpackSource *source, QObject* parent = nullptr);
+
+    virtual TypesCreation::Skillpack type() const = 0;
 
     SkillpackSource *source() const;
 
@@ -45,9 +48,11 @@ private:
     static qsizetype skillsCount(QQmlListProperty<SkillCreation>* list);
     static SkillCreation* skill(QQmlListProperty<SkillCreation>* list, qsizetype index);
 
-private:
-    SkillpackSource *m_source = nullptr;
+protected:
+    SkillpackSource *m_source{nullptr};
     QVector<SkillCreation*> m_skills;
+
+private:
     bool m_bought{false};
 };
 
