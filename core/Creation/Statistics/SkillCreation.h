@@ -5,6 +5,7 @@
 #include "qqmlintegration.h"
 
 #include <SkillSource.h>
+#include "../Common/Types.h"
 
 class SkillCreation : public QObject
 {
@@ -18,6 +19,8 @@ class SkillCreation : public QObject
 public:
     explicit SkillCreation(QObject *parent = nullptr);
     explicit SkillCreation(SkillSource* source, QObject* parent = nullptr);
+
+    virtual TypesCreation::Skill type() const = 0;
 
     SkillSource *source() const;
     int value() const;
@@ -37,8 +40,10 @@ public slots:
     void increasedBy(const int value);
     void decreaseBy(const int value);
 
-private:
+protected:
     SkillSource *m_source{nullptr};
+
+private:
     int m_value{0};
     int m_min{0};
     int m_max{5};
