@@ -4,8 +4,11 @@ project(QmlUI VERSION 0.1 LANGUAGES CXX)
 
 find_package(Qt6 6.4 COMPONENTS Quick REQUIRED)
 
+set(CMAKE_AUTORCC ON)
+
 qt_add_executable(appQmlUI
     main.cpp
+    icons.qrc
 )
 
 qt_add_qml_module(appQmlUI
@@ -107,6 +110,8 @@ qt_add_qml_module(appQmlUI
         Elements/Creation/Skills/Skillpack.qml
         Elements/Creation/Skills/Skill.qml
         Elements/Creation/Tricks/Trick.qml
+    RESOURCES
+        icons.qrc
 )
 
 set_target_properties(appQmlUI PROPERTIES
