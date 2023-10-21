@@ -4,6 +4,9 @@ import QtQuick.Controls
 import core.creation 1.0
 import creation.types 1.0
 
+import "../../../Common"
+import "../../../Elements/Card/Common"
+
 Item {
     property SkillCreation skill: null
 
@@ -14,6 +17,37 @@ Item {
         leftPadding: 5
 
         onImplicitHeightChanged: _root.height = implicitHeight
+
+        Image {
+            id: _info
+            width: _value.height
+            height: _value.height
+
+            source: "qrc:/Images/icons/info.svg"
+
+            TooltipPopup {
+                id: _tooltip
+
+                contentItem: TooltipContent {
+                    width: 300
+                    title: skill !== null ? skill.source.name : ""
+                    description: skill !== null ? skill.source.description : ""
+                }
+            }
+
+            MouseArea {
+                id: _test
+                anchors.fill: parent
+                onClicked: {
+                    if (_tooltip.opened)
+                        _tooltip.close()
+                    else {
+                        _tooltip.y = -(_info.height/2) - _tooltip.contentItem.height
+                        _tooltip.open()
+                    }
+                }
+            } // MouseArea
+        }
 
         Item {
             id: _name
@@ -40,11 +74,12 @@ Item {
         } // Item
 
         Item {
-            height: 1; width: _root.width - _name.width - _value.width - (parent.spacing*3) - parent.leftPadding
+            height: 1; width: _root.width - _info.width - _name.width - _value.width - (parent.spacing*4) - parent.leftPadding
         }
 
         SpinBox {
             id: _value
+            width: 90
             from: skill !== null ? skill.min : 0
             to: skill !== null ? skill.max : 5
             value: skill !== null ? skill.value : 0
