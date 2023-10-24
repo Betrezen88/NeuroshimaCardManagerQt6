@@ -42,6 +42,7 @@ qt_add_qml_module(appQmlUI
         Common/FormPopup.qml
 
         Forms/ExperienceForm.qml
+        Forms/OtherSkillForm.qml
         Forms/WoundForm.qml
 
         Delegates/Card/Beast/CombatAction.qml
