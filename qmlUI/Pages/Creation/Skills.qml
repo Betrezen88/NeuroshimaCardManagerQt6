@@ -7,6 +7,8 @@ import core.source 1.0
 import "../../Elements/Creation/Skills"
 import "../../Elements/Card/Common"
 import "../../Elements/Common"
+import "../../Forms"
+import "../../Common"
 
 Page {
     property CardCreation cardCreation: null
@@ -145,6 +147,19 @@ Page {
         } // Column
 
     } // ScrollView
+
+    FormPopup {
+        id: _otherSkillForm
+
+        contentItem: OtherSkillForm {
+            attributes: [ "Budowa", "Zręczność", "Charakter", "Percepcja", "Spryt" ]
+            onAccepted: function(name, attribute, description) {
+                console.log( "New skill to add: ", name, attribute, description )
+                _otherSkillForm.close()
+            }
+            onRejected: _otherSkillForm.close()
+        }
+    } // FormPopup
 
     background: Rectangle {
         color: "#fff"
