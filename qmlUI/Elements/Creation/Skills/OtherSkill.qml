@@ -2,21 +2,33 @@ import QtQuick
 import QtQuick.Controls
 
 Item {
+    required property var source
+
     id: _root
 
     Row {
         spacing: 5
         padding: 5
 
-        onImplicitHeightChanged: parent.height = implicitHeight
+        onImplicitHeightChanged: _root.height = implicitHeight
+
+        Image {
+            id: _info
+
+            width: _value.height
+            height: _value.height
+
+            source: "qrc:/Images/icons/info.svg"
+        }
 
         Text {
             id: _name
             text: "Skillname"
             font.pointSize: 12
             verticalAlignment: Text.AlignVCenter
-            width: parent.parent.width - _attribute.width - _value.width - (parent.spacing*2) - (parent.padding*2)
-            height: _value.height
+            wrapMode: Text.WordWrap
+            width: _root.width - _info.width - _attribute.width - _value.width - (parent.spacing*3) - (parent.padding*2)
+            height: implicitHeight > _value.height ? implicitHeight : _value.height
         }
 
         Text {
@@ -29,6 +41,7 @@ Item {
 
         SpinBox {
             id: _value
+            width: 90
             from: 0; to: 5
         }
     } // Row
