@@ -6,6 +6,7 @@ import core.source 1.0
 
 import "../../Elements/Creation/Skills"
 import "../../Elements/Card/Common"
+import "../../Elements/Common"
 
 Page {
     property CardCreation cardCreation: null
@@ -113,6 +114,18 @@ Page {
                         id: _label
                         text: "Inne Umiejętności"
                         width: _cleaverness.width
+
+                        IconButton {
+                            source: "qrc:/Images/icons/add.svg"
+                            width: _label.height - 5; height: _label.height - 5
+                            anchors {
+                                rightMargin: 2.5
+                                topMargin: 2.5
+                                top: parent.top
+                                right: parent.right
+                            }
+                            onClicked: _otherSkillForm.open()
+                        }
                     }
 
                     List {
