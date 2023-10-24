@@ -63,6 +63,8 @@ qt_add_qml_module(appQmlUI
         Delegates/Creation/Feature.qml
         Delegates/Creation/SelectionButton.qml
 
+        Elements/Common/IconButton.qml
+
         Elements/Card/Common/DataField.qml
         Elements/Card/Common/HeaderLabel.qml
         Elements/Card/Common/List.qml
