@@ -45,6 +45,8 @@ qt_add_qml_module(Source
         Statistics/FeatureSource.cpp
         Statistics/OriginSource.h
         Statistics/OriginSource.cpp
+        Statistics/OtherSkillSource.h
+        Statistics/OtherSkillSource.cpp
         Statistics/ProfessionSource.h
         Statistics/ProfessionSource.cpp
         Statistics/QuestionSource.h
