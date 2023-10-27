@@ -65,6 +65,10 @@ public:
     qsizetype otherSkillsCount() const;
     OtherSkillCreation* otherSkill(qsizetype index);
 
+    Q_INVOKABLE void addOtherSkill(const QString& name, const QString& description, const QString& attribute);
+    Q_INVOKABLE void removeOtherSkill(OtherSkillCreation* otherSkill);
+    Q_INVOKABLE bool isSkillNameTaken(const QString& name);
+
     SkillpointsCreationManager* skillpointsManager() const;
 
 signals:

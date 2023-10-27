@@ -179,6 +179,44 @@ OtherSkillCreation *StatisticsCreation::otherSkill(qsizetype index)
     return m_otherSkills.at(index);
 }
 
+void StatisticsCreation::addOtherSkill(const QString &name, const QString &description, const QString &attribute)
+{
+    OtherSkillCreation* otherSkill = new OtherSkillCreation(new OtherSkillSource(name, description, attribute), this);
+
+    connect(otherSkill, &OtherSkillCreation::increased, this, [this](const int value){
+        m_skillpointsManager->onSkillBought({}, value);
+    });
+    connect(otherSkill, &OtherSkillCreation::decreased, this, [this](const int value){
+        m_skillpointsManager->onSkillSold({}, value);
+    });
+
+    m_otherSkills.append( otherSkill );
+    emit otherSkillsChanged();
+}
+
+void StatisticsCreation::removeOtherSkill(OtherSkillCreation *otherSkill)
+{
+    if ( otherSkill->value() > 0 ) {
+        while (otherSkill->value() > 0) {
+            otherSkill->decrease();
+        }
+    }
+
+    m_otherSkills.removeOne( otherSkill );
+    m_otherSkills.squeeze();
+    otherSkill->deleteLater();
+    emit otherSkillsChanged();
+}
+
+bool StatisticsCreation::isSkillNameTaken(const QString &name)
+{
+    auto otherSkillFound = std::find_if(m_otherSkills.constBegin(), m_otherSkills.constEnd(), [&name](const OtherSkillCreation* otherSkill){
+        return name.toUpper() == otherSkill->source()->name().toUpper();
+    });
+
+    return otherSkillFound != m_otherSkills.constEnd();
+}
+
 void StatisticsCreation::onRemoveAttributeBonus(const AttributeBonusSource *bonus)
 {
     if ( bonus == nullptr )
