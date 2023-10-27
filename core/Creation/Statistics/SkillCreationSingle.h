@@ -16,6 +16,8 @@ public:
 
     TypesCreation::Skill type() const;
 
+    SkillSource *source() const;
+
 private:
     TypesCreation::Skill m_type;
 };

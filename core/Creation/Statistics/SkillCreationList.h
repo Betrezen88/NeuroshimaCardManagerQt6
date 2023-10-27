@@ -17,6 +17,7 @@ public:
     explicit SkillCreationList(const QVector<SkillSource*>& sources, QObject *parent = nullptr);
 
     TypesCreation::Skill type() const;
+    SkillSource *source() const;
 
     QStringList list() const;
 

@@ -10,7 +10,7 @@
 class SkillCreation : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(SkillSource* source READ source CONSTANT)
+    Q_PROPERTY(SkillSource* source READ source NOTIFY sourceChanged)
     Q_PROPERTY(int value READ value NOTIFY valueChanged FINAL)
     Q_PROPERTY(int min READ min NOTIFY minChanged FINAL)
     Q_PROPERTY(int max READ max NOTIFY maxChanged FINAL)
@@ -22,12 +22,13 @@ public:
 
     virtual TypesCreation::Skill type() const = 0;
 
-    SkillSource *source() const;
+    virtual SkillSource *source() const = 0;
     int value() const;
     int min() const;
     int max() const;
 
 signals:
+    void sourceChanged();
     void valueChanged();
     void increased(int value);
     void decreased(int value);

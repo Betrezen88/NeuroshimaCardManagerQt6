@@ -18,3 +18,8 @@ TypesCreation::Skill SkillCreationSingle::type() const
 {
     return m_type;
 }
+
+SkillSource *SkillCreationSingle::source() const
+{
+    return m_source;
+}

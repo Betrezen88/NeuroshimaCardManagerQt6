@@ -23,6 +23,11 @@ TypesCreation::Skill SkillCreationList::type() const
     return m_type;
 }
 
+SkillSource *SkillCreationList::source() const
+{
+    return m_source;
+}
+
 QStringList SkillCreationList::list() const
 {
     return m_list;
@@ -50,5 +55,6 @@ void SkillCreationList::onSelectedChanged(const QString &selected)
 
     if ( found != m_sources.constEnd() ) {
         m_source = *found;
+        emit sourceChanged();
     }
 }

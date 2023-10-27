@@ -13,11 +13,6 @@ SkillCreation::SkillCreation(SkillSource *source, QObject *parent)
 
 }
 
-SkillSource *SkillCreation::source() const
-{
-    return m_source;
-}
-
 int SkillCreation::value() const
 {
     return m_value;
