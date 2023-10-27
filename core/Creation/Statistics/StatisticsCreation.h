@@ -6,6 +6,7 @@
 #include "qqmlintegration.h"
 
 #include "AttributeCreation.h"
+#include "OtherSkillCreation.h"
 
 #include <DiseaseSource.h>
 #include <OriginSource.h>
@@ -17,6 +18,7 @@ class StatisticsCreation : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<AttributeCreation> attributes READ attributes CONSTANT)
+    Q_PROPERTY(QQmlListProperty<OtherSkillCreation> otherSkills READ otherSkills NOTIFY otherSkillsChanged FINAL)
     Q_PROPERTY(DiseaseSource* disease READ disease WRITE setDisease NOTIFY diseaseChanged FINAL)
     Q_PROPERTY(OriginSource* origin READ origin WRITE setOrigin NOTIFY originChanged FINAL)
     Q_PROPERTY(FeatureSource* originFeature READ originFeature WRITE setOriginFeature NOTIFY originFeatureChanged FINAL)
@@ -59,6 +61,10 @@ public:
     Q_INVOKABLE AttributeCreation* attribute(const QString& name);
     Q_INVOKABLE QStringList attributesNames() const;
 
+    QQmlListProperty<OtherSkillCreation> otherSkills();
+    qsizetype otherSkillsCount() const;
+    OtherSkillCreation* otherSkill(qsizetype index);
+
     SkillpointsCreationManager* skillpointsManager() const;
 
 signals:
@@ -74,6 +80,7 @@ signals:
     void removeAttributeBonus(const AttributeBonusSource* bonus);
     void applyFeatureBonus(const BonusSource* bonus);
     void removeFeatureBonus(const BonusSource* bonus);
+    void otherSkillsChanged();
 
 private slots:
     void onRemoveAttributeBonus(const AttributeBonusSource *bonus);
@@ -90,6 +97,9 @@ private:
     static qsizetype attributesCount(QQmlListProperty<AttributeCreation>* list);
     static AttributeCreation* attribute(QQmlListProperty<AttributeCreation>* list, qsizetype index);
 
+    static qsizetype otherSkillsCount(QQmlListProperty<OtherSkillCreation> *list);
+    static OtherSkillCreation *otherSkill(QQmlListProperty<OtherSkillCreation> *list, qsizetype index);
+
 private:
     DiseaseSource *m_disease{nullptr};
     OriginSource *m_origin{nullptr};
@@ -99,6 +109,7 @@ private:
     FeatureSource *m_professionFeature{nullptr};
     SpecializationSource *m_specialization{nullptr};
     QVector<AttributeCreation*> m_attributes;
+    QVector<OtherSkillCreation*> m_otherSkills;
     SkillpointsCreationManager* m_skillpointsManager{nullptr};
 };
 

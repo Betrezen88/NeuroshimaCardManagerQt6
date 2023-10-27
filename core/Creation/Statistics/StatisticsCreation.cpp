@@ -162,6 +162,23 @@ QStringList StatisticsCreation::attributesNames() const
     return list;
 }
 
+QQmlListProperty<OtherSkillCreation> StatisticsCreation::otherSkills()
+{
+    return QQmlListProperty<OtherSkillCreation>(this, this,
+                                                &StatisticsCreation::otherSkillsCount,
+                                                &StatisticsCreation::otherSkill);
+}
+
+qsizetype StatisticsCreation::otherSkillsCount() const
+{
+    return m_otherSkills.count();
+}
+
+OtherSkillCreation *StatisticsCreation::otherSkill(qsizetype index)
+{
+    return m_otherSkills.at(index);
+}
+
 void StatisticsCreation::onRemoveAttributeBonus(const AttributeBonusSource *bonus)
 {
     if ( bonus == nullptr )
@@ -314,6 +331,16 @@ qsizetype StatisticsCreation::attributesCount(QQmlListProperty<AttributeCreation
 AttributeCreation *StatisticsCreation::attribute(QQmlListProperty<AttributeCreation> *list, qsizetype index)
 {
     return reinterpret_cast<StatisticsCreation*>(list->data)->attribute(index);
+}
+
+qsizetype StatisticsCreation::otherSkillsCount(QQmlListProperty<OtherSkillCreation> *list)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->otherSkillsCount();
+}
+
+OtherSkillCreation* StatisticsCreation::otherSkill(QQmlListProperty<OtherSkillCreation> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->otherSkill(index);
 }
 
 SkillpointsCreationManager *StatisticsCreation::skillpointsManager() const
