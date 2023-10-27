@@ -154,13 +154,40 @@ Page {
     FormPopup {
         id: _otherSkillForm
 
+        ToolTip {
+            id: _tooltip
+            onAboutToHide: visible = false
+        }
+
         contentItem: OtherSkillForm {
-            attributes: [ "Budowa", "Zręczność", "Charakter", "Percepcja", "Spryt" ]
+            attributes: cardCreation?.statisticsCreation?.attributesNames() ?? []
             onAccepted: function(name, attribute, description) {
-                console.log( "New skill to add: ", name, attribute, description )
+                if ( name === "" ) {
+                    _tooltip.text = "Nazwa umiejętności nie może być pusta."
+                    _tooltip.visible = true
+                    return
+                }
+
+                if ( cardCreation?.statisticsCreation?.isSkillNameTaken(name) ) {
+                    _tooltip.text = "Podana umiejętność już istnieje ("+name+")."
+                    _tooltip.visible = true
+                    return
+                }
+
+                if ( description === "" ) {
+                    _tooltip.text = "Opis umiejętności nie może byc pusty."
+                    _tooltip.visible = true
+                    return
+                }
+
+                cardCreation?.statisticsCreation?.addOtherSkill(name, description, attribute)
                 _otherSkillForm.close()
             }
             onRejected: _otherSkillForm.close()
+        }
+
+        onAboutToHide: {
+            contentItem.clear()
         }
     } // FormPopup
 
