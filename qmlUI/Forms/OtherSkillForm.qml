@@ -46,10 +46,7 @@ Item {
             Layout.preferredHeight: 40
             Layout.preferredWidth: 100
             Layout.columnSpan: 2
-            onClicked: {
-                clear()
-                _root.rejected()
-            }
+            onClicked: _root.rejected()
         }
 
         Item {
@@ -62,12 +59,7 @@ Item {
             Layout.preferredHeight: 40
             Layout.preferredWidth: 100
             Layout.columnSpan: 2
-            onClicked: {
-                if ( _name.text !== "" || _description.text !== "" ) {
-                    _root.accepted(_name.text, _attributes.currentText, _description.text)
-                    clear()
-                }
-            }
+            onClicked: _root.accepted(_name.text, _attributes.currentText, _description.text)
         }
     } // GridLayout
 
