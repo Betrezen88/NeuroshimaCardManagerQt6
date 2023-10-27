@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>Images/icons/info.svg</file>
         <file>Images/icons/add.svg</file>
+        <file>Images/icons/remove.svg</file>
     </qresource>
 </RCC>
