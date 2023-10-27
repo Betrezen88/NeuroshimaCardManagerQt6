@@ -131,13 +131,16 @@ Page {
                     }
 
                     List {
+                        id: _otherSkills
                         width: _cleaverness.width
                         height: _character.height + _perception.height - _cleaverness.height - _label.height - parent.spacing
 
-                        model: 3
+                        model: cardCreation?.statisticsCreation?.otherSkills ?? []
 
                         delegate: OtherSkill {
+                            source: modelData
                             width: ListView.view.width
+                            onRemove: cardCreation.statisticsCreation.removeOtherSkill(modelData)
                         }
                     }
                 } // Column
