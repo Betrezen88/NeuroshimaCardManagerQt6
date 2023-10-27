@@ -153,6 +153,15 @@ AttributeCreation *StatisticsCreation::attribute(const QString &name)
     return *found;
 }
 
+QStringList StatisticsCreation::attributesNames() const
+{
+    QStringList list;
+    for ( auto attribute: m_attributes ) {
+        list << attribute->source()->name();
+    }
+    return list;
+}
+
 void StatisticsCreation::onRemoveAttributeBonus(const AttributeBonusSource *bonus)
 {
     if ( bonus == nullptr )

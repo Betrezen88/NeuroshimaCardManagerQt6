@@ -57,6 +57,7 @@ public:
     AttributeCreation* attribute(qsizetype index);
 
     Q_INVOKABLE AttributeCreation* attribute(const QString& name);
+    Q_INVOKABLE QStringList attributesNames() const;
 
     SkillpointsCreationManager* skillpointsManager() const;
 
