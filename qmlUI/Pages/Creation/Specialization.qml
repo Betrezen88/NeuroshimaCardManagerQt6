@@ -45,7 +45,7 @@ Page {
             }
 
             Text {
-                text: "Dodatkowy opis mechaniki związanej ze specjalizacją"
+                text: "Na zakupienie Umiejętności związanych z daną specializacją masz dodatkowe 30 punktów. Co więcej, za każdym razem gdy będziesz wydawał punkty doświadczenia na umiejętności związane z wybraną specializacją, zapłacisz za nie mniej o 20%."
                 font.pointSize: 14
                 wrapMode: Text.WordWrap
                 width: _root.width - _rightPanel.width - 50
