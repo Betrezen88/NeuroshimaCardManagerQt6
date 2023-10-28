@@ -35,7 +35,8 @@ Page {
 
             Text {
                 id: _description
-                text: "Opis zasad wydawania punktów umiejętności, oraz działania suwaków."
+                text: "Masz do dyspozycji 30 punktów za Specjalizację, na zakup Umiejętności z nią związanych. Dodatkowo masz 35 punktów na zakup dowolnych innych Umiejętności. Umiejętności są pogrupowane w pakiety, którego zakup kosztuje 5 punktów. Po zakupie umiejętności w pakiecie otrzymujesz na poziomie 1. Możesz kupić pojedyncze umiejętności, podniesienie ich na poziom 1 kosztuje 3 punkty, każdy kolejny poziom kosztuje tyle ile poziom na który podnosisz. Maksymalny poziom na który możesz podnieść umiejętność to poziom 5.
+    Zasada suwaka: Jeśli masz umiejętność na poziomie +4 lub większej, Poziom Trudności testu obniżasz o jeden stopień w dół, na łatwiejszy. Każda wielokrotność 4 zmniejsza poziom trudności o jeden w dół. Jeśli masz umiejętność na poziomie 0, Poziom trudności rośnie o jeden stopień w górę. Suwak nie działa poczas walki w testach akcji strzelania, rzucania, ciosów itd. Działa w testach zwyczajnych np. Morale, Odporność na ból utd. Działa dla każdej umiejetności przed rozpoczęciem walki turowej."
                 font.pointSize: 14
                 wrapMode: Text.WordWrap
                 width: _root.width - 10
@@ -45,7 +46,7 @@ Page {
                 spacing: 5
 
                 Text {
-                    text: "Specjalizacja:"
+                    text: "<b>Specjalizacja:</b>"
                     font.pointSize: 14
                 }
 
@@ -58,7 +59,7 @@ Page {
                 }
 
                 Text {
-                    text: "Ogólne:"
+                    text: "<b>Ogólne:</b>"
                     font.pointSize: 14
                 }
 
