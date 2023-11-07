@@ -9,6 +9,8 @@ qt_add_qml_module(Source
         Common/RequirementSource.h
         Common/RequirementSource.cpp
 
+        Model/RequirementSourceModel.h
+        Model/RequirementSourceModel.cpp
         Statistics/Bonus/AttributeBonusSource.h
         Statistics/Bonus/AttributeBonusSingle.h
         Statistics/Bonus/AttributeBonusSingle.cpp
@@ -75,6 +77,7 @@ qt_add_qml_module(Source
 target_include_directories(Source
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Common
+        ${CMAKE_CURRENT_SOURCE_DIR}/Model
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics/Bonus
 )
