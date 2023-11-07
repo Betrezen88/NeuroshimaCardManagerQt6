@@ -11,6 +11,8 @@ qt_add_qml_module(Source
 
         Model/RequirementSourceModel.h
         Model/RequirementSourceModel.cpp
+        Model/TrickSourceModel.h
+        Model/TrickSourceModel.cpp
         Model/TrickSourceItem.h
         Model/TrickSourceItem.cpp
 
