@@ -18,14 +18,12 @@ QVariant TrickSourceModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     TrickSourceItem* trick = m_tricks.at(index.row());
-    if ( role == TrickRoles::NameRole )
-        return trick->source()->name();
-    if ( role == TrickRoles::DescriptionRole )
-        return trick->source()->description();
-    if ( role == TrickRoles::ActionRole )
-        return trick->source()->action();
     if ( role == TrickRoles::RequirementsRole )
         return QVariant::fromValue(trick->requirements());
+    if ( role == TrickRoles::AvailableRole )
+        return trick->available();
+    if ( role == TrickRoles::SourceRole )
+        return QVariant::fromValue(trick->source());
 
     return QVariant();
 }
@@ -40,9 +38,7 @@ void TrickSourceModel::addTricks(const QString &name, const QVector<TrickSource 
 QHash<int, QByteArray> TrickSourceModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
-    roles[TrickRoles::NameRole] = "name";
-    roles[TrickRoles::DescriptionRole] = "description";
-    roles[TrickRoles::ActionRole] = "action";
+    roles[TrickRoles::SourceRole] = "source";
     roles[TrickRoles::RequirementsRole] = "requirements";
     return roles;
 }

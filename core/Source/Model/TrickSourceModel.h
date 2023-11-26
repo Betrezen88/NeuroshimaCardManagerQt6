@@ -14,10 +14,9 @@ class TrickSourceModel : public QAbstractListModel
 
 public:
     enum TrickRoles {
-        NameRole = Qt::UserRole+1,
-        DescriptionRole,
-        ActionRole,
-        RequirementsRole
+        SourceRole = Qt::UserRole+1,
+        RequirementsRole,
+        AvailableRole
     };
 
     explicit TrickSourceModel(QObject *parent = nullptr);
