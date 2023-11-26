@@ -251,6 +251,18 @@ Page {
                         }
                     } // Item
                 } // List
+
+                FormPopup {
+                    id: _trickDetails
+                    width: _root.width * 0.75
+                    contentItem: TrickContent {
+                        width: _trickDetails.width
+                        onAdd: function(source) {
+                            console.log("Adding trick ", source.name)
+                            _trickDetails.close()
+                        }
+                        onClose: _trickDetails.close()
+                    }
                 }
             } // GridLayout
 
