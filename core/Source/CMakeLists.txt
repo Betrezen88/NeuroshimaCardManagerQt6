@@ -10,6 +10,8 @@ qt_add_qml_module(Source
         Common/RequirementSource.h
 
         Model/RequirementSourceModel.h
+        Model/NameFilterProxyModel.cpp
+        Model/NameFilterProxyModel.h
         Model/RequirementFilterProxyModel.cpp
         Model/RequirementFilterProxyModel.h
         Model/RequirementSourceModel.cpp
