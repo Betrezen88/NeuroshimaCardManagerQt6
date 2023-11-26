@@ -4,10 +4,10 @@ qt_add_qml_module(Source
     URI core.source
     VERSION 1.0
     SOURCES
-        Common/ModifierSource.h
         Common/ModifierSource.cpp
-        Common/RequirementSource.h
+        Common/ModifierSource.h
         Common/RequirementSource.cpp
+        Common/RequirementSource.h
 
         Model/RequirementSourceModel.h
         Model/RequirementSourceModel.cpp
@@ -16,67 +16,67 @@ qt_add_qml_module(Source
         Model/TrickSourceItem.h
         Model/TrickSourceItem.cpp
 
-        Statistics/Bonus/AttributeBonusSource.h
-        Statistics/Bonus/AttributeBonusSingle.h
-        Statistics/Bonus/AttributeBonusSingle.cpp
-        Statistics/Bonus/AttributeBonusList.h
-        Statistics/Bonus/AttributeBonusList.cpp
-        Statistics/Bonus/BonusSource.h
-        Statistics/Bonus/BonusBeast.h
-        Statistics/Bonus/BonusBeast.cpp
-        Statistics/Bonus/BonusFame.h
-        Statistics/Bonus/BonusFame.cpp
-        Statistics/Bonus/BonusFeatures.h
-        Statistics/Bonus/BonusFeatures.cpp
-        Statistics/Bonus/BonusFriend.h
-        Statistics/Bonus/BonusFriend.cpp
-        Statistics/Bonus/BonusHealth.h
-        Statistics/Bonus/BonusHealth.cpp
-        Statistics/Bonus/BonusReputation.h
-        Statistics/Bonus/BonusReputation.cpp
-        Statistics/Bonus/BonusSkills.h
-        Statistics/Bonus/BonusSkills.cpp
-        Statistics/Bonus/BonusSkillpack.h
-        Statistics/Bonus/BonusSkillpack.cpp
-        Statistics/Bonus/BonusSkillpackDL.h
-        Statistics/Bonus/BonusSkillpackDL.cpp
-        Statistics/Bonus/BonusSkillpoints.h
-        Statistics/Bonus/BonusSkillpoints.cpp
-        Statistics/Bonus/BonusTrick.h
-        Statistics/Bonus/BonusTrick.cpp
-        Statistics/AttributeSource.h
         Statistics/AttributeSource.cpp
-        Statistics/DiseaseSource.h
+        Statistics/AttributeSource.h
+        Statistics/Bonus/AttributeBonusList.cpp
+        Statistics/Bonus/AttributeBonusList.h
+        Statistics/Bonus/AttributeBonusSingle.cpp
+        Statistics/Bonus/AttributeBonusSingle.h
+        Statistics/Bonus/AttributeBonusSource.h
+        Statistics/Bonus/BonusBeast.cpp
+        Statistics/Bonus/BonusBeast.h
+        Statistics/Bonus/BonusFame.cpp
+        Statistics/Bonus/BonusFame.h
+        Statistics/Bonus/BonusFeatures.cpp
+        Statistics/Bonus/BonusFeatures.h
+        Statistics/Bonus/BonusFriend.cpp
+        Statistics/Bonus/BonusFriend.h
+        Statistics/Bonus/BonusHealth.cpp
+        Statistics/Bonus/BonusHealth.h
+        Statistics/Bonus/BonusReputation.cpp
+        Statistics/Bonus/BonusReputation.h
+        Statistics/Bonus/BonusSkillpack.cpp
+        Statistics/Bonus/BonusSkillpack.h
+        Statistics/Bonus/BonusSkillpackDL.cpp
+        Statistics/Bonus/BonusSkillpackDL.h
+        Statistics/Bonus/BonusSkillpoints.cpp
+        Statistics/Bonus/BonusSkillpoints.h
+        Statistics/Bonus/BonusSkills.cpp
+        Statistics/Bonus/BonusSkills.h
+        Statistics/Bonus/BonusSource.h
+        Statistics/Bonus/BonusTrick.cpp
+        Statistics/Bonus/BonusTrick.h
         Statistics/DiseaseSource.cpp
-        Statistics/FeatureSource.h
+        Statistics/DiseaseSource.h
         Statistics/FeatureSource.cpp
-        Statistics/OriginSource.h
+        Statistics/FeatureSource.h
         Statistics/OriginSource.cpp
-        Statistics/OtherSkillSource.h
+        Statistics/OriginSource.h
         Statistics/OtherSkillSource.cpp
-        Statistics/ProfessionSource.h
+        Statistics/OtherSkillSource.h
         Statistics/ProfessionSource.cpp
-        Statistics/QuestionSource.h
+        Statistics/ProfessionSource.h
         Statistics/QuestionSource.cpp
-        Statistics/SkillSource.h
+        Statistics/QuestionSource.h
         Statistics/SkillSource.cpp
-        Statistics/SkillpackSource.h
+        Statistics/SkillSource.h
         Statistics/SkillpackSource.cpp
-        Statistics/SpecializationSource.h
+        Statistics/SkillpackSource.h
         Statistics/SpecializationSource.cpp
-        Statistics/StatisticsSource.h
+        Statistics/SpecializationSource.h
         Statistics/StatisticsSource.cpp
-        Statistics/SymptomSource.h
+        Statistics/StatisticsSource.h
         Statistics/SymptomSource.cpp
-        Statistics/TrickSource.h
+        Statistics/SymptomSource.h
         Statistics/TrickSource.cpp
+        Statistics/TrickSource.h
 
-        SourceConverter.h
         SourceConverter.cpp
-        SourceLoader.h
-        SourceLoader.cpp
-        SourceDocument.h
+        SourceConverter.h
         SourceDocument.cpp
+        SourceDocument.h
+        SourceLoader.cpp
+        SourceLoader.h
 )
 
 target_include_directories(Source
