@@ -9,7 +9,6 @@ qt_add_qml_module(Source
         Common/RequirementSource.cpp
         Common/RequirementSource.h
 
-        Model/RequirementSourceModel.h
         Model/AvailableFilterProxyModel.cpp
         Model/AvailableFilterProxyModel.h
         Model/NameFilterProxyModel.cpp
@@ -17,12 +16,13 @@ qt_add_qml_module(Source
         Model/RequirementFilterProxyModel.cpp
         Model/RequirementFilterProxyModel.h
         Model/RequirementSourceModel.cpp
-        Model/TrickSourceModel.h
-        Model/TrickSourceModel.cpp
-        Model/TrickSourceItem.h
+        Model/RequirementSourceModel.h
         Model/TrickSortProxyModel.cpp
         Model/TrickSortProxyModel.h
         Model/TrickSourceItem.cpp
+        Model/TrickSourceItem.h
+        Model/TrickSourceModel.cpp
+        Model/TrickSourceModel.h
         Model/TrickSourceSortFilterProxyModel.cpp
         Model/TrickSourceSortFilterProxyModel.h
 
