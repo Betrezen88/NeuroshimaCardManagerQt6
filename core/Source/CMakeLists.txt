@@ -23,6 +23,8 @@ qt_add_qml_module(Source
         Model/TrickSortProxyModel.cpp
         Model/TrickSortProxyModel.h
         Model/TrickSourceItem.cpp
+        Model/TrickSourceSortFilterProxyModel.cpp
+        Model/TrickSourceSortFilterProxyModel.h
 
         Statistics/AttributeSource.cpp
         Statistics/AttributeSource.h
