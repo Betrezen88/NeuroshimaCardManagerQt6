@@ -1,12 +1,16 @@
 import QtQuick
 
+import core.source 1.0
+
 Item {
-    property alias name: _name.text
+    property TrickSource source: null
 
     id: _root
 
+    signal showDetails(TrickSource source)
+
     Text {
-        id: _name
+        text: source?.name ?? ""
         font.pointSize: 12
         anchors.verticalCenter: parent.verticalCenter
         wrapMode: Text.WordWrap
@@ -18,7 +22,7 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: console.log("Show tricks info")
+        onClicked: _root.showDetails(_root.source)
     }
 
 } // Item
