@@ -29,10 +29,10 @@ public:
     bool optional() const;
 
 private:
-    Types::Requirement m_type;
+    Types::Requirement m_type{Types::Requirement::Skill};
     QString m_name;
-    int m_value;
-    bool m_optional;
+    int m_value{0};
+    bool m_optional{false};
 };
 
 #endif // REQUIREMENTSOURCE_H
