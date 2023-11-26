@@ -1,5 +1,9 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
+
+import core.creation 1.0
+import core.source 1.0
 
 import "../../Elements/Card/Common"
 import "../../Elements/Creation/Tricks"
@@ -8,79 +12,148 @@ Page {
     id: _root
 
     ScrollView {
-        id: _scrollView
-
         anchors {
             fill: parent
             margins: 5
         }
 
-        Column {
-            id: _column
-            spacing: 5
+        ColumnLayout {
+            width: _root.width - 10
+            height: _root.height - 10
 
             Text {
-                id: _title
                 text: "Sztuczki"
                 font.bold: true
                 font.pointSize: 16
                 padding: 5
+                Layout.fillWidth: true
             }
 
             Text {
-                id: _description
-                text: "Opis etapu sztuczek."
+                text: "Dobra wiadomość jest taka, że zaraz dostaniesz prezent - a będzie to Sztuczka. Jest tu ich cała masa, a więc wybór masz nie mały. Jedna ze stu - tak mniej więcej wygląają propocje...
+    Musisz jednak zwrócić uwagę na to, że przy każdej ze Sztuczek podane są minimalne wymagania, jakie musisz spełnić, by móc ją zdobyć. Wymagania dotyczą poziomu Umiejętności oraz Współczynników. Jak zauważysz, czasem są bardzo wygórowane - to dlatego, że Sztuczki będziesz mógł kupować w przyszłości za Punkty Doświadczenia. Wtedy, jak już rozwiniesz sobie to \"Zastraszanie na ósemkę\", wrócisz tu i zrobisz drobne zakupy, co?
+    A póki co, wybierz jedną."
                 font.pointSize: 14
                 padding: 5
+                wrapMode: Text.WordWrap
+                Layout.preferredWidth: _root.width - 10
             }
 
-            Row {
-                id: _row
-                spacing: 5
+            RowLayout {
+                Layout.preferredWidth: _root.width - 10
+                Layout.maximumWidth: 1000
+
+                ComboBox {
+                    model: cardCreation?.statisticsSource?.sortModel?.sortByModel ?? []
+                    font.pointSize: 12
+                    Layout.preferredHeight: 40; Layout.preferredWidth: 120
+                    onCurrentTextChanged: {
+                        cardCreation.statisticsSource.sortModel.sortBy = currentText
+                        _searchField.placeholderText = currentIndex === 0
+                                ? "Wpisz nazwę sztuczki..."
+                                : "Wpisz nazwę wymagania (np. blef)"
+                    }
+                } // ComboBox sort by
 
                 TextField {
-                    id: _searchFiled
+                    id: _searchField
                     placeholderText: "Szukaj..."
                     font.pointSize: 12
-                    height: _filters.height; width: _root.width - _filters.width - parent.spacing - 10
+                    Layout.preferredHeight: 40
+                    Layout.fillWidth: true
                 }
 
                 Button {
-                    id: _filters
-                    text: "F"
-                    height: 40; width: 40
-                }
-            } // Row
+                    id: _clearBtn
+                    Layout.preferredHeight: 40; Layout.preferredWidth: 40
+                    background: Rectangle {
+                        border.width: 2
+                        border.color: "#000"
+                    }
+                    onClicked: _searchField.clear()
+                } // Button clear
+
+                Button {
+                    id: _sortOrderBtn
+                    Layout.preferredHeight: 40; Layout.preferredWidth: 40
+                    background: Rectangle {
+                        border.width: 2
+                        border.color: "#000"
+                    }
+                    onClicked: _sortOrderMenu.open()
+
+                    Menu {
+                        id: _sortOrderMenu
+
+                        MenuItem {
+                            text: "Sortowanie A-Z"
+                            height: 40
+                        }
+                        MenuItem {
+                            text: "Sortowanie Z-A"
+                            height: 40
+                        }
+                    }
+                } // Button sort
+
+                Button {
+                    id: _availableOnlyBtn
+                    Layout.preferredHeight: 40; Layout.preferredWidth: 40
+                    background: Rectangle {
+                        border.width: 2
+                        border.color: "#000"
+                    }
+                    onClicked: _availableOnlyMenu.open()
 
             Grid {
+                    Menu {
+                        id: _availableOnlyMenu
+
+                        MenuItem {
+                            text: "Wszystkie sztuczki"
+                            height: 40
+                        }
+                        MenuItem {
+                            text: "Dostępne sztuczki"
+                            height: 40
+                        }
+                    }
+                } // Button available
+            } // RowLayout
+
+            GridLayout {
                 columns: 2
-                columnSpacing: 5
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: 600
+                Layout.maximumWidth: 1000
+                Layout.minimumHeight: 400
 
                 HeaderLabel {
                     text: "Wszystkie"
-                    width: (_root.width - parent.columnSpacing - 10) / 2
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
                 }
 
                 HeaderLabel {
                     text: "Posiadane"
-                    width: (_root.width - parent.columnSpacing - 10) / 2
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
                 }
 
                 List {
                     id: _available
                     spacing: 5
-                    width: (_root.width - parent.columnSpacing - 10) / 2
-                    height: _root.height - _title.height - _description.height - _row.implicitHeight - 40 - 30 > 400
-                            ? _root.height - _title.height - _description.height - _row.implicitHeight - 40 - 30
-                            : 400
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
 
-                    model: 3
+                    model: cardCreation?.statisticsSource?.tricks ?? []
 
                     delegate: Item {
                         width: ListView.view.width
 
                         Trick {
-                            name: "Sztuczka " + index
+                            source: model.source
                             anchors {
                                 top: parent.top
                                 bottom: parent.bottom
@@ -95,6 +168,11 @@ Page {
                             text: ">"
                             width: 40; height: parent.height
                             anchors.left: parent.left
+                            background: Rectangle {
+                                color: model.available ? "green" : "red"
+                                border.width: 2
+                                border.color: "#000"
+                            }
                         }
                     } // Item
                 } // List
@@ -102,10 +180,8 @@ Page {
                 List {
                     id: _owned
                     spacing: 5
-                    width: (_root.width - parent.columnSpacing - 10) / 2
-                    height: _root.height - _title.height - _description.height - _row.implicitHeight - 40 - 30 > 400
-                            ? _root.height - _title.height - _description.height - _row.implicitHeight - 40 - 30
-                            : 400
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
 
                     model: 3
 
@@ -113,7 +189,6 @@ Page {
                         width: ListView.view.width
 
                         Trick {
-                            name: "Sztuczka " + index
                             anchors {
                                 top: parent.top
                                 bottom: parent.bottom
@@ -128,12 +203,17 @@ Page {
                             text: "<"
                             width: 40; height: parent.height
                             anchors.right: parent.right
+                            background: Rectangle {
+                                border.width: 2
+                                border.color: "#000"
+                            }
                         }
                     } // Item
+                } // List
                 }
-            } // Grid
+            } // GridLayout
 
-        } // Column
+        } // ColumnLayout
 
     } // ScrollView
 
