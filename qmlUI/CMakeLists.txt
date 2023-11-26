@@ -113,6 +113,7 @@ qt_add_qml_module(appQmlUI
         Elements/Creation/Skills/Skillpack.qml
         Elements/Creation/Skills/Skill.qml
         Elements/Creation/Tricks/Trick.qml
+        Elements/Creation/Tricks/TrickContent.qml
     RESOURCES
         icons.qrc
 )
