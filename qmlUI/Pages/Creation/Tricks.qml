@@ -7,8 +7,11 @@ import core.source 1.0
 
 import "../../Elements/Card/Common"
 import "../../Elements/Creation/Tricks"
+import "../../Common"
 
 Page {
+    property CardCreation cardCreation: null
+
     id: _root
 
     ScrollView {
@@ -66,6 +69,9 @@ Page {
                 Button {
                     id: _clearBtn
                     Layout.preferredHeight: 40; Layout.preferredWidth: 40
+                    contentItem: Image {
+                        source: "qrc:/Images/icons/clear.svg"
+                    }
                     background: Rectangle {
                         border.width: 2
                         border.color: "#000"
@@ -76,6 +82,9 @@ Page {
                 Button {
                     id: _sortOrderBtn
                     Layout.preferredHeight: 40; Layout.preferredWidth: 40
+                    contentItem: Image {
+                        source: "qrc:/Images/icons/sort_ascending.svg"
+                    }
                     background: Rectangle {
                         border.width: 2
                         border.color: "#000"
@@ -88,10 +97,20 @@ Page {
                         MenuItem {
                             text: "Sortowanie A-Z"
                             height: 40
+                            icon.source: "qrc:/Images/icons/sort_ascending.svg"
+                            onClicked: _sortOrderBtn.contentItem = Qt.createQmlObject(`
+                                        import QtQuick
+                                        Image { source: "qrc:/Images/icons/sort_ascending.svg" }
+                                        `, _sortOrderBtn, "Icon")
                         }
                         MenuItem {
                             text: "Sortowanie Z-A"
                             height: 40
+                            icon.source: "qrc:/Images/icons/sort_descending.svg"
+                            onClicked: _sortOrderBtn.contentItem = Qt.createQmlObject(`
+                                        import QtQuick
+                                        Image { source: "qrc:/Images/icons/sort_descending.svg" }
+                                        `, _sortOrderBtn, "Icon")
                         }
                     }
                 } // Button sort
@@ -99,23 +118,35 @@ Page {
                 Button {
                     id: _availableOnlyBtn
                     Layout.preferredHeight: 40; Layout.preferredWidth: 40
+                    contentItem: Image {
+                        source: "qrc:/Images/icons/visible.svg"
+                    }
                     background: Rectangle {
                         border.width: 2
                         border.color: "#000"
                     }
                     onClicked: _availableOnlyMenu.open()
 
-            Grid {
                     Menu {
                         id: _availableOnlyMenu
 
                         MenuItem {
                             text: "Wszystkie sztuczki"
                             height: 40
+                            icon.source: "qrc:/Images/icons/visible.svg"
+                            onClicked: _availableOnlyBtn.contentItem = Qt.createQmlObject(`
+                                        import QtQuick
+                                        Image { source: "qrc:/Images/icons/visible.svg" }
+                                        `, _availableOnlyBtn, "Icon")
                         }
                         MenuItem {
                             text: "Dostępne sztuczki"
                             height: 40
+                            icon.source: "qrc:/Images/icons/non_visible.svg"
+                            onClicked: _availableOnlyBtn.contentItem = Qt.createQmlObject(`
+                                        import QtQuick
+                                        Image { source: "qrc:/Images/icons/non_visible.svg" }
+                                        `, _availableOnlyBtn, "Icon")
                         }
                     }
                 } // Button available
@@ -161,18 +192,25 @@ Page {
                                 left: _buyBtn.right
                             }
                             onHeightChanged: parent.height = height
+                            onShowDetails: function(source) {
+                                _trickDetails.contentItem.source = source
+                                _trickDetails.open()
+                            }
                         }
 
                         Button {
                             id: _buyBtn
-                            text: ">"
                             width: 40; height: parent.height
                             anchors.left: parent.left
+                            contentItem: Image {
+                                source: "qrc:/Images/icons/move_right.svg"
+                            }
                             background: Rectangle {
                                 color: model.available ? "green" : "red"
                                 border.width: 2
                                 border.color: "#000"
                             }
+                            onClicked: console.log("Buy trick")
                         }
                     } // Item
                 } // List
@@ -200,13 +238,16 @@ Page {
 
                         Button {
                             id: _sellBtn
-                            text: "<"
                             width: 40; height: parent.height
                             anchors.right: parent.right
+                            contentItem: Image {
+                                source: "qrc:/Images/icons/move_left.svg"
+                            }
                             background: Rectangle {
                                 border.width: 2
                                 border.color: "#000"
                             }
+                            onClicked: console.log("Sell trick")
                         }
                     } // Item
                 } // List
