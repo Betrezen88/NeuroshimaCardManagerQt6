@@ -3,5 +3,13 @@
         <file>Images/icons/info.svg</file>
         <file>Images/icons/add.svg</file>
         <file>Images/icons/remove.svg</file>
+        <file>Images/icons/sort_descending.svg</file>
+        <file>Images/icons/sort_ascending.svg</file>
+        <file>Images/icons/filter.svg</file>
+        <file>Images/icons/move_right.svg</file>
+        <file>Images/icons/move_left.svg</file>
+        <file>Images/icons/clear.svg</file>
+        <file>Images/icons/visible.svg</file>
+        <file>Images/icons/non_visible.svg</file>
     </qresource>
 </RCC>
