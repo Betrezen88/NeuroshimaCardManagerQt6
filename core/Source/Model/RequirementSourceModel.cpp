@@ -6,6 +6,13 @@ RequirementSourceModel::RequirementSourceModel(QObject *parent)
 
 }
 
+RequirementSourceModel::RequirementSourceModel(const QVector<RequirementSource *> &requirements, QObject *parent)
+    : QAbstractListModel{parent}
+    , m_requirments{requirements}
+{
+
+}
+
 int RequirementSourceModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);

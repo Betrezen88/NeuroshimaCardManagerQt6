@@ -21,7 +21,7 @@ public:
     };
 
     explicit RequirementSourceModel(QObject *parent = nullptr);
-    explicit RequirementSourceModel(QVector<RequirementSource*>* requirements, QObject *parent = nullptr);
+    explicit RequirementSourceModel(const QVector<RequirementSource*>& requirements, QObject *parent = nullptr);
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const;
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;

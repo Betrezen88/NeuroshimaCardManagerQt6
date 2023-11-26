@@ -10,6 +10,7 @@ TrickSourceItem::TrickSourceItem(const QString &sourceName, TrickSource *source,
     : QObject{parent}
     , m_sourceName{sourceName}
     , m_source{source}
+    , m_requirements{new RequirementSourceModel(m_source->requirementsVec(), this)}
 {
 
 }
