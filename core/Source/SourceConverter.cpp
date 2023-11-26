@@ -376,9 +376,9 @@ TrickSource *SourceConverter::trickSource(const QJsonObject &object)
 RequirementSource *SourceConverter::requirementSource(const QJsonObject &object)
 {
     auto stringToType = [](const QString& name){
-        if ( "Attribute" == name )
+        if ( QString("Attribute").toUpper() == name.toUpper() )
             return Types::Requirement::Attribute;
-        if ( "Skill" == name )
+        if ( QString("Skill").toUpper() == name.toUpper() )
             return Types::Requirement::Skill;
         return Types::Requirement::Profession;
     };
