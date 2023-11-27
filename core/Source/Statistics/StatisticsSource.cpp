@@ -5,8 +5,9 @@
 StatisticsSource::StatisticsSource(QObject *parent)
     : QObject{parent}
     , m_model{new TrickSourceModel(this)}
+    , m_sortModel{new TrickSourceSortFilterProxyModel(this)}
 {
-
+    m_sortModel->setSourceModel(m_model);
 }
 
 QQmlListProperty<OriginSource> StatisticsSource::origins()
@@ -112,11 +113,6 @@ qsizetype StatisticsSource::specializationsCount() const
 SpecializationSource *StatisticsSource::specialization(qsizetype index)
 {
     return m_specializations.at(index);
-}
-
-TrickSourceModel *StatisticsSource::model() const
-{
-    return m_model;
 }
 
 QStringList StatisticsSource::places() const
@@ -234,4 +230,14 @@ qsizetype StatisticsSource::specializationsCount(QQmlListProperty<Specialization
 SpecializationSource *StatisticsSource::specialization(QQmlListProperty<SpecializationSource> *list, qsizetype index)
 {
     return reinterpret_cast<StatisticsSource*>(list->data)->specialization(index);
+}
+
+TrickSourceSortFilterProxyModel *StatisticsSource::sortModel() const
+{
+    return m_sortModel;
+}
+
+TrickSortProxyModel *StatisticsSource::tricks() const
+{
+    return m_sortModel->model();
 }

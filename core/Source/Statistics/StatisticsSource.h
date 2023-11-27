@@ -13,6 +13,8 @@
 #include "TrickSource.h"
 
 #include "../Model/TrickSourceModel.h"
+#include "../Model/TrickSourceSortFilterProxyModel.h"
+#include "../Model/TrickSortProxyModel.h"
 
 class StatisticsSource : public QObject
 {
@@ -23,7 +25,8 @@ class StatisticsSource : public QObject
     Q_PROPERTY(QQmlListProperty<ProfessionSource> professions READ professions NOTIFY professionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<QuestionSource> questions READ questions NOTIFY questionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<SpecializationSource> specializations READ specializations NOTIFY specializationsChanged FINAL)
-    Q_PROPERTY(TrickSourceModel* model READ model CONSTANT)
+    Q_PROPERTY(TrickSourceSortFilterProxyModel* sortModel READ sortModel CONSTANT)
+    Q_PROPERTY(TrickSortProxyModel* tricks READ tricks CONSTANT)
     Q_PROPERTY(QStringList places READ places NOTIFY placesChanged FINAL)
     QML_ELEMENT
 
@@ -58,7 +61,9 @@ public:
 
     QStringList places() const;
 
-    TrickSourceModel *model() const;
+    TrickSourceSortFilterProxyModel* sortModel() const;
+
+    TrickSortProxyModel *tricks() const;
 
 signals:
     void attributesChanged();
@@ -114,6 +119,7 @@ private:
     QMap<QString, QVector<ProfessionSource*>> m_professionSource;
     QMap<QString, QVector<QuestionSource*>> m_questionSources;
     QMap<QString, QVector<TrickSource*>> m_trickSources;
+    TrickSourceSortFilterProxyModel *m_sortModel{nullptr};
 };
 
 #endif // STATISTICSSOURCE_H
