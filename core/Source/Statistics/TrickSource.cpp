@@ -52,6 +52,11 @@ RequirementSource *TrickSource::requirement(qsizetype index)
     return m_requirements.at(index);
 }
 
+QVector<RequirementSource *> TrickSource::requirementsVec()
+{
+    return m_requirements;
+}
+
 qsizetype TrickSource::requirementsCount(QQmlListProperty<RequirementSource> *list)
 {
     return reinterpret_cast<TrickSource*>(list->data)->requirementsCount();

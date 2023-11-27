@@ -32,6 +32,8 @@ public:
     qsizetype requirementsCount() const;
     RequirementSource* requirement(qsizetype index);
 
+    QVector<RequirementSource*> requirementsVec();
+
 private:
     static qsizetype requirementsCount(QQmlListProperty<RequirementSource> *list);
     static RequirementSource* requirement(QQmlListProperty<RequirementSource> *list, qsizetype index);
