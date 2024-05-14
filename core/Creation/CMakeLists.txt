@@ -6,6 +6,9 @@ qt_add_qml_module(Creation
     SOURCES
         Common/Types.h
 
+        Model/TrickCreationModel.h
+        Model/TrickCreationModel.cpp
+
         Statistics/AttributeCreation.h
         Statistics/AttributeCreation.cpp
         Statistics/OtherSkillCreation.h
