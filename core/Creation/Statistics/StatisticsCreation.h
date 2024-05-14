@@ -28,6 +28,7 @@ class StatisticsCreation : public QObject
     Q_PROPERTY(SpecializationSource* specialization READ specialization WRITE setSpecialization NOTIFY specializationChanged FINAL)
     Q_PROPERTY(SkillpointsCreationManager* skillpointsManager READ skillpointsManager CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("StatisticsCreation is uncreatable.")
 
 public:
     explicit StatisticsCreation(QObject *parent = nullptr);

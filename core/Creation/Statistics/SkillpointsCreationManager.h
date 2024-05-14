@@ -19,6 +19,7 @@ class SkillpointsCreationManager : public QObject
     Q_PROPERTY(int specializationSkillpoints READ specializationSkillpoints NOTIFY specializationSkillpointsChanged FINAL)
     Q_PROPERTY(int specializationSkillpointsMax READ specializationSkillpointsMax WRITE setSpecializationSkillpointsMax NOTIFY specializationSkillpointsMaxChanged FINAL)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillpointsCreationManager is uncreatable.")
 
 public:
     explicit SkillpointsCreationManager(QObject *parent = nullptr);

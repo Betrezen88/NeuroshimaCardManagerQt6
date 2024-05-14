@@ -17,6 +17,7 @@ class SkillpackCreation : public QObject
     Q_PROPERTY(QQmlListProperty<SkillCreation> skills READ skills CONSTANT)
     Q_PROPERTY(bool bought READ bought WRITE setBought NOTIFY boughtChanged FINAL)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillpackCreation is uncreatable.")
 
 public:
     explicit SkillpackCreation(QObject *parent = nullptr);

@@ -11,6 +11,7 @@ class SkillCreationList : public SkillCreation
     Q_PROPERTY(QString selected READ selected WRITE setSelected NOTIFY selectedChanged FINAL)
     Q_PROPERTY(QStringList list READ list CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillCreationList is uncreatable.")
 
 public:
     explicit SkillCreationList(QObject *parent = nullptr);

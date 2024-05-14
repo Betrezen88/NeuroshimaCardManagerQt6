@@ -15,6 +15,7 @@ class OtherSkillCreation : public QObject
     Q_PROPERTY(int max READ max CONSTANT)
     Q_PROPERTY(QString attributeShort READ attributeShort CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("OtherSkillCreation is uncreatable.")
 
 public:
     explicit OtherSkillCreation(QObject *parent = nullptr);

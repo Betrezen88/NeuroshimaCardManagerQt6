@@ -15,6 +15,7 @@ class SkillCreation : public QObject
     Q_PROPERTY(int min READ min NOTIFY minChanged FINAL)
     Q_PROPERTY(int max READ max NOTIFY maxChanged FINAL)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillCreation is uncreatable.")
 
 public:
     explicit SkillCreation(QObject *parent = nullptr);

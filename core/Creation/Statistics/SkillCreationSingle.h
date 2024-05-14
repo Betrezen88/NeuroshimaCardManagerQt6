@@ -9,6 +9,7 @@ class SkillCreationSingle : public SkillCreation
     Q_OBJECT
     Q_PROPERTY(TypesCreation::Skill type READ type CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillCreationSingle is uncreatable.")
 
 public:
     explicit SkillCreationSingle(QObject *parent = nullptr);

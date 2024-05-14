@@ -9,6 +9,7 @@ class SkillpackCreationGeneral : public SkillpackCreation
     Q_OBJECT
     Q_PROPERTY(TypesCreation::Skillpack type READ type CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillpackCreationGeneral is uncreatable.")
 
 public:
     explicit SkillpackCreationGeneral(QObject *parent = nullptr);

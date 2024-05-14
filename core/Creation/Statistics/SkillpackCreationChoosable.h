@@ -11,6 +11,7 @@ class SkillpackCreationChoosable : public SkillpackCreation
     Q_OBJECT
     Q_PROPERTY(TypesCreation::Skillpack type READ type CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillpackCreationChoosable is uncreatable.")
 
 public:
     explicit SkillpackCreationChoosable(QObject *parent = nullptr);

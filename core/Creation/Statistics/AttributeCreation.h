@@ -18,6 +18,7 @@ class AttributeCreation : public QObject
     Q_PROPERTY(int baseValue READ baseValue WRITE setBaseValue NOTIFY baseValueChanged FINAL)
     Q_PROPERTY(int bonus READ bonus WRITE setBonus NOTIFY bonusChanged FINAL)
     QML_ELEMENT
+    QML_UNCREATABLE("AttributeCreation is uncreatable.")
 
 public:
     explicit AttributeCreation(QObject *parent = nullptr);
