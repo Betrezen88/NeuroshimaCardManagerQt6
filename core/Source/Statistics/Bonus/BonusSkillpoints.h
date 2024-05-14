@@ -11,6 +11,7 @@ class BonusSkillpoints : public BonusSource
     Q_PROPERTY(QString specialization READ specialization CONSTANT)
     Q_PROPERTY(int value READ value CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("BonusSkillpoints is uncreatable.")
 
 public:
     explicit BonusSkillpoints(QObject *parent = nullptr);

@@ -14,6 +14,7 @@ class SymptomSource : public QObject
     Q_PROPERTY(QString description READ description CONSTANT)
     Q_PROPERTY(QQmlListProperty<ModifierSource> penalties READ penalties CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("SymptomSource is uncreatable.")
 
 public:
     explicit SymptomSource(QObject *parent = nullptr);

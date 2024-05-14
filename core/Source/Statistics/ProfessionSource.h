@@ -14,6 +14,7 @@ class ProfessionSource : public QObject
     Q_PROPERTY(QString quote READ quote CONSTANT)
     Q_PROPERTY(QQmlListProperty<FeatureSource> features READ features CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("ProfessionSource is uncreatable.")
 
 public:
     explicit ProfessionSource(QObject *parent = nullptr);

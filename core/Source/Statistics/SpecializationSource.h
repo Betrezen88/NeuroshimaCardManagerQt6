@@ -10,6 +10,7 @@ class SpecializationSource : public QObject
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(QString description READ description CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("SpecializationSource is uncreatable.")
 
 public:
     explicit SpecializationSource(QObject *parent = nullptr);

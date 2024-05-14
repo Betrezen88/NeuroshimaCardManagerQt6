@@ -9,6 +9,7 @@ class BonusTrick : public BonusSource
     Q_PROPERTY(Types::Bonus type READ type CONSTANT)
     Q_PROPERTY(QString name READ name CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("BonusTrick is uncreatable.")
 
 public:
     explicit BonusTrick(QObject *parent = nullptr);

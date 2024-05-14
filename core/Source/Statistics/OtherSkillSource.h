@@ -11,6 +11,7 @@ class OtherSkillSource : public QObject
     Q_PROPERTY(QString description READ description CONSTANT)
     Q_PROPERTY(QString attribute READ attribute CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("OtherSkillSource is uncreatable.")
 
 public:
     explicit OtherSkillSource(QObject *parent = nullptr);

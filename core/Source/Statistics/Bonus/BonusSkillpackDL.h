@@ -11,6 +11,7 @@ class BonusSkillpackDL : public BonusSource
     Q_PROPERTY(QStringList list READ list CONSTANT)
     Q_PROPERTY(QString selected READ selected WRITE setSelected NOTIFY selectedChanged FINAL)
     QML_ELEMENT
+    QML_UNCREATABLE("BonusSkillpackDL is uncreatable.")
 
 public:
     explicit BonusSkillpackDL(QObject *parent = nullptr);

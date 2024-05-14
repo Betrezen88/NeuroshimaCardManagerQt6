@@ -10,6 +10,7 @@ class SkillSource : public QObject
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(QString description READ description CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillSource is uncreatable.")
 
 public:
     explicit SkillSource(QObject *parent = nullptr);

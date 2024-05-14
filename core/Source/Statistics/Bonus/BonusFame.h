@@ -10,6 +10,7 @@ class BonusFame : public BonusSource
     Q_PROPERTY(int value READ value CONSTANT)
     Q_PROPERTY(int price READ price CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("BonusFame is uncreatable.")
 
 public:
     explicit BonusFame(QObject *parent = nullptr);

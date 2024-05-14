@@ -9,6 +9,7 @@ class BonusHealth : public BonusSource
     Q_OBJECT
     Q_PROPERTY(Types::Bonus type READ type CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("BonusHealth is uncreatable.")
 
 public:
     explicit BonusHealth(QObject *parent = nullptr);

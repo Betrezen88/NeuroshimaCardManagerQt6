@@ -11,6 +11,7 @@ class BonusSkillpack : public BonusSource
     Q_PROPERTY(int value READ value CONSTANT)
     Q_PROPERTY(Types::Bonus type READ type CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("BonusSkillpack is uncreatable.")
 
 public:
     explicit BonusSkillpack(QObject* parent = nullptr);

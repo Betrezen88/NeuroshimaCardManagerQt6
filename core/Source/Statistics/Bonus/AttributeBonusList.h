@@ -11,6 +11,7 @@ class AttributeBonusList : public AttributeBonusSource
     Q_PROPERTY(QStringList list READ list CONSTANT)
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
     QML_ELEMENT
+    QML_UNCREATABLE("AttributeBonusList is uncreatable.")
 
 public:
     explicit AttributeBonusList(QObject *parent = nullptr);

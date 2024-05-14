@@ -9,6 +9,7 @@ class BonusBeast : public BonusSource
     Q_OBJECT
     Q_PROPERTY(Types::Bonus type READ type CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("BonusBeast is uncreatable.")
 
 public:
     explicit BonusBeast(QObject *parent = nullptr);

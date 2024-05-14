@@ -14,6 +14,7 @@ class CardCreation : public QObject
     Q_PROPERTY(StatisticsSource* statisticsSource READ statisticsSource CONSTANT)
     Q_PROPERTY(StatisticsCreation* statisticsCreation READ statisticsCreation NOTIFY statisticsCreationChanged FINAL)
     QML_ELEMENT
+    QML_UNCREATABLE("CardCreation is uncreatable.")
 
 public:
     explicit CardCreation(QObject *parent = nullptr);

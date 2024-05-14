@@ -15,6 +15,7 @@ class TrickSource : public QObject
     Q_PROPERTY(QString action READ action CONSTANT)
     Q_PROPERTY(QQmlListProperty<RequirementSource> requirements READ requirements CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("TrickSource is uncreatable.")
 
 public:
     explicit TrickSource(QObject *parent = nullptr);

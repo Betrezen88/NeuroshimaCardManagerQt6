@@ -10,6 +10,7 @@ class AttributeBonusSource : public QObject
     Q_OBJECT
     Q_PROPERTY(int value READ value CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("AttributeBonusSource is uncreatable.")
 
 public:
     explicit AttributeBonusSource(QObject* parent = nullptr) : QObject{parent} {}

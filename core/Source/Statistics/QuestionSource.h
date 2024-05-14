@@ -10,6 +10,7 @@ class QuestionSource : public QObject
     Q_PROPERTY(QString question READ question CONSTANT)
     Q_PROPERTY(QString description READ description CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("QuestionSource is uncreatable.")
 
 public:
     explicit QuestionSource(QObject *parent = nullptr);

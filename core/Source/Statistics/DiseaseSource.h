@@ -15,6 +15,7 @@ class DiseaseSource : public QObject
     Q_PROPERTY(QString cure READ cure CONSTANT)
     Q_PROPERTY(QQmlListProperty<SymptomSource> symptoms READ symptoms CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("DiseaseSource is uncreatable.")
 
 public:
     explicit DiseaseSource(QObject *parent = nullptr);

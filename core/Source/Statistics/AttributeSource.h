@@ -14,6 +14,8 @@ class AttributeSource : public QObject
     Q_PROPERTY(QString description READ description CONSTANT)
     Q_PROPERTY(QQmlListProperty<SkillpackSource> skillpacks READ skillpacks CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("AttributeSource is uncreatable.")
+
 public:
     explicit AttributeSource(QObject *parent = nullptr);
     explicit AttributeSource(const QString& name,

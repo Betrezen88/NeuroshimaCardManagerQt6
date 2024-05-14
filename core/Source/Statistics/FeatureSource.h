@@ -12,6 +12,7 @@ class FeatureSource : public QObject
     Q_PROPERTY(QString description READ description CONSTANT)
     Q_PROPERTY(BonusSource* bonus READ bonus CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("FeatureSource is uncreatable.")
 
 public:
     explicit FeatureSource(QObject *parent = nullptr);

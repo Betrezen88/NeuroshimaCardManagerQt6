@@ -9,6 +9,7 @@ class BonusFeatures : public BonusSource
     Q_OBJECT
     Q_PROPERTY(Types::Bonus type READ type CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("BonusFeatures is uncreatable.")
 
 public:
     explicit BonusFeatures(QObject *parent = nullptr);

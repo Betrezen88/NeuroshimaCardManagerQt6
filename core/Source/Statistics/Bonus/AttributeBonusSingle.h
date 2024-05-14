@@ -9,6 +9,7 @@ class AttributeBonusSingle : public AttributeBonusSource
     Q_PROPERTY(Types::AttributeBonus type READ type CONSTANT)
     Q_PROPERTY(QString name READ name CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("AttributeBonusSingle is uncreatable.")
 
 public:
     explicit AttributeBonusSingle(QObject *parent = nullptr);

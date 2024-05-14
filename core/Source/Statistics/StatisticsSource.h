@@ -19,6 +19,7 @@
 class StatisticsSource : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(QQmlListProperty<AttributeSource> attributes READ attributes NOTIFY attributesChanged FINAL)
     Q_PROPERTY(QQmlListProperty<DiseaseSource> diseases READ diseases NOTIFY diseasesChanged FINAL)
     Q_PROPERTY(QQmlListProperty<OriginSource> origins READ origins NOTIFY originsChanged FINAL)
@@ -28,7 +29,7 @@ class StatisticsSource : public QObject
     Q_PROPERTY(TrickSourceSortFilterProxyModel* sortModel READ sortModel CONSTANT)
     Q_PROPERTY(TrickSortProxyModel* tricks READ tricks CONSTANT)
     Q_PROPERTY(QStringList places READ places NOTIFY placesChanged FINAL)
-    QML_ELEMENT
+    QML_UNCREATABLE("StatisticsSource is uncreatable.")
 
 public:
     explicit StatisticsSource(QObject *parent = nullptr);

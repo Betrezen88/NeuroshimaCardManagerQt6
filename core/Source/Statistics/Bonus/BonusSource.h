@@ -9,6 +9,7 @@ class BonusSource : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
+    QML_UNCREATABLE("BonusSource is uncreatable.")
 
 public:
     explicit BonusSource(QObject* parent = nullptr): QObject{parent} {}

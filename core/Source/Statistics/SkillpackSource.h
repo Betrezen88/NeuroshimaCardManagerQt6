@@ -14,6 +14,7 @@ class SkillpackSource : public QObject
     Q_PROPERTY(QStringList specializations READ specializations CONSTANT)
     Q_PROPERTY(QQmlListProperty<SkillSource> skills READ skills CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("SkillpackSource is uncreatable.")
 
 public:
     explicit SkillpackSource(QObject *parent = nullptr);

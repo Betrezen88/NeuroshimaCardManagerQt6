@@ -16,6 +16,7 @@ class OriginSource : public QObject
     Q_PROPERTY(QQmlListProperty<FeatureSource> features READ features CONSTANT)
     Q_PROPERTY(AttributeBonusSource* bonus READ bonus CONSTANT)
     QML_ELEMENT
+    QML_UNCREATABLE("OriginSource is uncreatable.")
 
 public:
     explicit OriginSource(QObject *parent = nullptr);
