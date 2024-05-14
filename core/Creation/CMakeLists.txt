@@ -26,6 +26,8 @@ qt_add_qml_module(Creation
         Statistics/SkillpointsCreationManager.cpp
         Statistics/StatisticsCreation.h
         Statistics/StatisticsCreation.cpp
+        Statistics/TrickCreation.h
+        Statistics/TrickCreation.cpp
 
         CardCreation.h
         CardCreation.cpp
