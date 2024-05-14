@@ -20,6 +20,14 @@ TrickSource::TrickSource(const QString &name,
 
 }
 
+bool TrickSource::operator==(const TrickSource &other)
+{
+    return m_name == other.name()
+           && m_description == other.description()
+           && m_action == other.action()
+           && m_requirements.count() == other.requirementsCount();
+}
+
 QString TrickSource::name() const
 {
     return m_name;

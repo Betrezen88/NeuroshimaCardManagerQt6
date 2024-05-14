@@ -25,6 +25,8 @@ public:
                          const QVector<RequirementSource*>& requirements,
                          QObject* parent = nullptr);
 
+    bool operator==(const TrickSource& other);
+
     QString name() const;
     QString description() const;
     QString action() const;
