@@ -7,18 +7,21 @@
 
 #include "AttributeCreation.h"
 #include "OtherSkillCreation.h"
+#include "TrickCreation.h"
 
 #include <DiseaseSource.h>
 #include <OriginSource.h>
 #include <ProfessionSource.h>
 #include <SkillpointsCreationManager.h>
 #include <SpecializationSource.h>
+#include <TrickSource.h>
 
 class StatisticsCreation : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<AttributeCreation> attributes READ attributes CONSTANT)
     Q_PROPERTY(QQmlListProperty<OtherSkillCreation> otherSkills READ otherSkills NOTIFY otherSkillsChanged FINAL)
+    Q_PROPERTY(QQmlListProperty<TrickCreation> tricks READ tricks NOTIFY tricksChanged FINAL)
     Q_PROPERTY(DiseaseSource* disease READ disease WRITE setDisease NOTIFY diseaseChanged FINAL)
     Q_PROPERTY(OriginSource* origin READ origin WRITE setOrigin NOTIFY originChanged FINAL)
     Q_PROPERTY(FeatureSource* originFeature READ originFeature WRITE setOriginFeature NOTIFY originFeatureChanged FINAL)
@@ -70,6 +73,10 @@ public:
     Q_INVOKABLE void removeOtherSkill(OtherSkillCreation* otherSkill);
     Q_INVOKABLE bool isSkillNameTaken(const QString& name);
 
+    QQmlListProperty<TrickCreation> tricks();
+    qsizetype tricksCount() const;
+    TrickCreation* trick(qsizetype index);
+
     SkillpointsCreationManager* skillpointsManager() const;
 
 signals:
@@ -86,6 +93,7 @@ signals:
     void applyFeatureBonus(const BonusSource* bonus);
     void removeFeatureBonus(const BonusSource* bonus);
     void otherSkillsChanged();
+    void tricksChanged();
 
 private slots:
     void onRemoveAttributeBonus(const AttributeBonusSource *bonus);
@@ -105,6 +113,9 @@ private:
     static qsizetype otherSkillsCount(QQmlListProperty<OtherSkillCreation> *list);
     static OtherSkillCreation *otherSkill(QQmlListProperty<OtherSkillCreation> *list, qsizetype index);
 
+    static qsizetype tricksCount(QQmlListProperty<TrickCreation> *list);
+    static TrickCreation* trick(QQmlListProperty<TrickCreation> *list, qsizetype index);
+
 private:
     DiseaseSource *m_disease{nullptr};
     OriginSource *m_origin{nullptr};
@@ -116,6 +127,7 @@ private:
     QVector<AttributeCreation*> m_attributes;
     QVector<OtherSkillCreation*> m_otherSkills;
     SkillpointsCreationManager* m_skillpointsManager{nullptr};
+    QVector<TrickCreation*> m_tricks;
 };
 
 #endif // STATISTICSCREATION_H

@@ -381,7 +381,34 @@ OtherSkillCreation* StatisticsCreation::otherSkill(QQmlListProperty<OtherSkillCr
     return reinterpret_cast<StatisticsCreation*>(list->data)->otherSkill(index);
 }
 
+qsizetype StatisticsCreation::tricksCount(QQmlListProperty<TrickCreation> *list)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->tricksCount();
+}
+
+TrickCreation *StatisticsCreation::trick(QQmlListProperty<TrickCreation> *list, qsizetype index)
+{
+    return  reinterpret_cast<StatisticsCreation*>(list->data)->trick(index);
+}
+
 SkillpointsCreationManager *StatisticsCreation::skillpointsManager() const
 {
     return m_skillpointsManager;
+}
+
+QQmlListProperty<TrickCreation> StatisticsCreation::tricks()
+{
+    return QQmlListProperty<TrickCreation>(this, this,
+                                           &StatisticsCreation::tricksCount,
+                                           &StatisticsCreation::trick);
+}
+
+qsizetype StatisticsCreation::tricksCount() const
+{
+    return m_tricks.count();
+}
+
+TrickCreation *StatisticsCreation::trick(qsizetype index)
+{
+    return m_tricks.at(index);
 }
