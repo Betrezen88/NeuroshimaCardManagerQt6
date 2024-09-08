@@ -15,16 +15,22 @@ Item {
 
     ColumnLayout {
         width: _root.width
+
+        onImplicitHeightChanged: _root.implicitHeight = implicitHeight
+
         Label {
+            id: _name
             text: source?.name ?? ""
             font.bold: true
             font.pointSize: 14
             color: "#000"
-            Layout.alignment: Qt.AlignHCenter
+            horizontalAlignment: Text.AlignHCenter
+            Layout.fillWidth: true
         } // Label
 
         RowLayout {
-            Layout.preferredWidth: _root.width
+            Layout.fillWidth: true
+
             Text {
                 text: "Wymagania: "
                 font.bold: true
@@ -34,7 +40,6 @@ Item {
             Flow {
                 spacing: 2
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
                 Repeater {
                     model: source?.requirements ?? []
                     delegate: Text {
@@ -47,12 +52,10 @@ Item {
         } // RowLayout
 
         RowLayout {
-            Layout.preferredWidth: _root.width
             Text {
                 text: "Opis: "
                 font.bold: true
                 font.pointSize: 12
-                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignTop
             }
             Text {
@@ -64,12 +67,10 @@ Item {
         } // RowLayout
 
         RowLayout {
-            Layout.preferredWidth: _root.width
             Text {
                 text: "Akcja: "
                 font.bold: true
                 font.pointSize: 12
-                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignTop
             }
             Text {
@@ -80,22 +81,13 @@ Item {
             }
         } // RowLayout
 
-        RowLayout {
-            Layout.preferredWidth: _root.width
+        Button {
+            text: "Zamknij"
+            Layout.preferredHeight: 40
+            onClicked: _root.close()
+            Layout.alignment:  Qt.AlignBottom | Qt.AlignRight
+            Layout.bottomMargin: 10
+        } // Button
 
-            Button {
-                text: "Zamknij"
-                Layout.preferredHeight: 40
-                Layout.alignment: Qt.AlignLeft
-                onClicked: _root.close()
-            }
-            Button {
-                text: "Dodaj"
-                Layout.preferredHeight: 40
-                Layout.alignment: Qt.AlignRight
-                onClicked: _root.add(_root.source)
-            }
-        } // RowLayout
     } // ColumnLayout
-
 } // Item
