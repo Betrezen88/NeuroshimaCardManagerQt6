@@ -94,6 +94,10 @@ signals:
     void removeFeatureBonus(const BonusSource* bonus);
     void otherSkillsChanged();
     void tricksChanged();
+    void trickSold(TrickSource *trick);
+
+public slots:
+    void onTrickBougth(TrickSource* trick);
 
 private slots:
     void onRemoveAttributeBonus(const AttributeBonusSource *bonus);
@@ -102,6 +106,7 @@ private slots:
     void onRemoveFeatureBonus(const BonusSource* bonus);
     void onAttributeBonusListChanged(const QString& from, const QString& to);
     void onSkillpackChanged(const QString& from, const QString& to, const int value);
+    void onTrickSold(TrickSource *trick);
 
 private:
     void init();

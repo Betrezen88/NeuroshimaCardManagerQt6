@@ -322,10 +322,19 @@ void StatisticsCreation::onSkillpackChanged(const QString &from, const QString &
     if ( toSkillpack != nullptr ) {
         toSkillpack->increaseSkillsBy(value);
     }
+void StatisticsCreation::onTrickSold(TrickSource *trick)
+{
+    auto found = std::find_if(m_tricks.constBegin(), m_tricks.constEnd(), [&trick](const TrickCreation *trickItem){
+        return trickItem->source() == trick;
+    });
+    m_tricks.takeAt(m_tricks.indexOf(*found))->deleteLater();
+    emit tricksChanged();
 }
 
 void StatisticsCreation::init()
 {
+    connect(this, &StatisticsCreation::trickSold, this, &StatisticsCreation::onTrickSold);
+
     connect(this, &StatisticsCreation::specializationChangedTo, m_skillpointsManager, &SkillpointsCreationManager::setSpecialization);
     connect(this, &StatisticsCreation::applyAttributeBonus, this, &StatisticsCreation::onApplyAttributeBonus);
     connect(this, &StatisticsCreation::removeAttributeBonus, this, &StatisticsCreation::onRemoveAttributeBonus);
@@ -394,6 +403,12 @@ TrickCreation *StatisticsCreation::trick(QQmlListProperty<TrickCreation> *list, 
 SkillpointsCreationManager *StatisticsCreation::skillpointsManager() const
 {
     return m_skillpointsManager;
+}
+
+void StatisticsCreation::onTrickBougth(TrickSource *trick)
+{
+    m_tricks.append(new TrickCreation(trick, this));
+    emit tricksChanged();
 }
 
 QQmlListProperty<TrickCreation> StatisticsCreation::tricks()
