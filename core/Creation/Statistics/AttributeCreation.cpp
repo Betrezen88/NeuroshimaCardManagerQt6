@@ -33,7 +33,7 @@ AttributeSource *AttributeCreation::source() const
     return m_source;
 }
 
-const QVector<SkillpackCreation *> &AttributeCreation::skillpacks() const
+const QVector<SkillpackCreation *> AttributeCreation::skillpacks() const
 {
     return m_skillpacks;
 }

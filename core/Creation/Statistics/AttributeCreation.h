@@ -26,7 +26,7 @@ public:
 
     AttributeSource *source() const;
 
-    const QVector<SkillpackCreation *>& skillpacks() const;
+    const QVector<SkillpackCreation *> skillpacks() const;
 
     QQmlListProperty<SkillpackCreation> skillpacks();
     qsizetype skillpacksCount() const;
