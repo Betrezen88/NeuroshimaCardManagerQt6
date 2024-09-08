@@ -27,7 +27,6 @@ void AvailableFilterProxyModel::setFilterByAvailability(const bool newFilterByAv
 
 bool AvailableFilterProxyModel::filterAcceptsRow(int row, const QModelIndex &parent) const
 {
-    qDebug() << "AvailableFilterProxyModel::filterAcceptsRow() " << row;
     if (sourceModel() == nullptr)
         return false;
 

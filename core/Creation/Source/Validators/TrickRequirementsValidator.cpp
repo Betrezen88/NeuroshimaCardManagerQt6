@@ -7,7 +7,6 @@ TrickRequirementsValidator::TrickRequirementsValidator(QObject *parent)
 void TrickRequirementsValidator::validate(const QVector<AttributeCreation *> &attributes, const QVector<TrickSourceItem *> &tricks)
 {
     for (TrickSourceItem* trick: tricks) {
-        qDebug() <<  trick->source()->name();
         const auto requirements = trick->source()->requirementsVec();
 
         bool available{true};
