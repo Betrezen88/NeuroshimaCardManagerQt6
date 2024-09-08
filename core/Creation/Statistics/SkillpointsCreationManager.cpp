@@ -42,6 +42,11 @@ void SkillpointsCreationManager::setSpecializationSkillpointsMax(int newSpeciali
     emit specializationSkillpointsMaxChanged();
 }
 
+int SkillpointsCreationManager::tricksCount() const
+{
+    return m_trickCount;
+}
+
 bool SkillpointsCreationManager::canSkillpackBeBought(const QString &specialization)
 {
     return availablePoints(specialization) >= 5;
@@ -50,6 +55,11 @@ bool SkillpointsCreationManager::canSkillpackBeBought(const QString &specializat
 bool SkillpointsCreationManager::canSkillBeIncreased(const QString &specialization, const int value)
 {
     return availablePoints(specialization) >= value;
+}
+
+bool SkillpointsCreationManager::canTrickBeBought()
+{
+    return m_trickCount == 0;
 }
 
 void SkillpointsCreationManager::onSkillpackBought(const QStringList &specializations)
@@ -100,6 +110,16 @@ void SkillpointsCreationManager::onSkillSold(const QStringList &specializations,
     else {
         setGeneralSkillpoints( m_general.current + cost );
     }
+}
+
+void SkillpointsCreationManager::onTrickBought()
+{
+    ++m_trickCount;
+}
+
+void SkillpointsCreationManager::onTrickSold()
+{
+    --m_trickCount;
 }
 
 int SkillpointsCreationManager::availablePoints(const QString &specialization)

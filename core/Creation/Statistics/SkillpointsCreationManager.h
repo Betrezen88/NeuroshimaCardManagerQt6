@@ -18,6 +18,7 @@ class SkillpointsCreationManager : public QObject
     Q_PROPERTY(int generalSkillpoints READ generalSkillpoints NOTIFY generalSkillpointsChanged FINAL)
     Q_PROPERTY(int specializationSkillpoints READ specializationSkillpoints NOTIFY specializationSkillpointsChanged FINAL)
     Q_PROPERTY(int specializationSkillpointsMax READ specializationSkillpointsMax WRITE setSpecializationSkillpointsMax NOTIFY specializationSkillpointsMaxChanged FINAL)
+    Q_PROPERTY(int tricksCount READ tricksCount NOTIFY tricksCountChanged FINAL)
     QML_ELEMENT
     QML_UNCREATABLE("SkillpointsCreationManager is uncreatable.")
 
@@ -33,20 +34,26 @@ public:
     int specializationSkillpointsMax() const;
     void setSpecializationSkillpointsMax(int newSpecializationSkillpointsMax);
 
+    int tricksCount() const;
+
     Q_INVOKABLE bool canSkillpackBeBought(const QString& specialization);
     Q_INVOKABLE bool canSkillBeIncreased(const QString& specialization, const int value);
+    Q_INVOKABLE bool canTrickBeBought();
 
 signals:
     void specializationChanged();
     void generalSkillpointsChanged();
     void specializationSkillpointsChanged();
     void specializationSkillpointsMaxChanged();
+    void tricksCountChanged();
 
 public slots:
     void onSkillpackBought(const QStringList& specializations);
     void onSkillpackSold(const QStringList& specializations);
     void onSkillBought(const QStringList &specializations, const int value);
     void onSkillSold(const QStringList &specializations, const int value);
+    void onTrickBought();
+    void onTrickSold();
 
 private:
     int availablePoints(const QString& specialization);
@@ -61,6 +68,7 @@ private:
     Skillpoints m_general{35, 35};
     Skillpoints m_specializations{30, 30};
     const int m_skillpackCost{5};
+    int m_trickCount{0};
 };
 
 #endif // SKILLPOINTSCREATIONMANAGER_H
