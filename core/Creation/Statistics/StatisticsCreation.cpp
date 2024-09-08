@@ -253,6 +253,7 @@ void StatisticsCreation::onApplyAttributeBonus(const AttributeBonusSource *bonus
         const AttributeBonusList* listBonus = static_cast<const AttributeBonusList*>(bonus);
         connect(listBonus, &AttributeBonusList::nameWasChanged, this, &StatisticsCreation::onAttributeBonusListChanged);
     }
+    emit statsChanged( m_attributes );
 }
 
 void StatisticsCreation::onApplyFeatureBonus(const BonusSource *bonus)
@@ -322,6 +323,9 @@ void StatisticsCreation::onSkillpackChanged(const QString &from, const QString &
     if ( toSkillpack != nullptr ) {
         toSkillpack->increaseSkillsBy(value);
     }
+    emit statsChanged( m_attributes );
+}
+
 void StatisticsCreation::onTrickSold(TrickSource *trick)
 {
     auto found = std::find_if(m_tricks.constBegin(), m_tricks.constEnd(), [&trick](const TrickCreation *trickItem){
@@ -342,14 +346,27 @@ void StatisticsCreation::init()
     connect(this, &StatisticsCreation::removeFeatureBonus, this, &StatisticsCreation::onRemoveFeatureBonus);
 
     for ( const AttributeCreation* attribute: m_attributes ) {
+        connect(attribute, &AttributeCreation::valueChanged, this, [this](){ emit this->statsChanged(m_attributes); });
+        connect(attribute, &AttributeCreation::bonusChanged, this, [this](){ emit this->statsChanged(m_attributes); });
         for ( const SkillpackCreation* skillpack: attribute->skillpacks() ) {
             connect(skillpack, &SkillpackCreation::skillIncreased, m_skillpointsManager, &SkillpointsCreationManager::onSkillBought);
+            connect(skillpack, &SkillpackCreation::skillIncreased, this, [this](const QStringList& specializations, const int level){
+                Q_UNUSED(specializations)
+                Q_UNUSED(level)
+                emit this->statsChanged(m_attributes);
+            });
             connect(skillpack, &SkillpackCreation::skillDecreased, m_skillpointsManager, &SkillpointsCreationManager::onSkillSold);
-            connect(skillpack, &SkillpackCreation::boughtChanged, [this, skillpack](const bool bought){
+            connect(skillpack, &SkillpackCreation::skillIncreased, this, [this](const QStringList& specializations, const int level){
+                Q_UNUSED(specializations)
+                Q_UNUSED(level)
+                emit this->statsChanged(m_attributes);
+            });
+            connect(skillpack, &SkillpackCreation::boughtChanged, this, [this, skillpack](const bool bought){
                 if ( bought )
                     m_skillpointsManager->onSkillpackBought(skillpack->source()->specializations());
                 else
                     m_skillpointsManager->onSkillpackSold(skillpack->source()->specializations());
+                emit this->statsChanged(m_attributes);
             });
         }
     }

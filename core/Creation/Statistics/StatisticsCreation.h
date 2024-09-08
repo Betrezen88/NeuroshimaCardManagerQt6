@@ -95,6 +95,7 @@ signals:
     void otherSkillsChanged();
     void tricksChanged();
     void trickSold(TrickSource *trick);
+    void statsChanged(QVector<AttributeCreation*> attributes);
 
 public slots:
     void onTrickBougth(TrickSource* trick);
