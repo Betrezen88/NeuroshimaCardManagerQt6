@@ -18,6 +18,11 @@ SkillpackSource *SkillpackCreation::source() const
     return m_source;
 }
 
+QVector<SkillCreation *> SkillpackCreation::skills() const
+{
+    return m_skills;
+}
+
 QQmlListProperty<SkillCreation> SkillpackCreation::skills()
 {
     return QQmlListProperty<SkillCreation>(this, this,

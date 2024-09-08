@@ -8,7 +8,7 @@
 #include <SkillpackSource.h>
 
 #include "SkillCreation.h"
-#include "Common/Types.h"
+#include "../Common/Types.h"
 
 class SkillpackCreation : public QObject
 {
@@ -26,6 +26,8 @@ public:
     virtual TypesCreation::Skillpack type() const = 0;
 
     SkillpackSource *source() const;
+
+    QVector<SkillCreation*> skills() const;
 
     QQmlListProperty<SkillCreation> skills();
     qsizetype skillsCount() const;
