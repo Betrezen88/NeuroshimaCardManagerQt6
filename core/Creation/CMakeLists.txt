@@ -1,5 +1,7 @@
 find_package(Qt6 6.4 COMPONENTS Core Qml)
 
+add_subdirectory(Source)
+
 qt_add_qml_module(Creation
     URI core.creation
     VERSION 1.0
@@ -38,9 +40,10 @@ qt_add_qml_module(Creation
 
 target_include_directories(Creation
     PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/Common
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics
-        ${CMAKE_CURRENT_SOURCE_DIR}/../Source/Statistics
-        ${CMAKE_CURRENT_SOURCE_DIR}/../Source/Statistics/Bonus
+        ${CMAKE_CURRENT_SOURCE_DIR}/Source/Statistics
+        ${CMAKE_CURRENT_SOURCE_DIR}/Source/Statistics/Bonus
 )
 
 target_link_libraries(Creation

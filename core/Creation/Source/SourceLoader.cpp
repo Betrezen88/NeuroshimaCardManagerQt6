@@ -1,6 +1,6 @@
 #include "SourceLoader.h"
 
-#include "../Utils/JsonLoader.h"
+#include "../../Utils/JsonLoader.h"
 
 #include <QDir>
 #include <QJsonArray>
@@ -47,3 +47,7 @@ void SourceLoader::load()
     }
 }
 
+void SourceLoader::onError(const QString &message)
+{
+    qDebug() << "onError: " << message;
+}

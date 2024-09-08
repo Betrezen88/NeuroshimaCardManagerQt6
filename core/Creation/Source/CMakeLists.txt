@@ -11,6 +11,8 @@ qt_add_qml_module(Source
 
         Model/AvailableFilterProxyModel.cpp
         Model/AvailableFilterProxyModel.h
+        Model/BougthFilterProxyModel.h
+        Model/BougthFilterProxyModel.cpp
         Model/NameFilterProxyModel.cpp
         Model/NameFilterProxyModel.h
         Model/RequirementFilterProxyModel.cpp
@@ -81,6 +83,7 @@ qt_add_qml_module(Source
         Statistics/TrickSource.cpp
         Statistics/TrickSource.h
 
+
         SourceConverter.cpp
         SourceConverter.h
         SourceDocument.cpp
@@ -95,6 +98,8 @@ target_include_directories(Source
         ${CMAKE_CURRENT_SOURCE_DIR}/Model
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics/Bonus
+        ${CMAKE_CURRENT_SOURCE_DIR}../Creation/Common/
+        ${CMAKE_CURRENT_SOURCE_DIR}../Creation/Statistics/
 )
 
 target_link_libraries(Source

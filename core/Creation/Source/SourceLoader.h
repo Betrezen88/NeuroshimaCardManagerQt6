@@ -16,6 +16,9 @@ public:
 
 signals:
     void sendSourceDocument(const SourceDocument& document);
+
+private slots:
+    void onError(const QString& message);
 };
 
 #endif // SOURCELOADER_H

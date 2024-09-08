@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#include "BougthFilterProxyModel.h"
 #include "NameFilterProxyModel.h"
 #include "RequirementFilterProxyModel.h"
 #include "AvailableFilterProxyModel.h"
@@ -51,6 +52,7 @@ private:
     NameFilterProxyModel *m_nameFilter{nullptr};
     RequirementFilterProxyModel *m_requirementFilter{nullptr};
     AvailableFilterProxyModel *m_availableFilter{nullptr};
+    BougthFilterProxyModel *m_bougthFilter{nullptr};
     TrickSortProxyModel *m_sortModel{nullptr};
     bool m_ascendingOrder{true};
     QString m_pattern;

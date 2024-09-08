@@ -42,3 +42,16 @@ RequirementSourceModel *TrickSourceItem::requirements() const
 {
     return m_requirements;
 }
+
+bool TrickSourceItem::bought() const
+{
+    return m_bought;
+}
+
+void TrickSourceItem::setBought(bool newBought)
+{
+    if (m_bought == newBought)
+        return;
+    m_bought = newBought;
+    emit boughtChanged();
+}

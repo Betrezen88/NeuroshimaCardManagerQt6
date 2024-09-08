@@ -35,6 +35,9 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
     case SourceDocument::Type::Diseases:
         convertDiseases(document);
         break;
+    case SourceDocument::Type::Features:
+        qDebug() << "Converting attributes.";
+        break;
     case SourceDocument::Type::Origins:
         convertOrigins(document);
         break;

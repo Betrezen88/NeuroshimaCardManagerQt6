@@ -1,4 +1,7 @@
 #include "StatisticsSource.h"
+#include "Validators/TrickRequirementsValidator.h"
+
+#include "../../Statistics/AttributeCreation.h"
 
 #include <QDebug>
 
@@ -170,6 +173,17 @@ void StatisticsSource::addTricks(const QString &name, const QVector<TrickSource 
 void StatisticsSource::addPlaces(const QStringList &places)
 {
     m_places = places;
+}
+
+void StatisticsSource::onTrickSold(TrickSource *trick)
+{
+    qDebug() << "Trick sold " << trick->name();
+}
+
+void StatisticsSource::onStatsChanged(QVector<AttributeCreation *> attributes)
+{
+    TrickRequirementsValidator validator(this);
+    validator.validate(attributes, m_model->tricks());
 }
 
 qsizetype StatisticsSource::attribtuesCount(QQmlListProperty<AttributeSource> *list)

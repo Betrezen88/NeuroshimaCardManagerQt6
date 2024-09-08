@@ -5,7 +5,8 @@ TrickSourceSortFilterProxyModel::TrickSourceSortFilterProxyModel(QObject *parent
     , m_nameFilter{new NameFilterProxyModel(this)}
     , m_requirementFilter{new RequirementFilterProxyModel(m_nameFilter, this)}
     , m_availableFilter{new AvailableFilterProxyModel(m_requirementFilter, this)}
-    , m_sortModel{new TrickSortProxyModel(m_availableFilter, this)}
+    , m_bougthFilter{new BougthFilterProxyModel(m_availableFilter, this)}
+    , m_sortModel{new TrickSortProxyModel(m_bougthFilter, this)}
 {
     connect(this, &TrickSourceSortFilterProxyModel::sourceModelChanged, this, [this](){
         m_nameFilter->setSourceModel(sourceModel());

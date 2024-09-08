@@ -16,6 +16,8 @@
 #include "../Model/TrickSourceSortFilterProxyModel.h"
 #include "../Model/TrickSortProxyModel.h"
 
+class AttributeCreation;
+
 class StatisticsSource : public QObject
 {
     Q_OBJECT
@@ -75,6 +77,7 @@ signals:
     void tricksChanged();
     void placesChanged();
     void questionsChanged();
+    void trickBougth(TrickSource* trick);
 
 public slots:
     void addAttributes(const QVector<AttributeSource*>& attributes);
@@ -85,6 +88,8 @@ public slots:
     void addSpecializations(const QVector<SpecializationSource*>& specializations);
     void addTricks(const QString& name, const QVector<TrickSource *> &tricks);
     void addPlaces(const QStringList& places);
+    void onTrickSold(TrickSource *trick);
+    void onStatsChanged(QVector<AttributeCreation*> attributes);
 
 private:
     static qsizetype attribtuesCount(QQmlListProperty<AttributeSource> *list);

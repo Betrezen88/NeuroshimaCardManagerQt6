@@ -12,6 +12,7 @@ RequirementSource::RequirementSource(const Types::Requirement type,
                                      const bool optional,
                                      QObject *parent)
     : QObject{parent}
+    , m_type{type}
     , m_name{name}
     , m_value{value}
     , m_optional{optional}

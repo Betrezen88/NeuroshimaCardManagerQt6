@@ -16,7 +16,8 @@ public:
     enum TrickRoles {
         SourceRole = Qt::UserRole+1,
         RequirementsRole,
-        AvailableRole
+        AvailableRole,
+        Bougth
     };
 
     explicit TrickSourceModel(QObject *parent = nullptr);
@@ -25,6 +26,8 @@ public:
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
     void addTricks(const QString& name, const QVector<TrickSource*>& tricks);
+
+    QVector<TrickSourceItem*> tricks() const;
 
 protected:
     QHash<int, QByteArray> roleNames() const;
