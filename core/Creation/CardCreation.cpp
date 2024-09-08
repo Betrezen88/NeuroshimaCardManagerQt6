@@ -34,6 +34,11 @@ void CardCreation::init()
     }
 
     m_statisticsCreation = new StatisticsCreation( attributes, this );
+
+    connect(m_statisticsSource, &StatisticsSource::trickBougth, m_statisticsCreation, &StatisticsCreation::onTrickBougth);
+    connect(m_statisticsCreation, &StatisticsCreation::trickSold, m_statisticsSource, &StatisticsSource::onTrickSold);
+    connect(m_statisticsCreation, &StatisticsCreation::statsChanged, m_statisticsSource, &StatisticsSource::onStatsChanged);
+
     emit statisticsCreationChanged();
 
     m_statisticsCreation->setOrigin( m_statisticsSource->origin(0) );
