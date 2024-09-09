@@ -6,7 +6,6 @@
 
 StatisticsCreation::StatisticsCreation(QObject *parent)
     : QObject{parent}
-    , m_skillpointsManager(new SkillpointsCreationManager(this))
 {
     init();
 }
@@ -14,7 +13,6 @@ StatisticsCreation::StatisticsCreation(QObject *parent)
 StatisticsCreation::StatisticsCreation(const QVector<AttributeCreation *> &attributes, QObject *parent)
     : QObject{parent}
     , m_attributes{attributes}
-    , m_skillpointsManager(new SkillpointsCreationManager(this))
 {
     init();
     for ( AttributeCreation* attribute: m_attributes ) {
@@ -182,15 +180,8 @@ OtherSkillCreation *StatisticsCreation::otherSkill(qsizetype index)
 void StatisticsCreation::addOtherSkill(const QString &name, const QString &description, const QString &attribute)
 {
     OtherSkillCreation* otherSkill = new OtherSkillCreation(new OtherSkillSource(name, description, attribute), this);
-
-    connect(otherSkill, &OtherSkillCreation::increased, this, [this](const int value){
-        m_skillpointsManager->onSkillBought({}, value);
-    });
-    connect(otherSkill, &OtherSkillCreation::decreased, this, [this](const int value){
-        m_skillpointsManager->onSkillSold({}, value);
-    });
-
     m_otherSkills.append( otherSkill );
+    emit otherSkillAdded( otherSkill );
     emit otherSkillsChanged();
 }
 
@@ -338,8 +329,6 @@ void StatisticsCreation::onTrickSold(TrickSource *trick)
 void StatisticsCreation::init()
 {
     connect(this, &StatisticsCreation::trickSold, this, &StatisticsCreation::onTrickSold);
-
-    connect(this, &StatisticsCreation::specializationChangedTo, m_skillpointsManager, &SkillpointsCreationManager::setSpecialization);
     connect(this, &StatisticsCreation::applyAttributeBonus, this, &StatisticsCreation::onApplyAttributeBonus);
     connect(this, &StatisticsCreation::removeAttributeBonus, this, &StatisticsCreation::onRemoveAttributeBonus);
     connect(this, &StatisticsCreation::applyFeatureBonus, this, &StatisticsCreation::onApplyFeatureBonus);
@@ -349,23 +338,18 @@ void StatisticsCreation::init()
         connect(attribute, &AttributeCreation::valueChanged, this, [this](){ emit this->statsChanged(m_attributes); });
         connect(attribute, &AttributeCreation::bonusChanged, this, [this](){ emit this->statsChanged(m_attributes); });
         for ( const SkillpackCreation* skillpack: attribute->skillpacks() ) {
-            connect(skillpack, &SkillpackCreation::skillIncreased, m_skillpointsManager, &SkillpointsCreationManager::onSkillBought);
             connect(skillpack, &SkillpackCreation::skillIncreased, this, [this](const QStringList& specializations, const int level){
                 Q_UNUSED(specializations)
                 Q_UNUSED(level)
                 emit this->statsChanged(m_attributes);
             });
-            connect(skillpack, &SkillpackCreation::skillDecreased, m_skillpointsManager, &SkillpointsCreationManager::onSkillSold);
-            connect(skillpack, &SkillpackCreation::skillIncreased, this, [this](const QStringList& specializations, const int level){
-                Q_UNUSED(specializations)
-                Q_UNUSED(level)
+            connect(skillpack, &SkillpackCreation::skillDecreased, this, [this](const QStringList& specializations, const int level){
+                Q_UNUSED(specializations);
+                Q_UNUSED(level);
                 emit this->statsChanged(m_attributes);
             });
             connect(skillpack, &SkillpackCreation::boughtChanged, this, [this, skillpack](const bool bought){
-                if ( bought )
-                    m_skillpointsManager->onSkillpackBought(skillpack->source()->specializations());
-                else
-                    m_skillpointsManager->onSkillpackSold(skillpack->source()->specializations());
+                Q_UNUSED(bought);
                 emit this->statsChanged(m_attributes);
             });
         }
@@ -418,10 +402,6 @@ TrickCreation *StatisticsCreation::trick(QQmlListProperty<TrickCreation> *list, 
 }
 
 SkillpointsCreationManager *StatisticsCreation::skillpointsManager() const
-{
-    return m_skillpointsManager;
-}
-
 void StatisticsCreation::onTrickBougth(TrickSource *trick)
 {
     m_tricks.append(new TrickCreation(trick, this));

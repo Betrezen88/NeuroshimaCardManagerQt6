@@ -53,7 +53,7 @@ Page {
                 Text {
                     id: _specializationPoints
                     text: cardCreation !== null && cardCreation.statisticsCretion !== null
-                          ? cardCreation.statisticsCreation.skillpointsManager.specializationSkillpoints : 0
+                          ? cardCreation.skillpointsManager.specializationSkillpoints : 0
                     font.pointSize: 14
                     rightPadding: 20
                 }
@@ -66,7 +66,7 @@ Page {
                 Text {
                     id: _generalPoints
                     text: cardCreation !== null && cardCreation.statisticsCretion !== null
-                          ? cardCreation.statisticsCreation.skillpointsManager.generalSkillpoints : 0
+                          ? cardCreation.skillpointsManager.generalSkillpoints : 0
                     font.pointSize: 14
                 }
             } // Row

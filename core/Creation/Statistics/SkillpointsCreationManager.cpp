@@ -115,11 +115,13 @@ void SkillpointsCreationManager::onSkillSold(const QStringList &specializations,
 void SkillpointsCreationManager::onTrickBought()
 {
     ++m_trickCount;
+    emit tricksCountChanged();
 }
 
 void SkillpointsCreationManager::onTrickSold()
 {
     --m_trickCount;
+    emit tricksCountChanged();
 }
 
 int SkillpointsCreationManager::availablePoints(const QString &specialization)

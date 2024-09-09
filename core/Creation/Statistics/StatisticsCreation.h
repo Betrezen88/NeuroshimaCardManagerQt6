@@ -29,7 +29,6 @@ class StatisticsCreation : public QObject
     Q_PROPERTY(ProfessionSource* profession READ profession WRITE setProfession NOTIFY professionChanged FINAL)
     Q_PROPERTY(FeatureSource* professionFeature READ professionFeature WRITE setProfessionFeature NOTIFY professionFeatureChanged FINAL)
     Q_PROPERTY(SpecializationSource* specialization READ specialization WRITE setSpecialization NOTIFY specializationChanged FINAL)
-    Q_PROPERTY(SkillpointsCreationManager* skillpointsManager READ skillpointsManager CONSTANT)
     QML_ELEMENT
     QML_UNCREATABLE("StatisticsCreation is uncreatable.")
 
@@ -77,8 +76,6 @@ public:
     qsizetype tricksCount() const;
     TrickCreation* trick(qsizetype index);
 
-    SkillpointsCreationManager* skillpointsManager() const;
-
 signals:
     void diseaseChanged();
     void originChanged();
@@ -93,8 +90,10 @@ signals:
     void applyFeatureBonus(const BonusSource* bonus);
     void removeFeatureBonus(const BonusSource* bonus);
     void otherSkillsChanged();
+    void otherSkillAdded(OtherSkillCreation* otherSkill);
     void tricksChanged();
     void trickSold(TrickSource *trick);
+    void trickBougth(TrickSource *trick);
     void statsChanged(QVector<AttributeCreation*> attributes);
 
 public slots:
@@ -132,7 +131,6 @@ private:
     SpecializationSource *m_specialization{nullptr};
     QVector<AttributeCreation*> m_attributes;
     QVector<OtherSkillCreation*> m_otherSkills;
-    SkillpointsCreationManager* m_skillpointsManager{nullptr};
     QVector<TrickCreation*> m_tricks;
 };
 

@@ -28,15 +28,42 @@ void CardCreation::init()
 
     loader.load();
 
+    m_skillpointsManager = new SkillpointsCreationManager(this);
     QVector<AttributeCreation*> attributes;
-    for ( AttributeSource* attribute: const_cast<const StatisticsSource*>(m_statisticsSource)->attributes() ) {
-        attributes.append( new AttributeCreation(attribute) );
+    for (AttributeSource* attribute: const_cast<const StatisticsSource*>(m_statisticsSource)->attributes() ) {
+        AttributeCreation* attributeCreation = new AttributeCreation(attribute);
+        for ( const SkillpackCreation* skillpack: const_cast<const AttributeCreation*>(attributeCreation)->skillpacks() ) {
+            connect(skillpack, &SkillpackCreation::skillIncreased, m_skillpointsManager, &SkillpointsCreationManager::onSkillBought);
+            connect(skillpack, &SkillpackCreation::skillDecreased, m_skillpointsManager, &SkillpointsCreationManager::onSkillSold);
+            connect(skillpack, &SkillpackCreation::boughtChanged, this, [this, skillpack](const bool bougth){
+                if ( bougth ) {
+                    this->m_skillpointsManager->onSkillpackBought(skillpack->source()->specializations());
+                } else {
+                    this->m_skillpointsManager->onSkillpackSold(skillpack->source()->specializations());
+                }
+            });
+        }
+        attributes.append( attributeCreation );
     }
 
     m_statisticsCreation = new StatisticsCreation( attributes, this );
 
     connect(m_statisticsSource, &StatisticsSource::trickBougth, m_statisticsCreation, &StatisticsCreation::onTrickBougth);
+    connect(m_statisticsSource, &StatisticsSource::trickBougth, m_skillpointsManager, &SkillpointsCreationManager::onTrickBought);
+    connect(m_statisticsCreation, &StatisticsCreation::specializationChangedTo, m_skillpointsManager, &SkillpointsCreationManager::setSpecialization);
     connect(m_statisticsCreation, &StatisticsCreation::trickSold, m_statisticsSource, &StatisticsSource::onTrickSold);
+    connect(m_statisticsCreation, &StatisticsCreation::trickSold, this, [this](TrickSource* trick){
+        Q_UNUSED(trick)
+        this->m_skillpointsManager->onTrickSold();
+    });
+    connect(m_statisticsCreation, &StatisticsCreation::otherSkillAdded, this, [this](OtherSkillCreation* otherSkill){
+        connect(otherSkill, &OtherSkillCreation::increased, this, [this](const int value){
+            this->m_skillpointsManager->onSkillBought({}, value);
+        });
+        connect(otherSkill, &OtherSkillCreation::decreased, this, [this](const int value){
+            this->m_skillpointsManager->onSkillSold({}, value);
+        });
+    });
     connect(m_statisticsCreation, &StatisticsCreation::statsChanged, m_statisticsSource, &StatisticsSource::onStatsChanged);
 
     emit statisticsCreationChanged();
@@ -54,4 +81,9 @@ StatisticsSource *CardCreation::statisticsSource() const
 StatisticsCreation *CardCreation::statisticsCreation() const
 {
     return m_statisticsCreation;
+}
+
+SkillpointsCreationManager *CardCreation::skillpointsManager() const
+{
+    return m_skillpointsManager;
 }
