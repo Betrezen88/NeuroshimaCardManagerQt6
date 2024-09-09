@@ -64,6 +64,7 @@ Page {
                     font.pointSize: 12
                     Layout.preferredHeight: 40
                     Layout.fillWidth: true
+                    onTextChanged: cardCreation.statisticsSource.sortModel.pattern = text
                 }
 
                 Button {
@@ -98,19 +99,25 @@ Page {
                             text: "Sortowanie A-Z"
                             height: 40
                             icon.source: "qrc:/Images/icons/sort_ascending.svg"
-                            onClicked: _sortOrderBtn.contentItem = Qt.createQmlObject(`
-                                        import QtQuick
-                                        Image { source: "qrc:/Images/icons/sort_ascending.svg" }
-                                        `, _sortOrderBtn, "Icon")
+                            onClicked: {
+                                cardCreation.statisticsSource.sortModel.ascendingOrder = true
+                                _sortOrderBtn.contentItem = Qt.createQmlObject(`
+                                    import QtQuick
+                                    Image { source: "qrc:/Images/icons/sort_ascending.svg" }
+                                    `, _sortOrderBtn, "Icon")
+                            }
                         }
                         MenuItem {
                             text: "Sortowanie Z-A"
                             height: 40
                             icon.source: "qrc:/Images/icons/sort_descending.svg"
-                            onClicked: _sortOrderBtn.contentItem = Qt.createQmlObject(`
-                                        import QtQuick
-                                        Image { source: "qrc:/Images/icons/sort_descending.svg" }
-                                        `, _sortOrderBtn, "Icon")
+                            onClicked: {
+                                cardCreation.statisticsSource.sortModel.ascendingOrder = false
+                                _sortOrderBtn.contentItem = Qt.createQmlObject(`
+                                    import QtQuick
+                                    Image { source: "qrc:/Images/icons/sort_descending.svg" }
+                                    `, _sortOrderBtn, "Icon")
+                            }
                         }
                     }
                 } // Button sort
@@ -134,19 +141,25 @@ Page {
                             text: "Wszystkie sztuczki"
                             height: 40
                             icon.source: "qrc:/Images/icons/visible.svg"
-                            onClicked: _availableOnlyBtn.contentItem = Qt.createQmlObject(`
-                                        import QtQuick
-                                        Image { source: "qrc:/Images/icons/visible.svg" }
-                                        `, _availableOnlyBtn, "Icon")
+                            onClicked: {
+                                cardCreation.statisticsSource.sortModel.availableOnly = false
+                                _availableOnlyBtn.contentItem = Qt.createQmlObject(`
+                                    import QtQuick
+                                    Image { source: "qrc:/Images/icons/visible.svg" }
+                                    `, _availableOnlyBtn, "Icon")
+                            }
                         }
                         MenuItem {
                             text: "Dostępne sztuczki"
                             height: 40
                             icon.source: "qrc:/Images/icons/non_visible.svg"
-                            onClicked: _availableOnlyBtn.contentItem = Qt.createQmlObject(`
-                                        import QtQuick
-                                        Image { source: "qrc:/Images/icons/non_visible.svg" }
-                                        `, _availableOnlyBtn, "Icon")
+                            onClicked: {
+                                cardCreation.statisticsSource.sortModel.availableOnly = true
+                                _availableOnlyBtn.contentItem = Qt.createQmlObject(`
+                                    import QtQuick
+                                    Image { source: "qrc:/Images/icons/non_visible.svg" }
+                                    `, _availableOnlyBtn, "Icon")
+                            }
                         }
                     }
                 } // Button available
@@ -210,7 +223,18 @@ Page {
                                 border.width: 2
                                 border.color: "#000"
                             }
-                            onClicked: console.log("Buy trick")
+                            onClicked: {
+                                model.bougth = true
+                                cardCreation.statisticsSource.trickBougth(model.source)
+                            }
+                            enabled: model.available && cardCreation.skillpointsManager.canTrickBeBought()
+                        }
+
+                        Connections {
+                            target: cardCreation.skillpointsManager
+                            function onTricksCountChanged() {
+                                _buyBtn.enabled = model.available && cardCreation.skillpointsManager.canTrickBeBought()
+                            }
                         }
                     } // Item
                 } // List
@@ -221,12 +245,13 @@ Page {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    model: 3
+                    model: cardCreation?.statisticsCreation?.tricks ?? []
 
                     delegate: Item {
                         width: ListView.view.width
 
                         Trick {
+                            source: model.source
                             anchors {
                                 top: parent.top
                                 bottom: parent.bottom
@@ -247,7 +272,7 @@ Page {
                                 border.width: 2
                                 border.color: "#000"
                             }
-                            onClicked: console.log("Sell trick")
+                            onClicked: cardCreation.statisticsCreation.trickSold(model.source)
                         }
                     } // Item
                 } // List
@@ -258,10 +283,11 @@ Page {
                     contentItem: TrickContent {
                         width: _trickDetails.width
                         onAdd: function(source) {
-                            console.log("Adding trick ", source.name)
+                            cardCreation.statisticsSource.trickBougth(source)
                             _trickDetails.close()
                         }
                         onClose: _trickDetails.close()
+                        onImplicitHeightChanged: _trickDetails.height = implicitHeight
                     }
                 }
             } // GridLayout
