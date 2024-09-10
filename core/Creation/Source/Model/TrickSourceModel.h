@@ -22,15 +22,16 @@ public:
 
     explicit TrickSourceModel(QObject *parent = nullptr);
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const;
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
     void addTricks(const QString& name, const QVector<TrickSource*>& tricks);
 
     QVector<TrickSourceItem*> tricks() const;
 
 protected:
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
 
 private:
     QVector<TrickSourceItem*> m_tricks;

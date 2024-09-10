@@ -224,8 +224,9 @@ Page {
                                 border.color: "#000"
                             }
                             onClicked: {
+                                var source = model.source
                                 model.bougth = true
-                                cardCreation.statisticsSource.trickBougth(model.source)
+                                cardCreation.statisticsSource.trickBougth(source)
                             }
                             enabled: model.available && cardCreation.skillpointsManager.canTrickBeBought()
                         }

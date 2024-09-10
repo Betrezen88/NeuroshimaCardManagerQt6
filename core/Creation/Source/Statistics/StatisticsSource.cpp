@@ -11,6 +11,11 @@ StatisticsSource::StatisticsSource(QObject *parent)
     , m_sortModel{new TrickSourceSortFilterProxyModel(this)}
 {
     m_sortModel->setSourceModel(m_model);
+
+    connect(this, &StatisticsSource::trickBougth, this, [this](const TrickSource* trick){
+        Q_UNUSED(trick)
+        m_sortModel->filterBougth();
+    });
 }
 
 QQmlListProperty<OriginSource> StatisticsSource::origins()
@@ -177,7 +182,16 @@ void StatisticsSource::addPlaces(const QStringList &places)
 
 void StatisticsSource::onTrickSold(TrickSource *trick)
 {
-    qDebug() << "Trick sold " << trick->name();
+    QVector<TrickSourceItem*> tricks = m_model->tricks();
+    auto trickFound = std::find_if(tricks.constBegin(),
+                                   tricks.constEnd(),
+                                   [&trick](const TrickSourceItem* trickItem){
+                                        return trickItem->source() == trick;
+    });
+    if ( trickFound != tricks.constEnd() ) {
+        (*trickFound)->setBought(false);
+        m_sortModel->filterBougth();
+    }
 }
 
 void StatisticsSource::onStatsChanged(QVector<AttributeCreation *> attributes)

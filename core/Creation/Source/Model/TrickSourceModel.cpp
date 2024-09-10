@@ -18,6 +18,7 @@ QVariant TrickSourceModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     TrickSourceItem* trick = m_tricks.at(index.row());
+
     if ( role == TrickRoles::RequirementsRole )
         return QVariant::fromValue(trick->requirements());
     if ( role == TrickRoles::AvailableRole )
@@ -28,6 +29,23 @@ QVariant TrickSourceModel::data(const QModelIndex &index, int role) const
         return trick->bought();
 
     return QVariant();
+}
+
+bool TrickSourceModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (!hasIndex(index.row(), index.column(), index.parent()) || !value.isValid())
+        return false;
+
+    TrickSourceItem& trick = *m_tricks[index.row()];
+
+    if ( role == TrickRoles::Bougth )
+        trick.setBought( value.toBool() );
+    else
+        return false;
+
+    emit dataChanged(index, index, { role });
+
+    return true;
 }
 
 void TrickSourceModel::addTricks(const QString &name, const QVector<TrickSource *> &tricks)

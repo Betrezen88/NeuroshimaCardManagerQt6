@@ -97,3 +97,8 @@ void TrickSourceSortFilterProxyModel::setAvailableOnly(bool newAvailableOnly)
     m_availableOnly = newAvailableOnly;
     emit availableOnlyChanged();
 }
+
+void TrickSourceSortFilterProxyModel::filterBougth()
+{
+    m_bougthFilter->invalidate();
+}

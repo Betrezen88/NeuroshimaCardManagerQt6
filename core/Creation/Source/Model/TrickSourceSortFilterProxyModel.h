@@ -40,6 +40,8 @@ public:
     bool availableOnly() const;
     void setAvailableOnly(bool newAvailableOnly);
 
+    void filterBougth();
+
 signals:
     void ascendingOrderChanged();
     void patternChanged();
