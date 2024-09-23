@@ -137,6 +137,11 @@ void StatisticsSource::addAttributes(const QVector<AttributeSource *> &attribute
 void StatisticsSource::addDiseases(const QString &name, const QVector<DiseaseSource *> &diseases)
 {
     m_diseaseSources.insert(name, diseases);
+
+    if ( m_diseases.isEmpty() ) {
+        m_diseases = m_diseaseSources.value(name);
+        emit diseasesChanged();
+    }
 }
 
 void StatisticsSource::addOrigins(const QString &name, const QVector<OriginSource *> &origins)
