@@ -1,10 +1,11 @@
 import QtQuick
 import QtQuick.Layouts
 
+import data.types 1.0
+import core.source 1.0
+
 Item {
-    property alias name: _name.text
-    property alias description: _description.text
-    property alias penalties: _penalties.text
+    property SymptomSource symptom: null
 
     id: _root
 
@@ -16,7 +17,7 @@ Item {
 
         Text {
             id: _name
-            text: modelData
+            text: symptom?.name ?? ""
             font.pointSize: 12
             horizontalAlignment: Text.AlignHCenter
             Layout.fillWidth: true
@@ -24,17 +25,28 @@ Item {
 
         Text {
             id: _description
+            text: symptom?.description ?? ""
             font.pointSize: 12
+            font.italic: true
             wrapMode: Text.WordWrap
             verticalAlignment: Text.AlignJustify
             Layout.fillWidth: true
         }
 
-        Text {
-            id: _penalties
-            font.pointSize: 12
-            wrapMode: Text.WordWrap
+        Flow {
+            spacing: 5
             Layout.fillWidth: true
+
+            Repeater {
+                id: _penalties
+                model: symptom?.penalties ?? []
+                delegate: Text {
+                    text: (model.value > 0 ? "+" : "") + model.value + (model.type === Types.Modifier.Test ? "%" : "") + " " + model.name + (index < _penalties.count-1 ? ", " : "")
+                    font.pointSize: 10
+                    font.bold: true
+                    font.italic: true
+                }
+            }
         }
     } // Column
 } // Item
