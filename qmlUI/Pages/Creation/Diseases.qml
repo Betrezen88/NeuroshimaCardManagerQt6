@@ -2,10 +2,15 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import core.creation 1.0
+import core.source 1.0
+
 import "../../Elements/Card/Common"
 import "../../Elements/Creation/Diseases"
 
 Page {
+    property CardCreation cardCreation: null
+
     id: _root
 
     ScrollView {
@@ -29,23 +34,29 @@ Page {
                 width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2)
             }
 
+            Item { width: 5; height: 5 }
+
             Text {
                 id: _name
-                text: "Nazwa choroby"
+                text: _rightPanel.disease?.name ?? ""
                 font.bold: true
                 font.pointSize: 14
+                horizontalAlignment: Text.AlignHCenter
+                width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2)
             }
 
             Text {
                 id: _diseaseDescription
-                text: "Opis choroby."
+                text: _rightPanel.disease?.description ?? ""
+                wrapMode: Text.WordWrap
                 font.pointSize: 14
                 width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2)
             }
 
             Text {
                 id: _cure
-                text: "Opis kroku losowania choroby."
+                text: _rightPanel.disease?.cure ?? ""
+                wrapMode: Text.WordWrap
                 font.pointSize: 14
                 width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2)
             }
@@ -54,6 +65,7 @@ Page {
                 text: "Symptomy"
                 font.bold: true
                 font.pointSize: 14
+                horizontalAlignment: Text.AlignHCenter
                 width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2)
             }
 
@@ -62,13 +74,11 @@ Page {
                 width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2)
 
                 Repeater {
-                    model: [ "Pierwsze symptomy", "Stan ostry", "Stan krytyczny", "Stan terminlny" ]
+                    model: _rightPanel.disease?.symptoms ?? []
 
                     delegate: Symptom {
                         width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2) < 700 ? 250 : 350
-                        name: modelData
-                        description: "Opis"
-                        penalties: "-1 Zręczność, +30% Kondycja"
+                        symptom: modelData
                     } // Item
                 }
             } // Flow
@@ -78,6 +88,8 @@ Page {
     } // ScrollView
 
     ColumnLayout {
+        property DiseaseSource disease: null
+
         id: _rightPanel
 
         anchors {
@@ -105,28 +117,7 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            model: ListModel {
-                ListElement { name: "Zwapnienie płut" }
-                ListElement { name: "Gorączka sobotniej nocy" }
-                ListElement { name: "Przewlekła gorączka krwotoczna" }
-                ListElement { name: "Mount Rushmore" }
-                ListElement { name: "Syndrom Obcego" }
-                ListElement { name: "Chore Nery" }
-                ListElement { name: "Alergie" }
-                ListElement { name: "Szaleństwo bostońskie" }
-                ListElement { name: "Syndrom Thrumana (matołek)" }
-                ListElement { name: "Drgawki" }
-                ListElement { name: "Hemofilia" }
-                ListElement { name: "Drętwota Hollywood" }
-                ListElement { name: "Osteoporoza" }
-                ListElement { name: "Zawroty głowy" }
-                ListElement { name: "Niewydolność krążenia" }
-                ListElement { name: "Anemia" }
-                ListElement { name: "Morbius Dexteri (amnezje)" }
-                ListElement { name: "Syndrom Draculi (światłowstręt)" }
-                ListElement { name: "Zespół wirusowej horoby języka (VTDS)" }
-                ListElement { name: "Paranoja" }
-            }
+            model: cardCreation?.statisticsSource?.diseases ?? []
 
             delegate: Rectangle {
                 width: ListView.view.width; height: 40
@@ -138,6 +129,13 @@ Page {
                     wrapMode: Text.WordWrap
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        _rightPanel.disease = model.modelData
+                    }
                 }
             }
         } // ListView
