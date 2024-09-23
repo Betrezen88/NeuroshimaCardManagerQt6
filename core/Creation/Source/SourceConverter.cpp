@@ -345,7 +345,7 @@ DiseaseSource *SourceConverter::diseaseSource(const QJsonObject &object)
 SymptomSource *SourceConverter::symptomSource(const QJsonObject &object)
 {
     QVector<ModifierSource*> penaltySources;
-    const QJsonArray& penalties = object.value("penalty").toArray();
+    const QJsonArray& penalties = object.value("penalties").toArray();
     for ( const QJsonValue& penalty: penalties ) {
         penaltySources.append( modifierSource(penalty.toObject()) );
     }
