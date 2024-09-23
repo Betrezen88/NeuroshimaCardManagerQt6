@@ -401,7 +401,6 @@ TrickCreation *StatisticsCreation::trick(QQmlListProperty<TrickCreation> *list, 
     return  reinterpret_cast<StatisticsCreation*>(list->data)->trick(index);
 }
 
-SkillpointsCreationManager *StatisticsCreation::skillpointsManager() const
 void StatisticsCreation::onTrickBougth(TrickSource *trick)
 {
     m_tricks.append(new TrickCreation(trick, this));
