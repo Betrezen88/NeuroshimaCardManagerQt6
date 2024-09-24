@@ -9,6 +9,8 @@ add_library(Utils
     CardConverter.cpp
     JsonLoader.h
     JsonLoader.cpp
+    Dice.h
+    Dice.cpp
 )
 
 target_link_libraries(Utils
