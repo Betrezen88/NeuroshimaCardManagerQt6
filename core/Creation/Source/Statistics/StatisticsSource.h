@@ -46,6 +46,8 @@ public:
     qsizetype diseasesCount() const;
     DiseaseSource* disease(qsizetype index);
 
+    Q_INVOKABLE void drawDisease();
+
     QQmlListProperty<OriginSource> origins();
     qsizetype originsCount() const;
     OriginSource* origin(qsizetype index);
@@ -71,6 +73,7 @@ public:
 signals:
     void attributesChanged();
     void diseasesChanged();
+    void diseaseDrawed(DiseaseSource *drawedDisease);
     void originsChanged();
     void professionsChanged();
     void specializationsChanged();

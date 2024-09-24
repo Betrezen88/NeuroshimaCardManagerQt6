@@ -2,6 +2,7 @@
 #include "Validators/TrickRequirementsValidator.h"
 
 #include "../../Statistics/AttributeCreation.h"
+#include <../../Utils/Dice.h>
 
 #include <QDebug>
 
@@ -60,6 +61,12 @@ qsizetype StatisticsSource::diseasesCount() const
 DiseaseSource *StatisticsSource::disease(qsizetype index)
 {
     return m_diseases.at(index);
+}
+
+void StatisticsSource::drawDisease()
+{
+    Dice dice{m_diseases.count()};
+    emit diseaseDrawed( m_diseases.at(dice.roll()-1) );
 }
 
 qsizetype StatisticsSource::originsCount() const

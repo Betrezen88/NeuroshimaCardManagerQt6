@@ -48,6 +48,7 @@ void CardCreation::init()
 
     m_statisticsCreation = new StatisticsCreation( attributes, this );
 
+    connect(m_statisticsSource, &StatisticsSource::diseaseDrawed, m_statisticsCreation, &StatisticsCreation::setDisease);
     connect(m_statisticsSource, &StatisticsSource::trickBougth, m_statisticsCreation, &StatisticsCreation::onTrickBougth);
     connect(m_statisticsSource, &StatisticsSource::trickBougth, m_skillpointsManager, &SkillpointsCreationManager::onTrickBought);
     connect(m_statisticsCreation, &StatisticsCreation::specializationChangedTo, m_skillpointsManager, &SkillpointsCreationManager::setSpecialization);

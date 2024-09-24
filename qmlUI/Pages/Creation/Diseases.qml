@@ -29,9 +29,13 @@ Page {
 
             Text {
                 id: _description
-                text: "Opis kroku losowania choroby."
+                text: "    Nastał czas na cos przykrego. Trzeba określić na co chorujesz. Co gorsza, nie ma tu zwyklej grypy, chyba, że ta grypa nieleczona zabija, a leczona co najwyzejej odsuwa moment śmierci. To, co poniżej, to nasze największe przekleństwo. Nasza degeneracja.
+    Każdy z Bohaterów powinien wylosować sobie chorobę, na jaką cierpi. Niestety, oto smutna prawda o współczesnym świecie.
+
+Kliknij losuj i powodzenia. Wylosowana choroba będzie podświetlona na czerwono."
                 font.pointSize: 14
                 width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2)
+                wrapMode: Text.WordWrap
             }
 
             Item { width: 5; height: 5 }
@@ -67,6 +71,7 @@ Page {
                 font.pointSize: 14
                 horizontalAlignment: Text.AlignHCenter
                 width: _root.width - _rightPanel.width - (_scrollView.anchors.margins*2)
+                visible: cardCreation?.statisticsCreation?.disease !== null
             }
 
             Flow {
@@ -121,7 +126,7 @@ Page {
 
             delegate: Rectangle {
                 width: ListView.view.width; height: 40
-                color: "lightgray"
+                color: model.name === cardCreation?.statisticsCreation?.disease?.name ? "red" : "lightgray"
 
                 Text {
                     text: model.name
@@ -144,10 +149,17 @@ Page {
             text: "Losuj"
             Layout.preferredHeight: 50
             Layout.fillWidth: true
+            onClicked: cardCreation?.statisticsSource?.drawDisease()
         }
     } // ColumnLayout
 
     background: Rectangle {
         color: "#fff"
+    }
+
+    onCardCreationChanged: {
+        cardCreation?.statisticsSource?.diseaseDrawed.connect(function(disease){
+            _rightPanel.disease = disease
+        })
     }
 } // Page
