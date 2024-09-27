@@ -19,22 +19,22 @@ void SkillpointsCreationManager::setSpecialization(const QString &newSpecializat
     emit specializationChanged();
 }
 
-int SkillpointsCreationManager::generalSkillpoints() const
+quint8 SkillpointsCreationManager::generalSkillpoints() const
 {
     return m_general.current;
 }
 
-int SkillpointsCreationManager::specializationSkillpoints() const
+quint8 SkillpointsCreationManager::specializationSkillpoints() const
 {
     return m_specializations.current;
 }
 
-int SkillpointsCreationManager::specializationSkillpointsMax() const
+quint8 SkillpointsCreationManager::specializationSkillpointsMax() const
 {
     return m_specializations.max;
 }
 
-void SkillpointsCreationManager::setSpecializationSkillpointsMax(int newSpecializationSkillpointsMax)
+void SkillpointsCreationManager::setSpecializationSkillpointsMax(quint8 newSpecializationSkillpointsMax)
 {
     if (m_specializations.max == newSpecializationSkillpointsMax)
         return;
@@ -42,7 +42,7 @@ void SkillpointsCreationManager::setSpecializationSkillpointsMax(int newSpeciali
     emit specializationSkillpointsMaxChanged();
 }
 
-int SkillpointsCreationManager::tricksCount() const
+quint8 SkillpointsCreationManager::tricksCount() const
 {
     return m_trickCount;
 }
@@ -52,7 +52,7 @@ bool SkillpointsCreationManager::canSkillpackBeBought(const QString &specializat
     return availablePoints(specialization) >= 5;
 }
 
-bool SkillpointsCreationManager::canSkillBeIncreased(const QString &specialization, const int value)
+bool SkillpointsCreationManager::canSkillBeIncreased(const QString &specialization, const quint8 value)
 {
     return availablePoints(specialization) >= value;
 }
@@ -60,6 +60,11 @@ bool SkillpointsCreationManager::canSkillBeIncreased(const QString &specializati
 bool SkillpointsCreationManager::canTrickBeBought()
 {
     return m_trickCount == 0;
+}
+
+bool SkillpointsCreationManager::canReputationBeBougth()
+{
+    return m_availableReputationPoints > 0;
 }
 
 void SkillpointsCreationManager::onSkillpackBought(const QStringList &specializations)
@@ -86,11 +91,11 @@ void SkillpointsCreationManager::onSkillpackSold(const QStringList &specializati
     }
 }
 
-void SkillpointsCreationManager::onSkillBought(const QStringList &specializations, const int value)
+void SkillpointsCreationManager::onSkillBought(const QStringList &specializations, const quint8 value)
 {
-    const int cost = buySkillCost(value);
+    const quint8 cost = buySkillCost(value);
     if ( specializations.contains(m_specialization) ) {
-        const int left = m_specializations.current - cost;
+        const quint8 left = m_specializations.current - cost;
         setSpecializationSkillpoints( left < 0 ? 0 : m_specializations.current - cost);
         setGeneralSkillpoints( left < 0 ? m_general.current + left : m_general.current );
     }
@@ -99,11 +104,11 @@ void SkillpointsCreationManager::onSkillBought(const QStringList &specialization
     }
 }
 
-void SkillpointsCreationManager::onSkillSold(const QStringList &specializations, const int value)
+void SkillpointsCreationManager::onSkillSold(const QStringList &specializations, const quint8 value)
 {
-    const int cost = sellSkillCost(value);
+    const quint8 cost = sellSkillCost(value);
     if ( specializations.contains(m_specialization) ) {
-        const int above = m_specializations.current + cost - m_specializations.max;
+        const quint8 above = m_specializations.current + cost - m_specializations.max;
         setSpecializationSkillpoints( above < 0 ? m_specializations.current + cost : m_specializations.max);
         setGeneralSkillpoints( above > 0 ? m_general.current + above : m_general.current );
     }
@@ -124,12 +129,24 @@ void SkillpointsCreationManager::onTrickSold()
     emit tricksCountChanged();
 }
 
-int SkillpointsCreationManager::availablePoints(const QString &specialization)
+void SkillpointsCreationManager::onReputationBougth()
+{
+    --m_availableReputationPoints;
+    emit availableReputationPointsChanged();
+}
+
+void SkillpointsCreationManager::onReputationSold()
+{
+    ++m_availableReputationPoints;
+    emit availableReputationPointsChanged();
+}
+
+quint8 SkillpointsCreationManager::availablePoints(const QString &specialization)
 {
     return m_specialization == specialization ? m_general.current + m_specializations.current : m_general.current;
 }
 
-int SkillpointsCreationManager::buySkillCost(const int level)
+quint8 SkillpointsCreationManager::buySkillCost(const quint8 level)
 {
     if ( 1 == level ) {
         return 3;
@@ -137,7 +154,7 @@ int SkillpointsCreationManager::buySkillCost(const int level)
     return level;
 }
 
-int SkillpointsCreationManager::sellSkillCost(const int level)
+quint8 SkillpointsCreationManager::sellSkillCost(const quint8 level)
 {
     if ( 0 == level - 1 ) {
         return 3;
@@ -145,7 +162,7 @@ int SkillpointsCreationManager::sellSkillCost(const int level)
     return level;
 }
 
-void SkillpointsCreationManager::setGeneralSkillpoints(const int newGeneralSkillpoints)
+void SkillpointsCreationManager::setGeneralSkillpoints(const quint8 newGeneralSkillpoints)
 {
     if ( m_general.current == newGeneralSkillpoints )
         return;
@@ -154,11 +171,29 @@ void SkillpointsCreationManager::setGeneralSkillpoints(const int newGeneralSkill
     emit generalSkillpointsChanged();
 }
 
-void SkillpointsCreationManager::setSpecializationSkillpoints(const int newSpecializationSkillpoints)
+void SkillpointsCreationManager::setSpecializationSkillpoints(const quint8 newSpecializationSkillpoints)
 {
     if ( m_specializations.current == newSpecializationSkillpoints )
         return;
 
     m_specializations.current = newSpecializationSkillpoints;
     emit specializationSkillpointsChanged();
+}
+
+quint8 SkillpointsCreationManager::availableReputationPoints() const
+{
+    return m_availableReputationPoints;
+}
+
+bool SkillpointsCreationManager::isReputationGeneralPoint() const
+{
+    return m_isReputationGeneralPoint;
+}
+
+void SkillpointsCreationManager::setIsReputationGeneralPoint(bool newIsReputationGeneralPoint)
+{
+    if (m_isReputationGeneralPoint == newIsReputationGeneralPoint)
+        return;
+    m_isReputationGeneralPoint = newIsReputationGeneralPoint;
+    emit isReputationGeneralPointChanged();
 }

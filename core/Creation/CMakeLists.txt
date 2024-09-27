@@ -15,6 +15,8 @@ qt_add_qml_module(Creation
         Statistics/AttributeCreation.cpp
         Statistics/OtherSkillCreation.h
         Statistics/OtherSkillCreation.cpp
+        Statistics/ReputationCreation.h
+        Statistics/ReputationCreation.cpp
         Statistics/SkillCreation.h
         Statistics/SkillCreation.cpp
         Statistics/SkillCreationSingle.h

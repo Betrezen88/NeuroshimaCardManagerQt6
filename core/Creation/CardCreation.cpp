@@ -46,7 +46,7 @@ void CardCreation::init()
         attributes.append( attributeCreation );
     }
 
-    m_statisticsCreation = new StatisticsCreation( attributes, this );
+    m_statisticsCreation = new StatisticsCreation( attributes, m_statisticsSource->places(), this );
 
     connect(m_statisticsSource, &StatisticsSource::diseaseDrawed, m_statisticsCreation, &StatisticsCreation::setDisease);
     connect(m_statisticsSource, &StatisticsSource::trickBougth, m_statisticsCreation, &StatisticsCreation::onTrickBougth);
@@ -65,6 +65,9 @@ void CardCreation::init()
             this->m_skillpointsManager->onSkillSold({}, value);
         });
     });
+    connect(m_statisticsCreation, &StatisticsCreation::reputationIncreased, m_skillpointsManager, &SkillpointsCreationManager::onReputationBougth);
+    connect(m_statisticsCreation, &StatisticsCreation::reputationDecreased, m_skillpointsManager, &SkillpointsCreationManager::onReputationSold);
+    connect(m_statisticsCreation, &StatisticsCreation::reputationGeneralPoint, m_skillpointsManager, &SkillpointsCreationManager::setIsReputationGeneralPoint);
     connect(m_statisticsCreation, &StatisticsCreation::statsChanged, m_statisticsSource, &StatisticsSource::onStatsChanged);
 
     emit statisticsCreationChanged();

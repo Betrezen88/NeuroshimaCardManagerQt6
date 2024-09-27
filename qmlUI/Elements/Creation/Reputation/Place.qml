@@ -1,8 +1,12 @@
 import QtQuick
 import QtQuick.Controls
 
+import core.creation 1.0
+
 Item {
-    property alias name: _name.text
+    property ReputationCreation reputation: null
+    property bool hasAvailablePoints: true
+    property bool isGeneralPoint: true
     property alias labelWidth: _name.width
     property alias implicitLabelWith: _name.implicitWidth
 
@@ -16,6 +20,7 @@ Item {
 
         Text {
             id: _name
+            text: reputation?.place ?? ""
             font.pointSize: 14
             verticalAlignment: Text.AlignVCenter
             height: _value.height
@@ -23,7 +28,28 @@ Item {
 
         SpinBox {
             id: _value
+            value: reputation?.value ?? 0
             height: 40
+            from: reputation?.min ?? 0
+            to: reputation?.max ?? 0
+
+            up.onPressedChanged: {
+                if ( up.pressed && reputation !== null && _root.hasAvailablePoints ) {
+                    reputation.increase()
+                    up.pressed = false
+                } else {
+                    value = reputation.value
+                }
+            }
+
+            down.onPressedChanged: {
+                if ( down.pressed && reputation !== null && _root.isGeneralPoint ) {
+                    reputation.decrease()
+                    down.pressed = false
+                } else {
+                    value = reputation.value
+                }
+            }
         }
     } // Row
 

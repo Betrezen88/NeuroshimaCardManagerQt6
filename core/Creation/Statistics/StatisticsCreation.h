@@ -7,6 +7,7 @@
 
 #include "AttributeCreation.h"
 #include "OtherSkillCreation.h"
+#include "ReputationCreation.h"
 #include "TrickCreation.h"
 
 #include <DiseaseSource.h>
@@ -22,6 +23,7 @@ class StatisticsCreation : public QObject
     Q_PROPERTY(QQmlListProperty<AttributeCreation> attributes READ attributes CONSTANT)
     Q_PROPERTY(QQmlListProperty<OtherSkillCreation> otherSkills READ otherSkills NOTIFY otherSkillsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<TrickCreation> tricks READ tricks NOTIFY tricksChanged FINAL)
+    Q_PROPERTY(QQmlListProperty<ReputationCreation> reputations READ reputations CONSTANT)
     Q_PROPERTY(DiseaseSource* disease READ disease WRITE setDisease NOTIFY diseaseChanged FINAL)
     Q_PROPERTY(OriginSource* origin READ origin WRITE setOrigin NOTIFY originChanged FINAL)
     Q_PROPERTY(FeatureSource* originFeature READ originFeature WRITE setOriginFeature NOTIFY originFeatureChanged FINAL)
@@ -34,7 +36,8 @@ class StatisticsCreation : public QObject
 
 public:
     explicit StatisticsCreation(QObject *parent = nullptr);
-    explicit StatisticsCreation(const QVector<AttributeCreation*>& attributes, QObject* parent = nullptr);
+    StatisticsCreation(const QVector<AttributeCreation*>& attributes, QObject* parent = nullptr);
+    StatisticsCreation(const QVector<AttributeCreation*>& attributes, const QStringList& places, QObject* parent = nullptr);
 
     DiseaseSource *disease() const;
     void setDisease(DiseaseSource *newDisease);
@@ -76,6 +79,10 @@ public:
     qsizetype tricksCount() const;
     TrickCreation* trick(qsizetype index);
 
+    QQmlListProperty<ReputationCreation> reputations();
+    qsizetype reputationsCount() const;
+    ReputationCreation* reputation(qsizetype index);
+
 signals:
     void diseaseChanged();
     void originChanged();
@@ -94,6 +101,9 @@ signals:
     void tricksChanged();
     void trickSold(TrickSource *trick);
     void trickBougth(TrickSource *trick);
+    void reputationIncreased();
+    void reputationDecreased();
+    void reputationGeneralPoint(bool newReputationGeneralPoint);
     void statsChanged(QVector<AttributeCreation*> attributes);
 
 public slots:
@@ -107,6 +117,8 @@ private slots:
     void onAttributeBonusListChanged(const QString& from, const QString& to);
     void onSkillpackChanged(const QString& from, const QString& to, const int value);
     void onTrickSold(TrickSource *trick);
+    void removeReputationPoint(const QString& place);
+    void applyReputationPoint(const QString& place);
 
 private:
     void init();
@@ -121,6 +133,9 @@ private:
     static qsizetype tricksCount(QQmlListProperty<TrickCreation> *list);
     static TrickCreation* trick(QQmlListProperty<TrickCreation> *list, qsizetype index);
 
+    static qsizetype reputationsCount(QQmlListProperty<ReputationCreation> *list);
+    static ReputationCreation* reputation(QQmlListProperty<ReputationCreation> *list, qsizetype index);
+
 private:
     DiseaseSource *m_disease{nullptr};
     OriginSource *m_origin{nullptr};
@@ -132,6 +147,7 @@ private:
     QVector<AttributeCreation*> m_attributes;
     QVector<OtherSkillCreation*> m_otherSkills;
     QVector<TrickCreation*> m_tricks;
+    QVector<ReputationCreation*> m_reputations;
 };
 
 #endif // STATISTICSCREATION_H

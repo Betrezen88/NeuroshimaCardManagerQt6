@@ -3,6 +3,8 @@
 #include "AttributeBonusList.h"
 #include <Bonus/BonusSkillpack.h>
 
+#include <../Utils/Dice.h>
+
 
 StatisticsCreation::StatisticsCreation(QObject *parent)
     : QObject{parent}
@@ -14,6 +16,19 @@ StatisticsCreation::StatisticsCreation(const QVector<AttributeCreation *> &attri
     : QObject{parent}
     , m_attributes{attributes}
 {
+    init();
+    for ( AttributeCreation* attribute: m_attributes ) {
+        attribute->setParent(this);
+    }
+}
+
+StatisticsCreation::StatisticsCreation(const QVector<AttributeCreation *> &attributes, const QStringList &places, QObject *parent)
+    : QObject(parent)
+    , m_attributes(attributes)
+{
+    for ( const QString& place: places ) {
+        m_reputations.append( new ReputationCreation(place, 0, 1, this) );
+    }
     init();
     for ( AttributeCreation* attribute: m_attributes ) {
         attribute->setParent(this);
@@ -43,7 +58,12 @@ void StatisticsCreation::setOrigin(OriginSource *newOrigin)
     if (m_origin == newOrigin)
         return;
 
+    if (m_origin != nullptr)
+        removeReputationPoint( m_origin->name() );
+
     m_origin = newOrigin;
+
+    applyReputationPoint( m_origin->name() );
     setAttributeBonus(m_origin->bonus());
 
     emit originChanged();
@@ -326,6 +346,39 @@ void StatisticsCreation::onTrickSold(TrickSource *trick)
     emit tricksChanged();
 }
 
+void StatisticsCreation::removeReputationPoint(const QString &place)
+{
+    auto found = std::find_if(m_reputations.constBegin(), m_reputations.constEnd(), [&place](const ReputationCreation* reputation){
+        return reputation->place().toLower() == place.toLower();
+    });
+
+    if ( found != m_reputations.constEnd() ) {
+        (*found)->decrease();
+    } else {
+        found = std::find_if(m_reputations.constBegin(), m_reputations.constEnd(), [](const ReputationCreation* reputation){
+            return reputation->value() > 0;
+        });
+        if ( found != m_reputations.constEnd() ) {
+            (*found)->decrease();
+        }
+    }
+}
+
+void StatisticsCreation::applyReputationPoint(const QString &place)
+{
+    auto found = std::find_if(m_reputations.constBegin(), m_reputations.constEnd(), [&place](const ReputationCreation* reputation){
+        return reputation->place().toLower() == place.toLower();
+    });
+
+    bool isReputationGeneralPoint{true};
+
+    if ( found != m_reputations.constEnd() ) {
+        (*found)->increase();
+        isReputationGeneralPoint = false;
+    }
+    emit reputationGeneralPoint( isReputationGeneralPoint );
+}
+
 void StatisticsCreation::init()
 {
     connect(this, &StatisticsCreation::trickSold, this, &StatisticsCreation::onTrickSold);
@@ -353,6 +406,10 @@ void StatisticsCreation::init()
                 emit this->statsChanged(m_attributes);
             });
         }
+    }
+    for ( const ReputationCreation* reputation: m_reputations ) {
+        connect(reputation, &ReputationCreation::increased, this, &StatisticsCreation::reputationIncreased);
+        connect(reputation, &ReputationCreation::decreased, this, &StatisticsCreation::reputationDecreased);
     }
 }
 
@@ -398,7 +455,17 @@ qsizetype StatisticsCreation::tricksCount(QQmlListProperty<TrickCreation> *list)
 
 TrickCreation *StatisticsCreation::trick(QQmlListProperty<TrickCreation> *list, qsizetype index)
 {
-    return  reinterpret_cast<StatisticsCreation*>(list->data)->trick(index);
+    return reinterpret_cast<StatisticsCreation*>(list->data)->trick(index);
+}
+
+qsizetype StatisticsCreation::reputationsCount(QQmlListProperty<ReputationCreation> *list)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->reputationsCount();
+}
+
+ReputationCreation *StatisticsCreation::reputation(QQmlListProperty<ReputationCreation> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->reputation(index);
 }
 
 void StatisticsCreation::onTrickBougth(TrickSource *trick)
@@ -422,4 +489,21 @@ qsizetype StatisticsCreation::tricksCount() const
 TrickCreation *StatisticsCreation::trick(qsizetype index)
 {
     return m_tricks.at(index);
+}
+
+QQmlListProperty<ReputationCreation> StatisticsCreation::reputations()
+{
+    return QQmlListProperty<ReputationCreation>(this, this,
+                                                &StatisticsCreation::reputationsCount,
+                                                &StatisticsCreation::reputation);
+}
+
+qsizetype StatisticsCreation::reputationsCount() const
+{
+    return m_reputations.count();
+}
+
+ReputationCreation *StatisticsCreation::reputation(qsizetype index)
+{
+    return m_reputations.at(index);
 }
