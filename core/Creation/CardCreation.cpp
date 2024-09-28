@@ -47,8 +47,10 @@ void CardCreation::init()
     }
 
     m_statisticsCreation = new StatisticsCreation( attributes, m_statisticsSource->places(), this );
+    m_statisticsCreation->setQuestionsSource( const_cast<const StatisticsSource*>(m_statisticsSource)->questions() );
 
     connect(m_statisticsSource, &StatisticsSource::diseaseDrawed, m_statisticsCreation, &StatisticsCreation::setDisease);
+    connect(m_statisticsSource, &StatisticsSource::currentQuestionsChanged, m_statisticsCreation, &StatisticsCreation::setQuestionsSource);
     connect(m_statisticsSource, &StatisticsSource::trickBougth, m_statisticsCreation, &StatisticsCreation::onTrickBougth);
     connect(m_statisticsSource, &StatisticsSource::trickBougth, m_skillpointsManager, &SkillpointsCreationManager::onTrickBought);
     connect(m_statisticsCreation, &StatisticsCreation::specializationChangedTo, m_skillpointsManager, &SkillpointsCreationManager::setSpecialization);

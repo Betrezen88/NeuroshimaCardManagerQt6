@@ -5,12 +5,14 @@
 #include <QQmlListProperty>
 #include "qqmlintegration.h"
 
+#include "AnswerCreation.h"
 #include "AttributeCreation.h"
 #include "OtherSkillCreation.h"
 #include "ReputationCreation.h"
 #include "TrickCreation.h"
 
 #include <DiseaseSource.h>
+#include <QuestionSource.h>
 #include <OriginSource.h>
 #include <ProfessionSource.h>
 #include <SkillpointsCreationManager.h>
@@ -24,6 +26,7 @@ class StatisticsCreation : public QObject
     Q_PROPERTY(QQmlListProperty<OtherSkillCreation> otherSkills READ otherSkills NOTIFY otherSkillsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<TrickCreation> tricks READ tricks NOTIFY tricksChanged FINAL)
     Q_PROPERTY(QQmlListProperty<ReputationCreation> reputations READ reputations CONSTANT)
+    Q_PROPERTY(QQmlListProperty<AnswerCreation> answers READ answers NOTIFY answersChanged FINAL)
     Q_PROPERTY(DiseaseSource* disease READ disease WRITE setDisease NOTIFY diseaseChanged FINAL)
     Q_PROPERTY(OriginSource* origin READ origin WRITE setOrigin NOTIFY originChanged FINAL)
     Q_PROPERTY(FeatureSource* originFeature READ originFeature WRITE setOriginFeature NOTIFY originFeatureChanged FINAL)
@@ -83,6 +86,10 @@ public:
     qsizetype reputationsCount() const;
     ReputationCreation* reputation(qsizetype index);
 
+    QQmlListProperty<AnswerCreation> answers();
+    qsizetype answersCount() const;
+    AnswerCreation* answer(qsizetype index);
+
 signals:
     void diseaseChanged();
     void originChanged();
@@ -105,9 +112,11 @@ signals:
     void reputationDecreased();
     void reputationGeneralPoint(bool newReputationGeneralPoint);
     void statsChanged(QVector<AttributeCreation*> attributes);
+    void answersChanged();
 
 public slots:
     void onTrickBougth(TrickSource* trick);
+    void setQuestionsSource(QVector<QuestionSource*> questions);
 
 private slots:
     void onRemoveAttributeBonus(const AttributeBonusSource *bonus);
@@ -136,6 +145,9 @@ private:
     static qsizetype reputationsCount(QQmlListProperty<ReputationCreation> *list);
     static ReputationCreation* reputation(QQmlListProperty<ReputationCreation> *list, qsizetype index);
 
+    static qsizetype answersCount(QQmlListProperty<AnswerCreation> *list);
+    static AnswerCreation* answer(QQmlListProperty<AnswerCreation> *list, qsizetype index);
+
 private:
     DiseaseSource *m_disease{nullptr};
     OriginSource *m_origin{nullptr};
@@ -148,6 +160,7 @@ private:
     QVector<OtherSkillCreation*> m_otherSkills;
     QVector<TrickCreation*> m_tricks;
     QVector<ReputationCreation*> m_reputations;
+    QVector<AnswerCreation*> m_answers;
 };
 
 #endif // STATISTICSCREATION_H

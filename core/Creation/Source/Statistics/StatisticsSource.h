@@ -28,6 +28,7 @@ class StatisticsSource : public QObject
     Q_PROPERTY(QQmlListProperty<ProfessionSource> professions READ professions NOTIFY professionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<QuestionSource> questions READ questions NOTIFY questionsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<SpecializationSource> specializations READ specializations NOTIFY specializationsChanged FINAL)
+    Q_PROPERTY(QStringList questionSources READ questionSources NOTIFY questionSourcesChanged FINAL)
     Q_PROPERTY(TrickSourceSortFilterProxyModel* sortModel READ sortModel CONSTANT)
     Q_PROPERTY(TrickSortProxyModel* tricks READ tricks CONSTANT)
     Q_PROPERTY(QStringList places READ places NOTIFY placesChanged FINAL)
@@ -60,6 +61,8 @@ public:
     qsizetype questionsCount() const;
     QuestionSource* question(qsizetype index);
 
+    QVector<QuestionSource*> questions() const;
+
     QQmlListProperty<SpecializationSource> specializations();
     qsizetype specializationsCount() const;
     SpecializationSource* specialization(qsizetype index);
@@ -69,6 +72,8 @@ public:
     TrickSourceSortFilterProxyModel* sortModel() const;
 
     TrickSortProxyModel *tricks() const;
+
+    QStringList questionSources() const;
 
 signals:
     void attributesChanged();
@@ -80,7 +85,9 @@ signals:
     void tricksChanged();
     void placesChanged();
     void questionsChanged();
+    void currentQuestionsChanged(const QVector<QuestionSource*>& questions);
     void trickBougth(TrickSource* trick);
+    void questionSourcesChanged();
 
 public slots:
     void addAttributes(const QVector<AttributeSource*>& attributes);

@@ -11,6 +11,8 @@ qt_add_qml_module(Creation
         Model/TrickCreationModel.h
         Model/TrickCreationModel.cpp
 
+        Statistics/AnswerCreation.h
+        Statistics/AnswerCreation.cpp
         Statistics/AttributeCreation.h
         Statistics/AttributeCreation.cpp
         Statistics/OtherSkillCreation.h

@@ -6,6 +6,8 @@ Rectangle {
 
     id: _root
 
+    signal textUpdated(string text)
+
     border.width: 2
     border.color: "#000"
 
@@ -20,6 +22,7 @@ Rectangle {
             font.pointSize: 12
             color: "#000"
             wrapMode: Text.WordWrap
+            onEditingFinished: _root.textUpdated(_contentText.text)
         }
     } // ScrollView
 } // Rectangle

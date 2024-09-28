@@ -113,6 +113,11 @@ QuestionSource *StatisticsSource::question(qsizetype index)
     return m_questions.at(index);
 }
 
+QVector<QuestionSource *> StatisticsSource::questions() const
+{
+    return m_questions;
+}
+
 QQmlListProperty<SpecializationSource> StatisticsSource::specializations()
 {
     return QQmlListProperty<SpecializationSource>(this, this,
@@ -174,6 +179,12 @@ void StatisticsSource::addProfessions(const QString &name, const QVector<Profess
 void StatisticsSource::addQuestions(const QString &name, const QVector<QuestionSource *> &questions)
 {
     m_questionSources.insert( name, questions );
+
+    if ( m_questions.isEmpty() ) {
+        m_questions = m_questionSources.value( name );
+        emit currentQuestionsChanged( m_questions );
+        emit questionsChanged();
+    }
 }
 
 void StatisticsSource::addSpecializations(const QVector<SpecializationSource *> &specializations)
@@ -280,4 +291,9 @@ TrickSourceSortFilterProxyModel *StatisticsSource::sortModel() const
 TrickSortProxyModel *StatisticsSource::tricks() const
 {
     return m_sortModel->model();
+}
+
+QStringList StatisticsSource::questionSources() const
+{
+    return m_questionSources.keys();
 }

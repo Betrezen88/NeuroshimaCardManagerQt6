@@ -44,7 +44,7 @@ SourceDocument::Type SourceDocument::stringToType(const QString &string)
         return SourceDocument::Type::Places;
     if ( "Diseases" == string )
         return SourceDocument::Type::Diseases;
-    if ( "Features" == string )
+    if ( "Form" == string )
         return SourceDocument::Type::Form;
     if ( "Features" == string )
         return SourceDocument::Type::Features;

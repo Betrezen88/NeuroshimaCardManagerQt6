@@ -468,10 +468,29 @@ ReputationCreation *StatisticsCreation::reputation(QQmlListProperty<ReputationCr
     return reinterpret_cast<StatisticsCreation*>(list->data)->reputation(index);
 }
 
+qsizetype StatisticsCreation::answersCount(QQmlListProperty<AnswerCreation> *list)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->answersCount();
+}
+
+AnswerCreation *StatisticsCreation::answer(QQmlListProperty<AnswerCreation> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->answer(index);
+}
+
 void StatisticsCreation::onTrickBougth(TrickSource *trick)
 {
     m_tricks.append(new TrickCreation(trick, this));
     emit tricksChanged();
+}
+
+void StatisticsCreation::setQuestionsSource(QVector<QuestionSource *> questions)
+{
+    m_answers.clear();
+    for ( QuestionSource* question: questions ) {
+        m_answers.append( new AnswerCreation(question, this) );
+    }
+    emit answersChanged();
 }
 
 QQmlListProperty<TrickCreation> StatisticsCreation::tricks()
@@ -506,4 +525,21 @@ qsizetype StatisticsCreation::reputationsCount() const
 ReputationCreation *StatisticsCreation::reputation(qsizetype index)
 {
     return m_reputations.at(index);
+}
+
+QQmlListProperty<AnswerCreation> StatisticsCreation::answers()
+{
+    return QQmlListProperty<AnswerCreation>(this, this,
+                                            &StatisticsCreation::answersCount,
+                                            &StatisticsCreation::answer);
+}
+
+qsizetype StatisticsCreation::answersCount() const
+{
+    return m_answers.count();
+}
+
+AnswerCreation *StatisticsCreation::answer(qsizetype index)
+{
+    return m_answers.at(index);
 }
