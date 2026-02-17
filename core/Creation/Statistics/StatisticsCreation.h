@@ -18,12 +18,14 @@
 #include <SkillpointsCreationManager.h>
 #include <SpecializationSource.h>
 #include <TrickSource.h>
+#include <ItemCreation.h>
 
 class StatisticsCreation : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<AttributeCreation> attributes READ attributes CONSTANT)
     Q_PROPERTY(QQmlListProperty<OtherSkillCreation> otherSkills READ otherSkills NOTIFY otherSkillsChanged FINAL)
+    Q_PROPERTY(QQmlListProperty<ItemCreation> items READ items NOTIFY itemsChanged FINAL)
     Q_PROPERTY(QQmlListProperty<TrickCreation> tricks READ tricks NOTIFY tricksChanged FINAL)
     Q_PROPERTY(QQmlListProperty<ReputationCreation> reputations READ reputations CONSTANT)
     Q_PROPERTY(QQmlListProperty<AnswerCreation> answers READ answers NOTIFY answersChanged FINAL)
@@ -90,6 +92,11 @@ public:
     qsizetype answersCount() const;
     AnswerCreation* answer(qsizetype index);
 
+    QQmlListProperty<ItemCreation> items();
+    qsizetype itemsCount() const;
+    ItemCreation* item(qsizetype index);
+
+
 signals:
     void diseaseChanged();
     void originChanged();
@@ -114,8 +121,12 @@ signals:
     void statsChanged(QVector<AttributeCreation*> attributes);
     void answersChanged();
 
+    void itemsChanged();
+
 public slots:
     void onTrickBougth(TrickSource* trick);
+    void onItemBougth(ItemSource *source);
+    void onItemSold(const quint32 index);
     void setQuestionsSource(QVector<QuestionSource*> questions);
 
 private slots:
@@ -148,6 +159,9 @@ private:
     static qsizetype answersCount(QQmlListProperty<AnswerCreation> *list);
     static AnswerCreation* answer(QQmlListProperty<AnswerCreation> *list, qsizetype index);
 
+    static qsizetype itemsCount(QQmlListProperty<ItemCreation> *list);
+    static ItemCreation* item(QQmlListProperty<ItemCreation> *list, qsizetype index);
+
 private:
     DiseaseSource *m_disease{nullptr};
     OriginSource *m_origin{nullptr};
@@ -161,6 +175,7 @@ private:
     QVector<TrickCreation*> m_tricks;
     QVector<ReputationCreation*> m_reputations;
     QVector<AnswerCreation*> m_answers;
+    QVector<ItemCreation*> m_items;
 };
 
 #endif // STATISTICSCREATION_H

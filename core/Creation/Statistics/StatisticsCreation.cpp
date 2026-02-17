@@ -5,6 +5,7 @@
 
 #include <../Utils/Dice.h>
 
+#include <QDebug>
 
 StatisticsCreation::StatisticsCreation(QObject *parent)
     : QObject{parent}
@@ -273,6 +274,30 @@ void StatisticsCreation::onApplyFeatureBonus(const BonusSource *bonus)
         return;
 
     switch (bonus->type()) {
+    case Types::Bonus::Pet:
+        qDebug() << "Add step to create your pet.";
+        break;
+    case Types::Bonus::Health:
+        qDebug() << "Set deases to none.";
+        break;
+    case Types::Bonus::Fame:
+        qDebug() << "Set Fame bonus";
+        break;
+    case Types::Bonus::Features:
+        qDebug() << "Gather all features except one with bonus type features.";
+        break;
+    case Types::Bonus::Connections:
+        qDebug() << "Connections cash";
+        break;
+    case Types::Bonus::Reputation:
+        qDebug() << "Set Reputation bonus";
+        break;
+    case Types::Bonus::Skillpoints:
+        qDebug() << "Make connection to check if specialization is correct and increase skillpoints";
+        break;
+    case Types::Bonus::Skills:
+        qDebug() << "Set all skills with value equal to 0 with highest value to 1.";
+        break;
     case Types::Bonus::Skillpack: {
         connect(static_cast<const BonusSkillpack*>(bonus), &BonusSkillpack::selectedWasChanged,
                 this, [this, bonus](const QString& from, const QString& to){
@@ -282,6 +307,9 @@ void StatisticsCreation::onApplyFeatureBonus(const BonusSource *bonus)
         const_cast<BonusSkillpack*>(bonusSkillpack)->setSelected(bonusSkillpack->list().constFirst());
         break;
     }
+    case Types::Bonus::Trick:
+        qDebug() << "Add trick to hero.";
+        break;
     default:
         break;
     }
@@ -293,11 +321,41 @@ void StatisticsCreation::onRemoveFeatureBonus(const BonusSource *bonus)
         return;
 
     switch (bonus->type()) {
+    case Types::Bonus::Pet:
+        qDebug() << "Remove step to create your pet.";
+        break;
+    case Types::Bonus::Health:
+        qDebug() << "Remove Health .";
+        break;
+    case Types::Bonus::Fame:
+        qDebug() << "Remove Fame bonus";
+        break;
+    case Types::Bonus::Features:
+        qDebug() << "Gather all features except one with bonus type features.";
+        break;
+    case Types::Bonus::Connections:
+        qDebug() << "Connections cash";
+        break;
+    case Types::Bonus::Reputation:
+        qDebug() << "Set Reputation bonus";
+        break;
+    case Types::Bonus::Skillpoints: {
+        qDebug() << "Make connection to check if specialization is correct and increase skillpoints";
+        // connect signal on specialization changed
+        // increase specialization skillpoints if current specialization is equal from bonus
+        break;
+    }
+    case Types::Bonus::Skills:
+        qDebug() << "Set all skills with value equal to 0 with highest value to 1.";
+        break;
     case Types::Bonus::Skillpack: {
         auto bonusSkillpack = static_cast<const BonusSkillpack*>(bonus);
         onSkillpackChanged(bonusSkillpack->selected(), "", bonusSkillpack->value());
         break;
     }
+    case Types::Bonus::Trick:
+        qDebug() << "Add trick to hero.";
+        break;
     default:
         break;
     }
@@ -478,10 +536,48 @@ AnswerCreation *StatisticsCreation::answer(QQmlListProperty<AnswerCreation> *lis
     return reinterpret_cast<StatisticsCreation*>(list->data)->answer(index);
 }
 
+qsizetype StatisticsCreation::itemsCount(QQmlListProperty<ItemCreation> *list)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->itemsCount();
+}
+
+ItemCreation *StatisticsCreation::item(QQmlListProperty<ItemCreation> *list, qsizetype index)
+{
+    return reinterpret_cast<StatisticsCreation*>(list->data)->item(index);
+}
+
 void StatisticsCreation::onTrickBougth(TrickSource *trick)
 {
     m_tricks.append(new TrickCreation(trick, this));
     emit tricksChanged();
+}
+
+void StatisticsCreation::onItemBougth(ItemSource *source)
+{
+    auto found = std::find(m_items.begin(), m_items.end(), [&source](const ItemCreation *item){
+        return item->source() == source;
+    });
+
+    if (found != m_items.end()) {
+        (*found)->increase();
+    }
+    else {
+        m_items.append(new ItemCreation(source));
+    }
+}
+
+void StatisticsCreation::onItemSold(const quint32 index)
+{
+    qDebug() << "StatisticsCreation::onItemSold() " << index;
+
+    auto item = m_items.at(index);
+    if (item->quantity() > 1) {
+        item->decrease();
+    }
+    else {
+        m_items.removeAt(index);
+        emit itemsChanged();
+    }
 }
 
 void StatisticsCreation::setQuestionsSource(QVector<QuestionSource *> questions)
@@ -542,4 +638,21 @@ qsizetype StatisticsCreation::answersCount() const
 AnswerCreation *StatisticsCreation::answer(qsizetype index)
 {
     return m_answers.at(index);
+}
+
+QQmlListProperty<ItemCreation> StatisticsCreation::items()
+{
+    return QQmlListProperty<ItemCreation>(this, this,
+                                            &StatisticsCreation::itemsCount,
+                                            &StatisticsCreation::item);
+}
+
+qsizetype StatisticsCreation::itemsCount() const
+{
+    return m_items.count();
+}
+
+ItemCreation *StatisticsCreation::item(qsizetype index)
+{
+    return m_items.at(index);
 }

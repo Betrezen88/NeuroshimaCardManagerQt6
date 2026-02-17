@@ -25,6 +25,7 @@ void CardCreation::init()
     connect(&converter, &SourceConverter::questionsConverted, m_statisticsSource, &StatisticsSource::addQuestions);
     connect(&converter, &SourceConverter::placesConverted, m_statisticsSource, &StatisticsSource::addPlaces);
     connect(&converter, &SourceConverter::tricksConverted, m_statisticsSource, &StatisticsSource::addTricks);
+    connect(&converter, &SourceConverter::itemsConverted, m_statisticsSource, &StatisticsSource::addItems);
 
     loader.load();
 
