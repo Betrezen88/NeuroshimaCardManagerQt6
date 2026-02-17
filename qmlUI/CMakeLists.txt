@@ -117,6 +117,7 @@ qt_add_qml_module(appQmlUI
 
         Elements/Creation/Equipment/ArmorContent.qml
         Elements/Creation/Equipment/HandWeaponContent.qml
+        Elements/Creation/Equipment/ItemContent.qml
     RESOURCES
         icons.qrc
 )
