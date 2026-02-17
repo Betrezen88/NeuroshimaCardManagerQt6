@@ -17,6 +17,8 @@ qt_add_qml_module(Source
         Model/Items/ItemSourceFilterProxyModel.cpp
         Model/Items/ItemsSortProxyModel.h
         Model/Items/ItemsSortProxyModel.cpp
+        Model/Items/ShopItemSource.h
+        Model/Items/ShopItemSource.cpp
 
         Model/AvailableFilterProxyModel.cpp
         Model/AvailableFilterProxyModel.h
