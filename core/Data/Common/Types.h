@@ -25,6 +25,9 @@ Q_ENUM_NS(Bonus)
 enum class AttributeBonus { Single, List };
 Q_ENUM_NS(AttributeBonus)
 
+enum class Item { RangeWeapon, HandWeapon, Shield, Armor, Ammunition, Drug, WeaponMod, Consumable, MotorVehicle, Other };
+Q_ENUM_NS(Item)
+
 } // Types
 
 #endif // TYPES_H
