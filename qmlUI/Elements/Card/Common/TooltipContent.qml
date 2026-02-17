@@ -8,26 +8,32 @@ Item {
     id: _root
     height: _column.implicitHeight
 
-    Column {
-        id: _column
+    ScrollView {
+        clip: true
+        width: _root.width
 
-        Text {
-            id: _title
-            width: _root.width
-            font.pointSize: 12
-            font.bold: true
-            padding: 5
-            wrapMode: Text.WordWrap
-            horizontalAlignment: Text.AlignHCenter
-        }
+        Column {
+            id: _column
 
-        Text {
-            id: _description
-            padding: 5
-            width: _root.width
-            font.pointSize: 10
-            wrapMode: Text.WordWrap
-        }
+            Text {
+                id: _title
+                width: _root.width
+                font.pointSize: 12
+                font.bold: true
+                padding: 5
+                wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignHCenter
+            }
 
-    } // Column
+            Text {
+                id: _description
+                padding: 5
+                width: _root.width
+                font.pointSize: 10
+                wrapMode: Text.WordWrap
+            }
+
+        } // Column
+    }
+
 } // Item
