@@ -1,6 +1,8 @@
 #include "StatisticsSource.h"
 #include "Validators/TrickRequirementsValidator.h"
 
+#include "ItemSource.h"
+
 #include "../../Statistics/AttributeCreation.h"
 #include <../../Utils/Dice.h>
 
@@ -8,14 +10,17 @@
 
 StatisticsSource::StatisticsSource(QObject *parent)
     : QObject{parent}
-    , m_model{new TrickSourceModel(this)}
-    , m_sortModel{new TrickSourceSortFilterProxyModel(this)}
+    , m_tricksModel{new TrickSourceModel(this)}
+    , m_tricksProxyModel{new TrickSourceSortFilterProxyModel(this)}
+    , m_itemModel{new ItemSourceModel(this)}
+    , m_itemsProxyModel{new ItemSourceFilterProxyModel(this)}
 {
-    m_sortModel->setSourceModel(m_model);
+    m_tricksProxyModel->setSourceModel(m_tricksModel);
+    m_itemsProxyModel->setSourceModel(m_itemModel);
 
     connect(this, &StatisticsSource::trickBougth, this, [this](const TrickSource* trick){
         Q_UNUSED(trick)
-        m_sortModel->filterBougth();
+        m_tricksProxyModel->filterBougth();
     });
 }
 
@@ -195,7 +200,7 @@ void StatisticsSource::addSpecializations(const QVector<SpecializationSource *> 
 
 void StatisticsSource::addTricks(const QString &name, const QVector<TrickSource *> &tricks)
 {
-    m_model->addTricks( name, tricks );
+    m_tricksModel->addTricks( name, tricks );
 }
 
 void StatisticsSource::addPlaces(const QStringList &places)
@@ -203,9 +208,16 @@ void StatisticsSource::addPlaces(const QStringList &places)
     m_places = places;
 }
 
+void StatisticsSource::addItems(const QVector<ItemSource *> &items)
+{
+    qDebug() << "Adding items: " << items.count();
+    m_itemModel->addItem("", items);
+    qDebug() << "Added items: " << m_itemModel->rowCount();
+}
+
 void StatisticsSource::onTrickSold(TrickSource *trick)
 {
-    QVector<TrickSourceItem*> tricks = m_model->tricks();
+    QVector<TrickSourceItem*> tricks = m_tricksModel->tricks();
     auto trickFound = std::find_if(tricks.constBegin(),
                                    tricks.constEnd(),
                                    [&trick](const TrickSourceItem* trickItem){
@@ -213,14 +225,14 @@ void StatisticsSource::onTrickSold(TrickSource *trick)
     });
     if ( trickFound != tricks.constEnd() ) {
         (*trickFound)->setBought(false);
-        m_sortModel->filterBougth();
+        m_tricksProxyModel->filterBougth();
     }
 }
 
 void StatisticsSource::onStatsChanged(QVector<AttributeCreation *> attributes)
 {
     TrickRequirementsValidator validator(this);
-    validator.validate(attributes, m_model->tricks());
+    validator.validate(attributes, m_tricksModel->tricks());
 }
 
 qsizetype StatisticsSource::attribtuesCount(QQmlListProperty<AttributeSource> *list)
@@ -285,15 +297,25 @@ SpecializationSource *StatisticsSource::specialization(QQmlListProperty<Speciali
 
 TrickSourceSortFilterProxyModel *StatisticsSource::sortModel() const
 {
-    return m_sortModel;
+    return m_tricksProxyModel;
 }
 
 TrickSortProxyModel *StatisticsSource::tricks() const
 {
-    return m_sortModel->model();
+    return m_tricksProxyModel->model();
 }
 
 QStringList StatisticsSource::questionSources() const
 {
     return m_questionSources.keys();
+}
+
+ItemSourceFilterProxyModel *StatisticsSource::itemsModel() const
+{
+    return m_itemsProxyModel;
+}
+
+ItemsSortProxyModel *StatisticsSource::items() const
+{
+    return m_itemsProxyModel->model();
 }

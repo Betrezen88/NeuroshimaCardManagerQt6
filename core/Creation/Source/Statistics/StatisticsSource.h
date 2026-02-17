@@ -6,6 +6,7 @@
 
 #include "AttributeSource.h"
 #include "DiseaseSource.h"
+#include "ItemSource.h"
 #include "OriginSource.h"
 #include "ProfessionSource.h"
 #include "QuestionSource.h"
@@ -15,6 +16,8 @@
 #include "../Model/TrickSourceModel.h"
 #include "../Model/TrickSourceSortFilterProxyModel.h"
 #include "../Model/TrickSortProxyModel.h"
+#include "../Model/Items/ItemSourceFilterProxyModel.h"
+#include "../Model/Items/ItemSourceModel.h"
 
 class AttributeCreation;
 
@@ -31,6 +34,8 @@ class StatisticsSource : public QObject
     Q_PROPERTY(QStringList questionSources READ questionSources NOTIFY questionSourcesChanged FINAL)
     Q_PROPERTY(TrickSourceSortFilterProxyModel* sortModel READ sortModel CONSTANT)
     Q_PROPERTY(TrickSortProxyModel* tricks READ tricks CONSTANT)
+    Q_PROPERTY(ItemSourceFilterProxyModel* itemsModel READ itemsModel CONSTANT)
+    Q_PROPERTY(ItemsSortProxyModel* items READ items CONSTANT)
     Q_PROPERTY(QStringList places READ places NOTIFY placesChanged FINAL)
     QML_UNCREATABLE("StatisticsSource is uncreatable.")
 
@@ -70,10 +75,12 @@ public:
     QStringList places() const;
 
     TrickSourceSortFilterProxyModel* sortModel() const;
-
     TrickSortProxyModel *tricks() const;
 
     QStringList questionSources() const;
+
+    ItemSourceFilterProxyModel *itemsModel() const;
+    ItemsSortProxyModel *items() const;
 
 signals:
     void attributesChanged();
@@ -98,6 +105,7 @@ public slots:
     void addSpecializations(const QVector<SpecializationSource*>& specializations);
     void addTricks(const QString& name, const QVector<TrickSource *> &tricks);
     void addPlaces(const QStringList& places);
+    void addItems(const QVector<ItemSource*>& items);
     void onTrickSold(TrickSource *trick);
     void onStatsChanged(QVector<AttributeCreation*> attributes);
 
@@ -127,7 +135,8 @@ private:
     QVector<ProfessionSource*> m_professions;
     QVector<QuestionSource*> m_questions;
     QVector<SpecializationSource*> m_specializations;
-    TrickSourceModel *m_model{nullptr};
+    TrickSourceModel *m_tricksModel{nullptr};
+    ItemSourceModel *m_itemModel{nullptr};
     QStringList m_places;
 
     QMap<QString, QVector<DiseaseSource*>> m_diseaseSources;
@@ -135,7 +144,10 @@ private:
     QMap<QString, QVector<ProfessionSource*>> m_professionSource;
     QMap<QString, QVector<QuestionSource*>> m_questionSources;
     QMap<QString, QVector<TrickSource*>> m_trickSources;
-    TrickSourceSortFilterProxyModel *m_sortModel{nullptr};
+    QMap<QString, QVector<ItemSource*>> m_itemSources;
+
+    TrickSourceSortFilterProxyModel *m_tricksProxyModel{nullptr};
+    ItemSourceFilterProxyModel *m_itemsProxyModel{nullptr};
 };
 
 #endif // STATISTICSSOURCE_H
