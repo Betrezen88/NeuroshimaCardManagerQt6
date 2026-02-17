@@ -116,6 +116,7 @@ qt_add_qml_module(appQmlUI
         Elements/Creation/Tricks/TrickContent.qml
 
         Elements/Creation/Equipment/ArmorContent.qml
+        Elements/Creation/Equipment/HandWeaponContent.qml
     RESOURCES
         icons.qrc
 )
