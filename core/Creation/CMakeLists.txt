@@ -48,6 +48,7 @@ target_include_directories(Creation
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics
         ${CMAKE_CURRENT_SOURCE_DIR}/Source/Statistics
         ${CMAKE_CURRENT_SOURCE_DIR}/Source/Statistics/Bonus
+        ${CMAKE_CURRENT_SOURCE_DIR}/Source/Equipment
 )
 
 target_link_libraries(Creation

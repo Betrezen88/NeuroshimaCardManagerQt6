@@ -128,6 +128,7 @@ target_include_directories(Source
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Common
         ${CMAKE_CURRENT_SOURCE_DIR}/Model
+        ${CMAKE_CURRENT_SOURCE_DIR}/Equipment
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics/Bonus
         ${CMAKE_CURRENT_SOURCE_DIR}../Creation/Common/
