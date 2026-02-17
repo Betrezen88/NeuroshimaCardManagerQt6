@@ -87,6 +87,8 @@ qt_add_qml_module(Source
         Equipment/AmmunitionSource.cpp
         Equipment/ArmorSource.h
         Equipment/ArmorSource.cpp
+        Equipment/DefenceSource.h
+        Equipment/DefenceSource.cpp
         Equipment/ItemSource.h
 
         Validators/TrickRequirementsValidator.h
