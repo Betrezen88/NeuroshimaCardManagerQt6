@@ -110,6 +110,8 @@ qt_add_qml_module(Source
         Equipment/WeaponModSource.cpp
         Equipment/WeaponRequirementSource.h
         Equipment/WeaponRequirementSource.cpp
+        Equipment/WeaponSpecialSource.h
+        Equipment/WeaponSpecialSource.cpp
 
         Validators/TrickRequirementsValidator.h
         Validators/TrickRequirementsValidator.cpp
