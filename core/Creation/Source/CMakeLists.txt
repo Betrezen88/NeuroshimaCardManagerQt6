@@ -9,6 +9,9 @@ qt_add_qml_module(Source
         Common/RequirementSource.cpp
         Common/RequirementSource.h
 
+        Model/Items/ItemSourceModel.h
+        Model/Items/ItemSourceModel.cpp
+
         Model/AvailableFilterProxyModel.cpp
         Model/AvailableFilterProxyModel.h
         Model/BougthFilterProxyModel.h
@@ -128,6 +131,7 @@ target_include_directories(Source
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Common
         ${CMAKE_CURRENT_SOURCE_DIR}/Model
+        ${CMAKE_CURRENT_SOURCE_DIR}/Model/Items
         ${CMAKE_CURRENT_SOURCE_DIR}/Equipment
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics
         ${CMAKE_CURRENT_SOURCE_DIR}/Statistics/Bonus
