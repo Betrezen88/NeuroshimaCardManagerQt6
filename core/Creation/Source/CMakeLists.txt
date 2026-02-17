@@ -9,8 +9,14 @@ qt_add_qml_module(Source
         Common/RequirementSource.cpp
         Common/RequirementSource.h
 
+        Model/Items/ItemNameProxyModel.h
+        Model/Items/ItemNameProxyModel.cpp
         Model/Items/ItemSourceModel.h
         Model/Items/ItemSourceModel.cpp
+        Model/Items/ItemSourceFilterProxyModel.h
+        Model/Items/ItemSourceFilterProxyModel.cpp
+        Model/Items/ItemsSortProxyModel.h
+        Model/Items/ItemsSortProxyModel.cpp
 
         Model/AvailableFilterProxyModel.cpp
         Model/AvailableFilterProxyModel.h
