@@ -83,6 +83,8 @@ qt_add_qml_module(Source
         Statistics/TrickSource.cpp
         Statistics/TrickSource.h
 
+        Equipment/AmmunitionSource.h
+        Equipment/AmmunitionSource.cpp
         Equipment/ItemSource.h
 
         Validators/TrickRequirementsValidator.h
