@@ -102,6 +102,8 @@ qt_add_qml_module(Source
         Equipment/MotorVehicleSource.cpp
         Equipment/OtherSource.h
         Equipment/OtherSource.cpp
+        Equipment/RangeWeaponSource.h
+        Equipment/RangeWeaponSource.cpp
 
         Validators/TrickRequirementsValidator.h
         Validators/TrickRequirementsValidator.cpp
