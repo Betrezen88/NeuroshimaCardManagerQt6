@@ -12,6 +12,23 @@
 #include "SpecializationSource.h"
 #include "TrickSource.h"
 
+class DefenceSource;
+class ItemSource;
+class HandWeaponSource;
+class HandWeaponBonusSource;
+class HandWeaponDamageSource;
+class WeaponRequirementSource;
+class WeaponSpecialSource;
+class RangeWeaponSource;
+class ShieldSource;
+class RangeWeaponSource;
+class ArmorSource;
+class AmmunitionSource;
+class OtherSource;
+class DrugSource;
+class WeaponModSource;
+class MotorVehicleSource;
+
 class SourceConverter : public QObject
 {
     Q_OBJECT
@@ -27,11 +44,13 @@ signals:
     void specializationsConverted(const QVector<SpecializationSource*>& specializations);
     void tricksConverted(const QString& name, QVector<TrickSource*>& tricks);
     void placesConverted(const QStringList& places);
+    void itemsConverted(const QVector<ItemSource*>& items);
 
 public slots:
     void convertSourceDocument(const SourceDocument& document);
 
 private:
+    void convertWeaponSpecials(const SourceDocument& document);
     void convertAttributes(const SourceDocument& document);
     void convertDiseases(const SourceDocument& document);
     void convertOrigins(const SourceDocument& document);
@@ -40,6 +59,8 @@ private:
     void convertSpecializations(const SourceDocument& document);
     void convertTricks(const SourceDocument& document);
     void convertPlaces(const SourceDocument& document);
+    void convertItems(const SourceDocument& document);
+    void convertSpecials(const SourceDocument& document);
 
     AttributeSource* attributeSource(const QJsonObject& object);
     SkillpackSource* skillpackSource(const QJsonObject& object);
@@ -55,6 +76,23 @@ private:
     ModifierSource* modifierSource(const QJsonObject& object);
     TrickSource* trickSource(const QJsonObject& object);
     RequirementSource* requirementSource(const QJsonObject& object);
+    ItemSource* itemSource(const QJsonObject& object);
+    HandWeaponSource* handWeaponSource(const QJsonObject& object);
+    HandWeaponBonusSource* handWeaponBonusSource(const QJsonObject& object);
+    HandWeaponDamageSource* handWeaponDamageSource(const QJsonObject& object);
+    WeaponRequirementSource* weaponRequirement(const QJsonObject& object);
+    ShieldSource* shieldSource(const QJsonObject& object);
+    RangeWeaponSource* rangeWeaponSource(const QJsonObject& object);
+    ArmorSource* armorSource(const QJsonObject& object);
+    AmmunitionSource* ammunitionSource(const QJsonObject& object);
+    OtherSource* otherSource(const QJsonObject& object);
+    DrugSource* drugSource(const QJsonObject& object);
+    WeaponModSource* weaponModSource(const QJsonObject& object);
+    MotorVehicleSource* motoVehicleSource(const QJsonObject& object);
+    DefenceSource* defenceSource(const QJsonObject& object);
+
+private:
+    QHash<QString, QString> m_specials;
 };
 
 #endif // SOURCECONVERTER_H

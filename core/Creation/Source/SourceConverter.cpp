@@ -15,6 +15,17 @@
 #include "BonusSkillpoints.h"
 #include "BonusTrick.h"
 
+#include "AmmunitionSource.h"
+#include "ArmorSource.h"
+#include "DrugSource.h"
+#include "ItemSource.h"
+#include "HandWeaponSource.h"
+#include "MotorVehicleSource.h"
+#include "ShieldSource.h"
+#include "RangeWeaponSource.h"
+#include "OtherSource.h"
+#include "WeaponModSource.h"
+
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonValue>
@@ -38,6 +49,9 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
     case SourceDocument::Type::Features:
         qDebug() << "Converting attributes.";
         break;
+    case SourceDocument::Type::Items:
+        convertItems(document);
+        break;
     case SourceDocument::Type::Origins:
         convertOrigins(document);
         break;
@@ -56,9 +70,25 @@ void SourceConverter::convertSourceDocument(const SourceDocument &document)
     case SourceDocument::Type::Specializations:
         convertSpecializations(document);
         break;
+    case SourceDocument::Type::Specials:
+        convertSpecials(document);
     default:
-        qDebug() << "Unknown type.";
+        qDebug() << "convertSourceDocument() Unknown type. " << document.name() << document.type();
         break;
+    }
+}
+
+void SourceConverter::convertWeaponSpecials(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+    if ( data.isEmpty() ) {
+        return;
+    }
+
+    for ( const QJsonValue& special: data ) {
+        const QJsonObject& tSpecial = special.toObject();
+        m_specials.insert( tSpecial.value("name").toString(),
+                           tSpecial.value("description").toString() );
     }
 }
 
@@ -183,6 +213,36 @@ void SourceConverter::convertPlaces(const SourceDocument &document)
     }
 
     emit placesConverted( places );
+}
+
+void SourceConverter::convertItems(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+    if ( data.isEmpty() ) {
+        return;
+    }
+
+    QVector<ItemSource*> items;
+    for ( const QJsonValue& item: data ) {
+        if ( auto tItem = itemSource(item.toObject()) ) {
+            items.append( tItem );
+        }
+    }
+
+    emit itemsConverted( items );
+}
+
+void SourceConverter::convertSpecials(const SourceDocument &document)
+{
+    const QJsonArray& data = document.document().array();
+    if ( data.isEmpty() )
+        return;
+
+    for ( const QJsonValue& special: data ) {
+        const QJsonObject& tSpecial = special.toObject();
+        m_specials.insert(tSpecial.value("name").toString(),
+                          tSpecial.value("description").toString());
+    }
 }
 
 AttributeSource *SourceConverter::attributeSource(const QJsonObject &object)
@@ -390,4 +450,196 @@ RequirementSource *SourceConverter::requirementSource(const QJsonObject &object)
                                  object.value("name").toString(),
                                  object.value("value").toInt(),
                                  object.value("optional").toBool()};
+}
+
+ItemSource *SourceConverter::itemSource(const QJsonObject &object)
+{
+    auto itemType = object.value("type").toString();
+    if ( itemType == "HandWeapon" )
+        return handWeaponSource( object );
+    if ( itemType == "Shield" )
+        return shieldSource( object );
+    if ( itemType == "RangeWeapon" )
+        return rangeWeaponSource( object );
+    if ( itemType == "Armor" )
+        return armorSource( object );
+    if ( itemType == "Ammunition" )
+        return ammunitionSource( object );
+    if ( itemType == "Other" )
+        return otherSource( object );
+    if ( itemType == "Drug")
+        return drugSource( object );
+    if ( itemType == "WeaponMod" )
+        return weaponModSource( object );
+    if ( itemType == "MotorVehicle")
+        return motoVehicleSource( object );
+
+    return nullptr;
+}
+
+HandWeaponSource *SourceConverter::handWeaponSource(const QJsonObject &object)
+{
+    QVector<HandWeaponBonusSource*> bonuses;
+    for ( const QJsonValue& tBonus: object.value("bonus").toArray() ) {
+        bonuses.append( handWeaponBonusSource(tBonus.toObject()) );
+    }
+    QVector<HandWeaponDamageSource*> damage;
+    for ( const QJsonValue& tDamage: object.value("damage").toArray() ) {
+        damage.append( handWeaponDamageSource(tDamage.toObject()) );
+    }
+    QVector<WeaponSpecialSource*> specials;
+    for ( const QJsonValue& tSpecial: object.value("special").toArray() ) {
+        const QString& name = tSpecial.toString();
+        specials.append( new WeaponSpecialSource(name, m_specials.value(name)) );
+    }
+
+    return new HandWeaponSource(object.value("name").toString(),
+                                object.value("description").toString(),
+                                object.value("price").toInteger(),
+                                object.value("availability").toInteger(),
+                                object.value("category").toString(),
+                                bonuses,
+                                damage,
+                                specials,
+                                weaponRequirement(object.value("requirements").toObject()),
+                                object.value("penetration").toInteger() );
+}
+
+HandWeaponBonusSource *SourceConverter::handWeaponBonusSource(const QJsonObject &object)
+{
+    return new HandWeaponBonusSource(object.value("name").toString(),
+                                     object.value("value").toInteger());
+}
+
+HandWeaponDamageSource *SourceConverter::handWeaponDamageSource(const QJsonObject &object)
+{
+    QStringList wounds;
+    for ( const QJsonValue& wound: object.value("wounds").toArray() ) {
+        wounds.append( wound.toString() );
+    }
+    return new HandWeaponDamageSource(object.value("attribute").toString(),
+                                      object.value("value").toInteger(),
+                                      wounds);
+}
+
+WeaponRequirementSource *SourceConverter::weaponRequirement(const QJsonObject &object)
+{
+    return new WeaponRequirementSource( object.value("attribute").toString(),
+                                        object.value("value").toInteger() );
+}
+
+ShieldSource *SourceConverter::shieldSource(const QJsonObject &object)
+{
+    QVector<HandWeaponBonusSource*> bonuses;
+    for ( const QJsonValue& tBonus: object.value("bonus").toArray() ) {
+        bonuses.append( handWeaponBonusSource(tBonus.toObject()) );
+    }
+
+    return new ShieldSource( object.value("name").toString(),
+                             object.value("description").toString(),
+                             object.value("price").toInteger(),
+                             object.value("availability").toInteger(),
+                             object.value("category").toString(),
+                             object.value("durability").toInteger(),
+                             weaponRequirement(object.value("requirements").toObject()),
+                             bonuses,
+                             handWeaponDamageSource(object.value("damage").toObject()));
+}
+
+RangeWeaponSource *SourceConverter::rangeWeaponSource(const QJsonObject &object)
+{
+    QStringList ammunition;
+    for ( const QJsonValue& tAmmunition: object.value("ammunition").toArray() ) {
+        ammunition.append( tAmmunition.toString() );
+    }
+    QVector<quint32> magazine;
+    for ( const QJsonValue& tMagazine: object.value("magazine").toArray() ) {
+        magazine.append( tMagazine.toInteger() );
+    }
+    QVector<WeaponSpecialSource*> specials;
+    for ( const QJsonValue& tSpecial: object.value("special").toArray() ) {
+        const QString& name = tSpecial.toString();
+        specials.append( new WeaponSpecialSource(name, m_specials.value(name)) );
+    }
+
+    return new RangeWeaponSource( object.value("name").toString(),
+                                  object.value("description").toString(),
+                                  object.value("price").toInteger(),
+                                  object.value("availability").toInteger(),
+                                  object.value("category").toString(),
+                                  object.value("damage").toString(),
+                                  object.value("penetration").toInteger(),
+                                  ammunition,
+                                  object.value("firerate").toInteger(),
+                                  magazine,
+                                  weaponRequirement(object.value("requirements").toObject()),
+                                  specials );
+}
+
+ArmorSource *SourceConverter::armorSource(const QJsonObject &object)
+{
+    QVector<DefenceSource*> defence;
+    for ( const QJsonValue& tDefence: object.value("defence").toArray() ) {
+        defence.append( defenceSource(tDefence.toObject()) );
+    }
+
+    return new ArmorSource(object.value("name").toString(),
+                           object.value("description").toString(),
+                           object.value("price").toInteger(),
+                           object.value("availability").toInteger(),
+                           object.value("category").toString(),
+                           object.value("durability").toInteger(),
+                           defence);
+}
+
+AmmunitionSource *SourceConverter::ammunitionSource(const QJsonObject &object)
+{
+    return new AmmunitionSource(object.value("name").toString(),
+                                object.value("description").toString(),
+                                object.value("price").toInteger(),
+                                object.value("availability").toInteger(),
+                                object.value("category").toString());
+}
+
+OtherSource *SourceConverter::otherSource(const QJsonObject &object)
+{
+    return new OtherSource(object.value("name").toString(),
+                           object.value("description").toString(),
+                           object.value("price").toInteger(),
+                           object.value("availability").toInteger(),
+                           object.value("category").toString());
+}
+
+DrugSource *SourceConverter::drugSource(const QJsonObject &object)
+{
+    return new DrugSource(object.value("name").toString(),
+                          object.value("description").toString(),
+                          object.value("price").toInteger(),
+                          object.value("availability").toInteger(),
+                          object.value("category").toString());
+}
+
+WeaponModSource *SourceConverter::weaponModSource(const QJsonObject &object)
+{
+    return new WeaponModSource(object.value("name").toString(),
+                               object.value("description").toString(),
+                               object.value("price").toInteger(),
+                               object.value("availability").toInteger(),
+                               object.value("category").toString());
+}
+
+MotorVehicleSource *SourceConverter::motoVehicleSource(const QJsonObject &object)
+{
+    return new MotorVehicleSource(object.value("name").toString(),
+                                  object.value("description").toString(),
+                                  object.value("price").toInteger(),
+                                  object.value("availability").toInteger(),
+                                  object.value("category").toString());
+}
+
+DefenceSource *SourceConverter::defenceSource(const QJsonObject &object)
+{
+    return new DefenceSource(object.value("name").toString(),
+                             object.value("value").toInteger(),
+                             object.value("cutting").toInteger());
 }

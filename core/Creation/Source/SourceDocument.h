@@ -8,7 +8,7 @@ class SourceDocument : public QObject
 {
     Q_OBJECT
 public:
-    enum Type { Attributes, Diseases, Features, Form, Origins, Places, Professions, Questions, Tricks, Specializations, Unknown };
+    enum Type { Attributes, Diseases, Features, Form, Items, Origins, Places, Professions, Questions, Tricks, Specializations, Specials, Unknown };
     explicit SourceDocument(QObject *parent = nullptr);
     explicit SourceDocument(const QString& type, const QString& name, const QJsonDocument& document, QObject* parent = nullptr);
 

@@ -34,6 +34,8 @@ SourceDocument::Type SourceDocument::stringToType(const QString &string)
 {
     if ( "Attributes" == string )
         return SourceDocument::Type::Attributes;
+    if ( "Items" == string )
+        return SourceDocument::Type::Items;
     if ( "Origins" == string )
         return SourceDocument::Type::Origins;
     if ( "Professions" == string )
@@ -52,7 +54,10 @@ SourceDocument::Type SourceDocument::stringToType(const QString &string)
         return SourceDocument::Type::Tricks;
     if ( "Specializations" == string )
         return SourceDocument::Type::Specializations;
+    if ( "Specials" == string )
+        return SourceDocument::Type::Specials;
 
+    qDebug() << "stringToType() Unkown type: " << string;
     return SourceDocument::Type::Unknown;
 }
 
