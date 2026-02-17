@@ -94,6 +94,8 @@ qt_add_qml_module(Source
         Equipment/ItemSource.h
         Equipment/HandWeaponSource.h
         Equipment/HandWeaponSource.cpp
+        Equipment/HandWeaponDamageSource.h
+        Equipment/HandWeaponDamageSource.cpp
 
         Validators/TrickRequirementsValidator.h
         Validators/TrickRequirementsValidator.cpp
